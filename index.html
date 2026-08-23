@@ -9,27 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          navy: { 950:'#0a1c30', 900:'#0e2743', 800:'#153455', 700:'#1d4468' },
-          paper: { DEFAULT:'#f6f2e9', dim:'#ece5d4' },
-          gold: { DEFAULT:'#b3893f', light:'#d8b876' },
-          ink: { DEFAULT:'#152233', soft:'#4a5a6c' },
-          line: '#d8cfb9',
-          ok: '#3f6b4f',
-          warn: '#c98a2c',
-          danger: '#a13d3d'
-        },
-        fontFamily: {
-          display: ['Fraunces','serif'],
-          sans: ['Inter','sans-serif'],
-          mono: ['"IBM Plex Mono"','monospace']
-        }
-      }
-    }
-  }
+  tailwind.config = { theme: { extend: {
+    colors: {
+      navy: { 950:'#0a1c30', 900:'#0e2743', 800:'#153455', 700:'#1d4468' },
+      paper: { DEFAULT:'#f6f2e9', dim:'#ece5d4' },
+      gold: { DEFAULT:'#b3893f', light:'#d8b876' },
+      ink: { DEFAULT:'#152233', soft:'#4a5a6c' },
+      line: '#d8cfb9', ok: '#3f6b4f', warn: '#c98a2c', orange:'#c1631f', danger: '#a13d3d'
+    },
+    fontFamily: { display: ['Fraunces','serif'], sans: ['Inter','sans-serif'], mono: ['"IBM Plex Mono"','monospace'] }
+  } } }
 </script>
 <style>
   html{scroll-behavior:smooth;}
@@ -37,21 +26,13 @@
   :focus-visible{outline:2px solid #b3893f;outline-offset:2px;}
   ::-webkit-scrollbar{width:10px;height:10px;}
   ::-webkit-scrollbar-thumb{background:#d8cfb9;}
-  .guilloche{
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23d8b876' stroke-width='0.6'%3E%3Ccircle cx='0' cy='0' r='60'/%3E%3Ccircle cx='0' cy='0' r='90'/%3E%3Ccircle cx='0' cy='0' r='120'/%3E%3Ccircle cx='220' cy='220' r='60'/%3E%3Ccircle cx='220' cy='220' r='90'/%3E%3Ccircle cx='220' cy='220' r='120'/%3E%3Ccircle cx='220' cy='0' r='60'/%3E%3Ccircle cx='220' cy='0' r='90'/%3E%3Ccircle cx='0' cy='220' r='60'/%3E%3Ccircle cx='0' cy='220' r='90'/%3E%3Ccircle cx='110' cy='110' r='40'/%3E%3Ccircle cx='110' cy='110' r='70'/%3E%3Ccircle cx='110' cy='110' r='100'/%3E%3C/g%3E%3C/svg%3E");
-    background-size:220px 220px;
-  }
+  .guilloche{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23d8b876' stroke-width='0.6'%3E%3Ccircle cx='0' cy='0' r='60'/%3E%3Ccircle cx='0' cy='0' r='90'/%3E%3Ccircle cx='0' cy='0' r='120'/%3E%3Ccircle cx='220' cy='220' r='60'/%3E%3Ccircle cx='220' cy='220' r='90'/%3E%3Ccircle cx='220' cy='220' r='120'/%3E%3Ccircle cx='220' cy='0' r='60'/%3E%3Ccircle cx='220' cy='0' r='90'/%3E%3Ccircle cx='0' cy='220' r='60'/%3E%3Ccircle cx='0' cy='220' r='90'/%3E%3Ccircle cx='110' cy='110' r='40'/%3E%3Ccircle cx='110' cy='110' r='70'/%3E%3Ccircle cx='110' cy='110' r='100'/%3E%3C/g%3E%3C/svg%3E");background-size:220px 220px;}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .15s ease;white-space:nowrap;}
-  .btn-gold{background:#b3893f;color:#0a1c30;}
-  .btn-gold:hover{background:#d8b876;}
-  .btn-navy{background:#0a1c30;color:#f6f2e9;border-color:#0a1c30;}
-  .btn-navy:hover{background:#153455;}
-  .btn-outline{background:transparent;color:#0a1c30;border-color:#0a1c30;}
-  .btn-outline:hover{background:#0a1c30;color:#f6f2e9;}
-  .btn-ok{background:#3f6b4f;color:#fff;}
-  .btn-ok:hover{background:#355d40;}
-  .btn-danger{background:#a13d3d;color:#fff;}
-  .btn-danger:hover{background:#8a3333;}
+  .btn-gold{background:#b3893f;color:#0a1c30;} .btn-gold:hover{background:#d8b876;}
+  .btn-navy{background:#0a1c30;color:#f6f2e9;border-color:#0a1c30;} .btn-navy:hover{background:#153455;}
+  .btn-outline{background:transparent;color:#0a1c30;border-color:#0a1c30;} .btn-outline:hover{background:#0a1c30;color:#f6f2e9;}
+  .btn-ok{background:#3f6b4f;color:#fff;} .btn-ok:hover{background:#355d40;}
+  .btn-danger{background:#a13d3d;color:#fff;} .btn-danger:hover{background:#8a3333;}
   .btn-sm{padding:7px 12px;font-size:12.5px;}
   .btn:disabled{opacity:.45;cursor:not-allowed;}
   .card{background:#fff;border:1px solid #d8cfb9;}
@@ -64,9 +45,10 @@
   .badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;border:1px solid transparent;}
   .badge-green{background:#eaf1ec;color:#2c4a34;border-color:#3f6b4f;}
   .badge-amber{background:#fbf0e0;color:#7a4f10;border-color:#c98a2c;}
+  .badge-orange{background:#fbe7db;color:#7a3510;border-color:#c1631f;}
   .badge-red{background:#f7e9e9;color:#7a2727;border-color:#a13d3d;}
   .badge-navy{background:#e9edf1;color:#0e2743;border-color:#0e2743;}
-  .modal-overlay{position:fixed;inset:0;background:rgba(10,28,48,.65);display:flex;align-items:center;justify-content:center;padding:16px;z-index:200;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,28,48,.65);display:flex;align-items:center;justify-content:center;padding:16px;z-index:200;overflow-y:auto;}
   .sidebar-link{display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:14px;font-weight:500;color:#c9d3de;border-left:2px solid transparent;cursor:pointer;transition:all .15s ease;}
   .sidebar-link:hover{background:rgba(255,255,255,.04);color:#fff;}
   .sidebar-link.active{background:rgba(216,184,118,.1);border-left-color:#d8b876;color:#fff;}
@@ -74,7 +56,7 @@
   th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:#4a5a6c;padding:9px 12px;border-bottom:1px solid #d8cfb9;}
   td{padding:11px 12px;border-bottom:1px solid #ece5d4;vertical-align:middle;}
   tr:last-child td{border-bottom:none;}
-  .tab-btn{padding:9px 16px;font-size:13.5px;font-weight:600;color:#4a5a6c;border-bottom:2px solid transparent;cursor:pointer;}
+  .tab-btn{padding:9px 14px;font-size:13px;font-weight:600;color:#4a5a6c;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;}
   .tab-btn.active{color:#0a1c30;border-color:#b3893f;}
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0a1c30;color:#f6f2e9;padding:12px 20px;font-size:13.5px;z-index:300;box-shadow:0 8px 20px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .2s ease;max-width:90vw;text-align:center;}
   .toast.show{opacity:1;}
@@ -90,30 +72,25 @@
 
 <div id="toast" class="toast"></div>
 
-<!-- Firebase yapılandırması eksikse gösterilecek uyarı -->
 <div id="configWarning" class="hidden fixed inset-0 z-[500] bg-navy-950 text-paper flex items-center justify-center p-6">
   <div class="max-w-lg text-center">
     <div class="font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3">Kurulum Gerekli</div>
     <h1 class="font-display text-[24px] mb-4">Firebase yapılandırması eklenmedi</h1>
-    <p class="text-[#c9d3de] text-[14.5px] leading-relaxed">Bu uygulamanın çalışması için <code class="bg-white/10 px-1.5 py-0.5">firebaseConfig</code> alanına kendi Firebase projenizin bilgilerini girmeniz gerekiyor. Kod içinde "index.html" dosyasının en altındaki <code class="bg-white/10 px-1.5 py-0.5">&lt;script type="module"&gt;</code> bloğunu açıp <code class="bg-white/10 px-1.5 py-0.5">firebaseConfig</code> nesnesini kendi bilgilerinizle doldurun. Ayrıntılı adımlar için birlikte gönderilen KURULUM-REHBERI.md dosyasına bakınız.</p>
+    <p class="text-[#c9d3de] text-[14.5px] leading-relaxed">"firebaseConfig" alanına kendi Firebase bilgilerinizi girin. Ayrıntı için KURULUM-REHBERI.md'ye bakınız.</p>
   </div>
 </div>
 
 <div id="appRoot" class="hidden">
 
 <!-- =========================================================
-     PUBLIC SITE
+     PUBLIC SITE (girişsiz erişilebilir — pazarlama + teklif)
 ========================================================== -->
 <div id="screen-public">
-
   <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
     <div class="max-w-6xl mx-auto px-5 md:px-7 py-3.5 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-2.5">
         <svg class="w-8 h-8 text-navy-900" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>
-          <span class="block font-display font-semibold text-[16px] text-navy-950 leading-tight">Öz Grup Sigorta</span>
-          <span class="block font-mono text-[9px] tracking-widest text-gold uppercase">Sigorta Acenteliği</span>
-        </span>
+        <span><span class="block font-display font-semibold text-[16px] text-navy-950 leading-tight">Öz Grup Sigorta</span><span class="block font-mono text-[9px] tracking-widest text-gold uppercase">Sigorta Acenteliği</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-[14px] font-medium text-navy-900">
         <a href="#paketler" class="hover:text-gold">Paketler</a>
@@ -128,11 +105,9 @@
     <div class="absolute inset-0 guilloche opacity-[0.16] mix-blend-screen"></div>
     <div class="relative max-w-6xl mx-auto px-5 md:px-7 grid md:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
       <div>
-        <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3.5">
-          <span class="w-5 h-px bg-gold-light"></span> Öz Grup Sigorta
-        </div>
+        <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3.5"><span class="w-5 h-px bg-gold-light"></span> Öz Grup Sigorta</div>
         <h1 class="font-display font-semibold text-[34px] md:text-[52px] leading-[1.06] max-w-[15ch]">Güveninizi <em class="italic text-gold-light">teminat altına</em> alan sigorta ortağınız.</h1>
-        <p class="mt-5 text-[17px] text-[#c9d3de] max-w-[46ch]">Kasko, trafik, DASK ve özel sağlık sigortalarında online teklif alın; poliçelerinizi ve hasar süreçlerinizi güvenli hesabınızdan, her cihazdan takip edin.</p>
+        <p class="mt-5 text-[17px] text-[#c9d3de] max-w-[46ch]">Kasko, trafik, DASK ve özel sağlık sigortalarında online teklif alın; poliçelerinizi güvenli hesabınızdan takip edin, ihtiyaç anında tek tıkla yol yardımı çağırın.</p>
         <div class="flex flex-wrap gap-3 mt-8">
           <a href="#paketler" class="btn btn-gold">Paketleri İncele</a>
           <a href="#teklif" class="btn btn-outline !text-paper !border-paper/35 hover:!bg-paper/10">Hızlı Teklif Al</a>
@@ -143,12 +118,12 @@
           <svg viewBox="0 0 100 100"><defs><path id="ringpath" d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"/></defs><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="0.7"/><circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="0.7"/><text font-family="'IBM Plex Mono',monospace" font-size="7.6" fill="currentColor" letter-spacing="2.5"><textPath href="#ringpath">• ÖZ GRUP SİGORTA • GÜVEN • ŞEFFAFLIK •</textPath></text><path d="M50 38 L60 42 V50 C60 57 55.5 61.5 50 64 C44.5 61.5 40 57 40 50 V42 Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
         </div>
         <p class="text-center font-display text-[19px]">Müşteri &amp; Poliçe Paneli</p>
-        <p class="text-center text-[13px] text-[#a9b6c4] mb-5">Firebase ile güvenli, cihazlar arası senkron</p>
+        <p class="text-center text-[13px] text-[#a9b6c4] mb-5">Firebase ile güvenli, e-posta doğrulamalı giriş</p>
         <div class="grid grid-cols-2 gap-px bg-gold-light/25 border border-gold-light/25">
           <div class="bg-navy-950 p-4 text-center"><b class="block font-display text-[22px] text-gold-light">7</b><span class="text-[11px] text-[#9fadbc] uppercase">Sigorta Paketi</span></div>
           <div class="bg-navy-950 p-4 text-center"><b class="block font-display text-[22px] text-gold-light">%100</b><span class="text-[11px] text-[#9fadbc] uppercase">Online Süreç</span></div>
           <div class="bg-navy-950 p-4 text-center"><b class="block font-display text-[22px] text-gold-light">WA</b><span class="text-[11px] text-[#9fadbc] uppercase">Anlık Bildirim</span></div>
-          <div class="bg-navy-950 p-4 text-center"><b class="block font-display text-[22px] text-gold-light">24/7</b><span class="text-[11px] text-[#9fadbc] uppercase">Talep Kabulü</span></div>
+          <div class="bg-navy-950 p-4 text-center"><b class="block font-display text-[22px] text-gold-light">24/7</b><span class="text-[11px] text-[#9fadbc] uppercase">Yol Yardım</span></div>
         </div>
       </div>
     </div>
@@ -165,45 +140,91 @@
       <div class="max-w-[640px] mb-11">
         <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3"><span class="w-5 h-px bg-gold-light"></span> Sigorta Paketleri</div>
         <h2 class="font-display font-semibold text-[28px] md:text-[34px]">İhtiyacınıza uygun paketi seçin.</h2>
-        <p class="mt-3 text-[#b7c2cf] text-[15px]">Bir paket seçtiğinizde teklif formu otomatik güncellenir ve talebiniz WhatsApp ile kurucumuza iletilir.</p>
+        <p class="mt-3 text-[#b7c2cf] text-[15px]">Bir paket seçtiğinizde teklif formu, o pakete özel alanlarla otomatik güncellenir.</p>
       </div>
       <div id="pkgGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
     </div>
   </section>
 
+  <!-- ============ DİNAMİK TEKLİF FORMU ============ -->
   <section id="teklif" class="py-20 bg-paper-dim">
     <div class="max-w-6xl mx-auto px-5 md:px-7 grid md:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
       <div>
         <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold mb-3"><span class="w-5 h-px bg-gold"></span> Online Teklif</div>
         <h2 class="font-display font-semibold text-[26px] md:text-[30px] mb-4">Talebiniz doğrudan kurucumuza ulaşsın.</h2>
-        <p class="text-ink-soft text-[15px] mb-6">Formu doldurup gönderdiğinizde seçtiğiniz paket ve bilgilerinizle WhatsApp üzerinden Ahmetcan Öz'e bildirim gider. Talebiniz ayrıca güvenli veritabanımıza kaydedilir.</p>
+        <p class="text-ink-soft text-[15px] mb-6">Paket türüne göre form alanları otomatik değişir. Gönderdiğinizde talebiniz güvenli veritabanımıza kaydedilir ve WhatsApp ile iletilir.</p>
         <ul class="flex flex-col gap-4 text-[14.5px]">
-          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">1</span> Yukarıdan sigorta paketinizi seçin.</li>
-          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">2</span> Bilgilerinizi girin.</li>
-          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">3</span> "WhatsApp ile Gönder" ile iletin.</li>
+          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">1</span> Paketinizi seçin.</li>
+          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">2</span> Pakete özel bilgilerinizi girin.</li>
+          <li class="flex gap-3.5"><span class="font-mono text-[12px] text-gold border border-gold w-6 h-6 flex items-center justify-center flex-none">3</span> KVKK onayı ile gönderin.</li>
         </ul>
       </div>
       <form id="quoteForm" class="card p-7" novalidate>
         <div id="selectedPkgBox" class="border border-dashed border-gold p-3.5 mb-5 text-[13.5px] text-ink-soft bg-gold/[0.06]">Henüz paket seçilmedi — <strong class="font-display text-navy-950">lütfen yukarıdan bir paket seçin.</strong></div>
+
         <div class="field mb-4" id="q_nameField">
           <label class="label" for="q_name">Ad Soyad</label>
           <input class="input" id="q_name" placeholder="Adınız ve soyadınız">
           <div class="field-error">Lütfen ad soyad giriniz.</div>
         </div>
         <div class="field mb-4" id="q_phoneField">
-          <label class="label" for="q_phone">Telefon Numaranız</label>
+          <label class="label" for="q_phone">Telefon Numaranız (+90)</label>
           <input class="input" id="q_phone" placeholder="05XX XXX XX XX" inputmode="tel">
-          <div class="field-error">Lütfen geçerli bir telefon numarası giriniz.</div>
+          <div class="field-error">Lütfen geçerli bir Türkiye telefon numarası giriniz.</div>
         </div>
-        <div class="field mb-5">
-          <label class="label" for="q_note">T.C. No / Plaka / Sözleşme Notu (opsiyonel)</label>
-          <input class="input" id="q_note" placeholder="Örn. plaka no veya ek not">
+        <div class="field mb-4" id="q_tcField">
+          <label class="label" for="q_tc">T.C. Kimlik No</label>
+          <input class="input" id="q_tc" placeholder="11 haneli T.C. no" inputmode="numeric" maxlength="11">
+          <div class="field-error">Geçerli bir T.C. kimlik no giriniz.</div>
         </div>
+
+        <!-- Kasko/Trafik alanları -->
+        <div id="q_group_vehicle" class="hidden">
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="field" id="q_plakaField"><label class="label" for="q_plaka">Araç Plakası</label><input class="input" id="q_plaka" placeholder="34 ABC 123"></div>
+            <div class="field"><label class="label" for="q_ruhsatSeri">Ruhsat Seri</label><input class="input" id="q_ruhsatSeri" placeholder="AA"></div>
+          </div>
+          <div class="field mb-4"><label class="label" for="q_ruhsatNo">Ruhsat No</label><input class="input" id="q_ruhsatNo" placeholder="123456" inputmode="numeric"></div>
+        </div>
+
+        <!-- Konut/DASK alanları -->
+        <div id="q_group_home" class="hidden">
+          <div class="field mb-4"><label class="label" for="q_address">Açık Adres</label><textarea class="input" id="q_address" rows="2" placeholder="Mahalle, cadde, no"></textarea></div>
+          <div class="field mb-4"><label class="label" for="q_flat">Bina / Kat / Daire No</label><input class="input" id="q_flat" placeholder="Örn. B Blok, Kat 3, Daire 7"></div>
+        </div>
+
+        <!-- Sağlık alanları -->
+        <div id="q_group_health" class="hidden">
+          <div class="field mb-4"><label class="label" for="q_birth">Doğum Tarihi</label><input class="input" type="date" id="q_birth"></div>
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="field"><label class="label" for="q_height">Boy (cm)</label><input class="input" id="q_height" inputmode="numeric" placeholder="170"></div>
+            <div class="field"><label class="label" for="q_weight">Kilo (kg)</label><input class="input" id="q_weight" inputmode="numeric" placeholder="70"></div>
+          </div>
+        </div>
+
+        <div class="field mb-4">
+          <label class="label" for="q_payment">Ödeme Tercihi</label>
+          <select class="input" id="q_payment">
+            <option>Kredi Kartı (telefonla alınacak)</option>
+            <option>Havale/EFT</option>
+            <option>Elden Ödeme</option>
+          </select>
+        </div>
+        <div class="field mb-5"><label class="label" for="q_note">Ek Not (opsiyonel)</label><input class="input" id="q_note" placeholder="Eklemek istediğiniz bir not"></div>
+
+        <div class="bg-navy-950/[0.04] border border-line p-3.5 mb-4 text-[12px] text-ink-soft leading-relaxed">
+          🔒 Bu bilgiler 256-bit SSL ile korunmakta olup tamamen gizlidir. Talebiniz iletildiği an müşteri hizmetlerimiz saniyeler içinde sizinle iletişime geçecektir.
+        </div>
+        <label class="flex items-start gap-2.5 mb-5 text-[12.5px] text-ink-soft" id="q_kvkkField">
+          <input type="checkbox" id="q_kvkk" class="mt-0.5">
+          <span>Kişisel verilerimin <strong>6698 sayılı KVKK</strong> kapsamında, teklif sürecini yürütmek amacıyla işlenmesini kabul ediyorum.</span>
+        </label>
+        <div class="field-error mb-3" id="q_kvkkError" style="display:none;">Devam etmek için KVKK onayı gereklidir.</div>
+
         <button type="submit" id="quoteSubmitBtn" class="btn btn-ok w-full justify-center">
           <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5C11 9.3 10.5 8 10.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.4 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.4 10-10S17.5 2 12 2zm0 18c-1.7 0-3.4-.5-4.8-1.4l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 14.6 3 13.3 3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9z"/></svg>
           <span>WhatsApp ile Gönder</span>
         </button>
-        <p class="text-[11.5px] text-ink-soft text-center mt-3">Gönder butonuna bastığınızda WhatsApp, hazırlanmış mesajla açılır. İletişim: 0535 449 73 98</p>
       </form>
     </div>
   </section>
@@ -214,16 +235,13 @@
         <svg class="w-16 h-16 text-gold mb-4" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="0.9"/><circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="0.9"/><path d="M50 34 L62 39 V50 C62 59 56.5 64.5 50 68 C43.5 64.5 38 59 38 50 V39 Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
         <h3 class="font-display text-[20px]">Ahmetcan Öz</h3>
         <div class="font-mono text-[11px] tracking-widest uppercase text-gold mb-4">Kurucu</div>
-        <div class="text-[14px] text-ink-soft flex flex-col gap-1.5">
-          <span>Öz Grup Sigorta</span>
-          <a class="text-navy-950 font-semibold" href="tel:+905354497398">0535 449 73 98</a>
-        </div>
+        <div class="text-[14px] text-ink-soft flex flex-col gap-1.5"><span>Öz Grup Sigorta</span><a class="text-navy-950 font-semibold" href="tel:+905354497398">0535 449 73 98</a></div>
       </div>
       <div>
         <div class="flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold mb-3"><span class="w-5 h-px bg-gold"></span> Hakkımızda</div>
         <h2 class="font-display font-semibold text-[26px] md:text-[30px] mb-4">Sigortacılığa doğrudan ve şeffaf bir yaklaşım.</h2>
         <p class="text-ink-soft text-[15px] max-w-[56ch] mb-3.5">Öz Grup Sigorta, kurucumuz Ahmetcan Öz önderliğinde trafik, kasko, DASK, sağlık, konut, işyeri ve seyahat sigortası alanlarında müşterilerine doğrudan danışmanlık sunar.</p>
-        <p class="text-ink-soft text-[15px] max-w-[56ch]">Üye müşterilerimiz kendi güvenli panellerinden poliçelerini, ödeme durumlarını görüntüleyebilir ve hasar bildirimi oluşturabilir.</p>
+        <p class="text-ink-soft text-[15px] max-w-[56ch]">Üye müşterilerimiz kendi güvenli panellerinden poliçelerini takip edebilir, acil durumlarda tek tıkla yol yardımı çağırabilir.</p>
       </div>
     </div>
   </section>
@@ -232,26 +250,16 @@
     <div class="max-w-6xl mx-auto px-5 md:px-7">
       <div class="grid md:grid-cols-3 gap-10 mb-9">
         <div>
-          <div class="flex items-center gap-2.5 mb-3.5">
-            <svg class="w-7 h-7 text-gold-light" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="font-display text-[16px] text-paper">Öz Grup Sigorta</span>
-          </div>
+          <div class="flex items-center gap-2.5 mb-3.5"><svg class="w-7 h-7 text-gold-light" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="font-display text-[16px] text-paper">Öz Grup Sigorta</span></div>
           <p class="text-[13.5px] leading-relaxed max-w-[34ch]">Kasko, trafik, DASK, sağlık, konut, işyeri ve seyahat sigortalarında doğrudan danışmanlık. Kurucu: Ahmetcan Öz.</p>
         </div>
         <div>
           <h4 class="font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3.5">Bağlantılar</h4>
-          <ul class="flex flex-col gap-2 text-[14px]">
-            <li><a href="#paketler" class="hover:text-paper">Paketler</a></li>
-            <li><a href="#teklif" class="hover:text-paper">Teklif Al</a></li>
-            <li><a href="#hakkimizda" class="hover:text-paper">Hakkımızda</a></li>
-          </ul>
+          <ul class="flex flex-col gap-2 text-[14px]"><li><a href="#paketler" class="hover:text-paper">Paketler</a></li><li><a href="#teklif" class="hover:text-paper">Teklif Al</a></li><li><a href="#hakkimizda" class="hover:text-paper">Hakkımızda</a></li></ul>
         </div>
         <div>
           <h4 class="font-mono text-[11px] tracking-widest uppercase text-gold-light mb-3.5">İletişim</h4>
-          <ul class="flex flex-col gap-2 text-[14px]">
-            <li><a href="tel:+905354497398" class="hover:text-paper">0535 449 73 98</a></li>
-            <li><a href="https://wa.me/905354497398" target="_blank" rel="noopener" class="hover:text-paper">WhatsApp Hattı</a></li>
-          </ul>
+          <ul class="flex flex-col gap-2 text-[14px]"><li><a href="tel:+905354497398" class="hover:text-paper">0535 449 73 98</a></li><li><a href="https://wa.me/905354497398" target="_blank" rel="noopener" class="hover:text-paper">WhatsApp Hattı</a></li></ul>
         </div>
       </div>
       <div class="border-t border-white/10 pt-5 flex justify-between flex-wrap gap-2.5 text-[12px] text-[#7f8ea0]">
@@ -267,14 +275,14 @@
 </div>
 
 <!-- =========================================================
-     CUSTOMER DASHBOARD
+     CUSTOMER DASHBOARD (e-posta doğrulaması ZORUNLU)
 ========================================================== -->
 <div id="screen-customer" class="hidden min-h-screen">
   <header class="bg-navy-950 text-paper">
     <div class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
         <svg class="w-7 h-7 text-gold-light" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="font-display text-[15.5px]">Öz Grup Sigorta — Müşteri Paneli</span>
+        <span class="font-display text-[15.5px]">Dijital Cüzdanım</span>
       </div>
       <div class="flex items-center gap-2">
         <button onclick="goPublic()" class="btn btn-outline btn-sm !text-paper !border-paper/35">Siteye Dön</button>
@@ -283,7 +291,22 @@
     </div>
   </header>
   <main class="max-w-5xl mx-auto px-5 py-9">
-    <div id="custWelcome" class="card p-6 mb-7"></div>
+    <div id="custWelcome" class="card p-6 mb-5"></div>
+
+    <!-- Acil Yol Yardımı -->
+    <div class="card p-6 mb-5 border-danger/40 bg-danger/[0.04]">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h3 class="font-display text-[17px] text-navy-950 mb-1">🚨 Acil Yol Yardım</h3>
+          <p class="text-ink-soft text-[13px]">Kaza ya da arıza anında tek tıkla konumunuzu paylaşıp çekici talep edin.</p>
+        </div>
+        <button id="roadsideBtn" class="btn btn-danger">Çekici Çağır</button>
+      </div>
+    </div>
+
+    <div id="crossSellBox"></div>
+    <div id="renewalOfferBox"></div>
+
     <div class="grid md:grid-cols-3 gap-4 mb-9" id="custStats"></div>
 
     <div class="mb-3.5 flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold"><span class="w-5 h-px bg-gold"></span> Poliçelerim</div>
@@ -295,47 +318,38 @@
       <div>
         <div class="mb-3.5 flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold"><span class="w-5 h-px bg-gold"></span> Hasar Bildirimi</div>
         <form id="claimForm" class="card p-6">
-          <div class="field mb-4">
-            <label class="label" for="claim_policy">İlgili Poliçe</label>
-            <select id="claim_policy" class="input"></select>
-          </div>
-          <div class="field mb-4" id="claim_descField">
-            <label class="label" for="claim_desc">Hasar Açıklaması</label>
-            <textarea id="claim_desc" class="input" rows="4" placeholder="Olayı kısaca açıklayınız"></textarea>
-            <div class="field-error">Lütfen açıklama giriniz.</div>
-          </div>
+          <div class="field mb-4"><label class="label" for="claim_policy">İlgili Poliçe</label><select id="claim_policy" class="input"></select></div>
+          <div class="field mb-4" id="claim_descField"><label class="label" for="claim_desc">Hasar Açıklaması</label><textarea id="claim_desc" class="input" rows="4" placeholder="Olayı kısaca açıklayınız"></textarea><div class="field-error">Lütfen açıklama giriniz.</div></div>
           <button type="submit" class="btn btn-navy w-full justify-center">Hasar Bildirimi Gönder</button>
         </form>
       </div>
       <div>
         <div class="mb-3.5 flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold"><span class="w-5 h-px bg-gold"></span> Bildirimlerim</div>
-        <div class="card overflow-x-auto">
-          <table id="custClaimTable"><thead><tr><th>Tarih</th><th>Poliçe</th><th>Durum</th></tr></thead><tbody></tbody></table>
-        </div>
+        <div class="card overflow-x-auto"><table id="custClaimTable"><thead><tr><th>Tarih</th><th>Poliçe</th><th>Durum</th></tr></thead><tbody></tbody></table></div>
       </div>
     </div>
   </main>
 </div>
 
 <!-- =========================================================
-     ADMIN PANEL
+     ADMIN / PERSONEL PANELİ
 ========================================================== -->
 <div id="screen-admin" class="hidden min-h-screen bg-paper flex">
   <aside class="admin-sidebar w-[230px] bg-navy-950 min-h-screen flex-none py-6 flex flex-col">
-    <div class="px-5 mb-7 flex items-center gap-2.5">
+    <div class="px-5 mb-2 flex items-center gap-2.5">
       <svg class="w-7 h-7 text-gold-light" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div>
-        <div class="font-display text-[14.5px] text-paper leading-tight">Öz Grup</div>
-        <div class="font-mono text-[9.5px] tracking-widest text-gold-light uppercase">Acente Paneli</div>
-      </div>
+      <div><div class="font-display text-[14.5px] text-paper leading-tight">Öz Grup</div><div class="font-mono text-[9.5px] tracking-widest text-gold-light uppercase" id="adminRoleTag">Acente Paneli</div></div>
     </div>
-    <nav class="flex-1">
+    <div class="px-5 mb-5 text-[11px] text-[#9fadbc]" id="adminWhoAmI"></div>
+    <nav class="flex-1 overflow-y-auto">
       <div class="sidebar-link active" data-tab="overview" onclick="adminShowTab('overview')">Genel Bakış</div>
       <div class="sidebar-link" data-tab="addpolicy" onclick="adminShowTab('addpolicy')">Poliçe Ekle</div>
       <div class="sidebar-link" data-tab="customers" onclick="adminShowTab('customers')">Müşteriler</div>
       <div class="sidebar-link" data-tab="renewals" onclick="adminShowTab('renewals')">Yaklaşan Yenilemeler</div>
       <div class="sidebar-link" data-tab="leads" onclick="adminShowTab('leads')">Teklif Talepleri</div>
+      <div class="sidebar-link" data-tab="roadside" onclick="adminShowTab('roadside')">Yol Yardım Talepleri</div>
       <div class="sidebar-link" data-tab="claims" onclick="adminShowTab('claims')">Hasar Bildirimleri</div>
+      <div class="sidebar-link" data-tab="staff" id="staffTabLink" onclick="adminShowTab('staff')">Personel Yönetimi</div>
     </nav>
     <div class="px-4 pt-4 border-t border-white/10 flex flex-col gap-2">
       <button onclick="goPublic()" class="btn btn-outline btn-sm !text-paper !border-paper/35 w-full">Siteyi Görüntüle</button>
@@ -353,89 +367,111 @@
 </div><!-- /#appRoot -->
 
 <!-- =========================================================
-     MODALS
+     KİMLİK DOĞRULAMA MODALI (Giriş / Üye Ol / Şifremi Unuttum)
 ========================================================== -->
 <div id="modal-auth" class="modal-overlay hidden">
-  <div class="card w-full max-w-[420px] p-7 relative">
+  <div class="card w-full max-w-[420px] p-7 relative my-8">
     <button onclick="closeModal('modal-auth')" class="absolute top-3.5 right-3.5 text-ink-soft hover:text-ink text-xl leading-none">✕</button>
-    <div class="flex gap-1 mb-6 border-b border-line">
+    <div class="flex gap-1 mb-6 border-b border-line overflow-x-auto">
       <div class="tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Giriş Yap</div>
       <div class="tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">Üye Ol</div>
+      <div class="tab-btn" id="tabResetBtn" onclick="switchAuthTab('reset')">Şifremi Unuttum</div>
     </div>
 
+    <button id="googleSignInBtn" type="button" class="btn btn-outline w-full justify-center mb-4">
+      <svg class="w-4 h-4" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6 29.6 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.5 0 10.4-1.9 14.2-5.1l-6.6-5.4C29.6 35.5 27 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.6 5.1C9.6 39.7 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.3-4.1 5.6l6.6 5.4C40.9 36.2 44 30.6 44 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+      Google ile Devam Et
+    </button>
+    <div class="flex items-center gap-3 mb-4"><span class="flex-1 h-px bg-line"></span><span class="text-[11px] text-ink-soft">veya</span><span class="flex-1 h-px bg-line"></span></div>
+
     <form id="loginForm">
-      <div class="field mb-4" id="li_emailField">
-        <label class="label" for="li_email">E-posta</label>
-        <input class="input" id="li_email" type="email" placeholder="ornek@eposta.com">
-        <div class="field-error">Geçerli bir e-posta giriniz.</div>
-      </div>
-      <div class="field mb-4" id="li_pwField">
-        <label class="label" for="li_pw">Şifre</label>
-        <input class="input" id="li_pw" type="password" placeholder="••••••••">
-        <div class="field-error">E-posta veya şifre hatalı.</div>
-      </div>
+      <div class="field mb-4" id="li_emailField"><label class="label" for="li_email">E-posta</label><input class="input" id="li_email" type="email" placeholder="ornek@eposta.com"><div class="field-error">Geçerli bir e-posta giriniz.</div></div>
+      <div class="field mb-4" id="li_pwField"><label class="label" for="li_pw">Şifre</label><input class="input" id="li_pw" type="password" placeholder="••••••••"><div class="field-error">E-posta veya şifre hatalı.</div></div>
       <button type="submit" id="loginSubmitBtn" class="btn btn-navy w-full justify-center">Giriş Yap</button>
     </form>
 
     <form id="registerForm" class="hidden">
-      <div class="field mb-3.5" id="rg_nameField">
-        <label class="label" for="rg_name">Ad Soyad</label>
-        <input class="input" id="rg_name" placeholder="Adınız Soyadınız">
-        <div class="field-error">Ad soyad giriniz.</div>
-      </div>
-      <div class="field mb-3.5" id="rg_tcField">
-        <label class="label" for="rg_tc">T.C. Kimlik No</label>
-        <input class="input" id="rg_tc" placeholder="11 haneli T.C. no" inputmode="numeric" maxlength="11">
-        <div class="field-error">Geçerli bir T.C. kimlik no giriniz.</div>
-      </div>
-      <div class="field mb-3.5" id="rg_phoneField">
-        <label class="label" for="rg_phone">Telefon</label>
-        <input class="input" id="rg_phone" placeholder="05XX XXX XX XX" inputmode="tel">
-        <div class="field-error">Geçerli bir telefon giriniz.</div>
-      </div>
-      <div class="field mb-3.5" id="rg_emailField">
-        <label class="label" for="rg_email">E-posta</label>
-        <input class="input" id="rg_email" type="email" placeholder="ornek@eposta.com">
-        <div class="field-error">Geçerli bir e-posta giriniz.</div>
-      </div>
-      <div class="field mb-2" id="rg_pwField">
-        <label class="label" for="rg_pw">Şifre</label>
-        <input class="input" id="rg_pw" type="password" placeholder="En az 6 karakter">
-        <div class="field-error">Şifre en az 6 karakter olmalı.</div>
-      </div>
-      <p class="text-[11px] text-ink-soft mb-4">Bilgileriniz Firebase Authentication ve Firestore üzerinde güvenli biçimde saklanır.</p>
+      <div class="field mb-3.5" id="rg_nameField"><label class="label" for="rg_name">Ad Soyad</label><input class="input" id="rg_name" placeholder="Adınız Soyadınız"><div class="field-error">Ad soyad giriniz.</div></div>
+      <div class="field mb-3.5" id="rg_tcField"><label class="label" for="rg_tc">T.C. Kimlik No</label><input class="input" id="rg_tc" placeholder="11 haneli T.C. no" inputmode="numeric" maxlength="11"><div class="field-error">Geçerli bir T.C. kimlik no giriniz.</div></div>
+      <div class="field mb-3.5" id="rg_phoneField"><label class="label" for="rg_phone">Telefon (+90)</label><input class="input" id="rg_phone" placeholder="05XX XXX XX XX" inputmode="tel"><div class="field-error">Geçerli bir Türkiye telefon numarası giriniz.</div></div>
+      <div class="field mb-3.5" id="rg_emailField"><label class="label" for="rg_email">E-posta</label><input class="input" id="rg_email" type="email" placeholder="ornek@eposta.com"><div class="field-error">Geçerli bir e-posta giriniz.</div></div>
+      <div class="field mb-2" id="rg_pwField"><label class="label" for="rg_pw">Şifre</label><input class="input" id="rg_pw" type="password" placeholder="En az 6 karakter"><div class="field-error">Şifre en az 6 karakter olmalı.</div></div>
+      <p class="text-[11px] text-ink-soft mb-4">Kayıt sonrası e-postanıza bir doğrulama bağlantısı gönderilir. Panel erişimi için e-postanızı doğrulamanız gerekir.</p>
       <button type="submit" id="registerSubmitBtn" class="btn btn-navy w-full justify-center">Üye Ol</button>
     </form>
+
+    <form id="resetForm" class="hidden">
+      <div class="field mb-4" id="rs_emailField"><label class="label" for="rs_email">Kayıtlı E-posta</label><input class="input" id="rs_email" type="email" placeholder="ornek@eposta.com"><div class="field-error">Geçerli bir e-posta giriniz.</div></div>
+      <button type="submit" id="resetSubmitBtn" class="btn btn-navy w-full justify-center">Şifre Sıfırlama Bağlantısı Gönder</button>
+    </form>
+
     <p id="authError" class="text-[12.5px] text-danger mt-3 hidden"></p>
+    <p id="authSuccess" class="text-[12.5px] text-ok mt-3 hidden"></p>
+  </div>
+</div>
+
+<!-- Telefon/TC tamamlama (Google ile ilk girişte) -->
+<div id="modal-complete-profile" class="modal-overlay hidden">
+  <div class="card w-full max-w-[400px] p-7 relative my-8">
+    <div class="font-mono text-[11px] tracking-widest uppercase text-gold mb-2">Son Adım</div>
+    <h3 class="font-display text-[19px] mb-4 text-navy-950">Profilinizi Tamamlayın</h3>
+    <p class="text-ink-soft text-[13px] mb-5">Panele erişebilmeniz için T.C. kimlik no ve telefon numaranız gerekli.</p>
+    <form id="completeProfileForm">
+      <div class="field mb-3.5" id="cp_tcField"><label class="label" for="cp_tc">T.C. Kimlik No</label><input class="input" id="cp_tc" inputmode="numeric" maxlength="11"><div class="field-error">Geçerli bir T.C. no giriniz.</div></div>
+      <div class="field mb-4" id="cp_phoneField"><label class="label" for="cp_phone">Telefon (+90)</label><input class="input" id="cp_phone" placeholder="05XX XXX XX XX" inputmode="tel"><div class="field-error">Geçerli bir telefon giriniz.</div></div>
+      <button type="submit" class="btn btn-navy w-full justify-center">Kaydet ve Devam Et</button>
+    </form>
+  </div>
+</div>
+
+<!-- E-posta doğrulama bekleniyor ekranı -->
+<div id="modal-verify-email" class="modal-overlay hidden">
+  <div class="card w-full max-w-[400px] p-7 text-center my-8">
+    <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center text-gold text-2xl">✉️</div>
+    <h3 class="font-display text-[19px] mb-2 text-navy-950">E-posta Doğrulaması Bekleniyor</h3>
+    <p class="text-ink-soft text-[13.5px] mb-5">Panele erişebilmek için <strong id="verifyEmailAddr"></strong> adresine gönderilen bağlantıya tıklayın.</p>
+    <div class="flex flex-col gap-2.5">
+      <button id="resendVerifyBtn" class="btn btn-outline w-full justify-center">Doğrulama E-postasını Tekrar Gönder</button>
+      <button id="checkVerifyBtn" class="btn btn-navy w-full justify-center">Doğruladım, Kontrol Et</button>
+      <button onclick="doLogout()" class="btn btn-sm !bg-danger text-white w-full justify-center">Çıkış Yap</button>
+    </div>
   </div>
 </div>
 
 <div id="modal-admin-login" class="modal-overlay hidden">
-  <div class="card w-full max-w-[380px] p-7 relative">
+  <div class="card w-full max-w-[380px] p-7 relative my-8">
     <button onclick="closeModal('modal-admin-login')" class="absolute top-3.5 right-3.5 text-ink-soft hover:text-ink text-xl leading-none">✕</button>
-    <div class="font-mono text-[11px] tracking-widest uppercase text-gold mb-2">Yönetici Girişi</div>
+    <div class="font-mono text-[11px] tracking-widest uppercase text-gold mb-2">Yönetici / Personel Girişi</div>
     <h3 class="font-display text-[19px] mb-5 text-navy-950">Öz Grup Sigorta Admin</h3>
     <form id="adminLoginForm">
-      <div class="field mb-3.5" id="admin_emailField">
-        <label class="label" for="admin_email">Yönetici E-postası</label>
-        <input class="input" id="admin_email" type="email" placeholder="ornek@ozgrup.com">
-        <div class="field-error">Geçerli e-posta giriniz.</div>
-      </div>
-      <div class="field mb-2" id="admin_pwField">
-        <label class="label" for="admin_pw">Şifre</label>
-        <input class="input" id="admin_pw" type="password" placeholder="••••••••••">
-        <div class="field-error">Giriş bilgileri hatalı ya da bu hesabın yönetici yetkisi yok.</div>
-      </div>
-      <p class="text-[11px] text-ink-soft mb-4">Bu ekran gizlidir; erişim yalnızca Firestore'da "admin" rolü tanımlı hesaplar içindir.</p>
+      <div class="field mb-3.5" id="admin_emailField"><label class="label" for="admin_email">E-posta</label><input class="input" id="admin_email" type="email"><div class="field-error">Geçerli e-posta giriniz.</div></div>
+      <div class="field mb-2" id="admin_pwField"><label class="label" for="admin_pw">Şifre</label><input class="input" id="admin_pw" type="password"><div class="field-error">Giriş bilgileri hatalı ya da bu hesabın yönetici/personel yetkisi yok.</div></div>
       <button type="submit" id="adminLoginSubmitBtn" class="btn btn-gold w-full justify-center">Panele Gir</button>
     </form>
   </div>
 </div>
 
 <div id="modal-customer-detail" class="modal-overlay hidden">
-  <div class="card w-full max-w-2xl p-7 relative max-h-[85vh] overflow-y-auto">
+  <div class="card w-full max-w-2xl p-7 relative max-h-[85vh] overflow-y-auto my-8">
     <button onclick="closeModal('modal-customer-detail')" class="absolute top-3.5 right-3.5 text-ink-soft hover:text-ink text-xl leading-none">✕</button>
     <div id="customerDetailContent"></div>
+  </div>
+</div>
+
+<div id="modal-edit-policy" class="modal-overlay hidden">
+  <div class="card w-full max-w-md p-7 relative my-8">
+    <button onclick="closeModal('modal-edit-policy')" class="absolute top-3.5 right-3.5 text-ink-soft hover:text-ink text-xl leading-none">✕</button>
+    <h3 class="font-display text-[18px] mb-5 text-navy-950">Poliçeyi Düzenle</h3>
+    <form id="editPolicyForm">
+      <input type="hidden" id="ep_id">
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="field"><label class="label" for="ep_start">Başlangıç</label><input class="input" type="date" id="ep_start"></div>
+        <div class="field"><label class="label" for="ep_end">Bitiş</label><input class="input" type="date" id="ep_end"></div>
+      </div>
+      <div class="field mb-4"><label class="label" for="ep_payment">Ödeme Durumu</label><select class="input" id="ep_payment"><option>Ödendi</option><option>Bekliyor</option></select></div>
+      <div class="field mb-5"><label class="label" for="ep_renewal">Yenileme Teklif Fiyatı (₺, opsiyonel)</label><input class="input" id="ep_renewal" inputmode="numeric" placeholder="Örn. 4500"></div>
+      <button type="submit" class="btn btn-navy w-full justify-center">Kaydet</button>
+    </form>
   </div>
 </div>
 
@@ -443,40 +479,35 @@
      FIREBASE MODÜL SCRIPT
 ========================================================== -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signOut, onAuthStateChanged, updateProfile
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider,
+  signOut, onAuthStateChanged, updateProfile, sendEmailVerification, sendPasswordResetEmail, reload
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
   getFirestore, doc, setDoc, getDoc, getDocs, collection, addDoc,
-  updateDoc, query, where, orderBy, serverTimestamp
+  updateDoc, query, where, serverTimestamp, onSnapshot, arrayUnion
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 import {
   getStorage, ref, uploadBytes, getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 /* =========================================================
-   1) FİREBASE YAPILANDIRMASI
-   -----------------------------------------------------------
-   AŞAĞIDAKİ ALANLARI KENDİ FIREBASE PROJENİZİN BİLGİLERİYLE
-   DOLDURUN. (Firebase Console > Project Settings > General >
-   "Your apps" > Web app > SDK setup and configuration)
-   Ayrıntılı adımlar için KURULUM-REHBERI.md dosyasına bakınız.
+   FİREBASE YAPILANDIRMASI — kendi bilgilerinizle doldurun
 ========================================================== */
 const firebaseConfig = {
-  apiKey: "AIzaSyCs7crySnzSTilYmJdd2pACten9sZgzIgI",
-  authDomain: "oz-sigorta.firebaseapp.com",
-  projectId: "oz-sigorta",
-  storageBucket: "oz-sigorta.firebasestorage.app",
-  messagingSenderId: "572584086104",
-  appId: "1:572584086104:web:aee590212d75597de1182d",
-  measurementId: "G-E09T52ZJ36"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
+
 const CONFIG_IS_PLACEHOLDER = Object.values(firebaseConfig).some(v => String(v).startsWith('YOUR_'));
 if(CONFIG_IS_PLACEHOLDER){
   document.getElementById('configWarning').classList.remove('hidden');
-  throw new Error('Firebase yapılandırması eksik: firebaseConfig alanlarını doldurun.');
+  throw new Error('Firebase yapılandırması eksik.');
 } else {
   document.getElementById('appRoot').classList.remove('hidden');
 }
@@ -486,115 +517,97 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-/* =========================================================
-   SABİTLER
-========================================================== */
-const WHATSAPP_NUMBER = "905354497398"; // Ahmetcan Öz — 0535 449 73 98
+const WHATSAPP_NUMBER = "905354497398";
 const PACKAGES = ["Kasko Sigortası","Trafik Sigortası","DASK","Özel Sağlık Sigortası","Konut Sigortası","İşyeri Sigortası","Seyahat Sigortası"];
+const VEHICLE_PKGS = ["Kasko Sigortası","Trafik Sigortası"];
+const HOME_PKGS = ["Konut Sigortası","DASK"];
+const HEALTH_PKGS = ["Özel Sağlık Sigortası"];
 const PAYMENT_STATUSES = ["Ödendi","Bekliyor"];
 const CLAIM_STATUSES = ["Beklemede","İnceleniyor","Sonuçlandı"];
-const LEAD_STATUSES = ["Yeni","İletişime Geçildi","Kapandı"];
+const LEAD_STATUSES = ["Yeni","İletişime Geçildi","Onaylandı","Reddedildi"];
 
-let currentUser = null;   // Firebase Auth user
-let currentProfile = null; // Firestore users/{uid} document data
-let wantsAdminAccess = false; // hangi modal ile giriş yapıldığını ayırt etmek için
+let currentUser = null;
+let currentProfile = null;
+let wantsAdminAccess = false;
+let selectedPackage = null;
+let activeListeners = []; // admin sekmesi değişince eski onSnapshot dinleyicilerini kapatmak için
 
-/* =========================================================
-   YARDIMCI FONKSİYONLAR
-========================================================== */
-function escapeHtml(str){
-  return String(str==null?'':str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-}
-function fmtDate(iso){
-  if(!iso) return '—';
-  const d = new Date(iso + 'T00:00:00');
-  if(isNaN(d)) return iso;
-  return String(d.getDate()).padStart(2,'0') + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + d.getFullYear();
-}
-function daysUntil(iso){
-  const today = new Date(); today.setHours(0,0,0,0);
-  const end = new Date(iso + 'T00:00:00');
-  return Math.ceil((end - today) / 86400000);
-}
-function toWaNumber(phone){
-  let d = String(phone||'').replace(/\D/g,'');
-  if(d.startsWith('90')) return d;
-  if(d.startsWith('0')) d = d.slice(1);
-  return '90' + d;
-}
-function openWhatsApp(phone, message){
-  window.open("https://wa.me/" + toWaNumber(phone) + "?text=" + encodeURIComponent(message), '_blank', 'noopener');
-}
-function isValidPhone(v){ return String(v||'').replace(/\D/g,'').length >= 10; }
+function stopActiveListeners(){ activeListeners.forEach(u=>u()); activeListeners = []; }
+
+/* ---------------- yardımcılar ---------------- */
+function escapeHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+function fmtDate(iso){ if(!iso) return '—'; const d = new Date(iso + 'T00:00:00'); if(isNaN(d)) return iso; return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear(); }
+function daysUntil(iso){ const t=new Date(); t.setHours(0,0,0,0); const e=new Date(iso+'T00:00:00'); return Math.ceil((e-t)/86400000); }
+function toWaNumber(phone){ let d=String(phone||'').replace(/\D/g,''); if(d.startsWith('90')) return d; if(d.startsWith('0')) d=d.slice(1); return '90'+d; }
+function openWhatsApp(phone,msg){ window.open("https://wa.me/"+toWaNumber(phone)+"?text="+encodeURIComponent(msg), '_blank','noopener'); }
+function normalizeTRPhone(v){ let d=String(v||'').replace(/\D/g,''); if(d.startsWith('90')) d=d.slice(2); if(d.startsWith('0')) d=d.slice(1); return '+90'+d; }
+function isValidTRPhone(v){ const d=String(v||'').replace(/\D/g,'').replace(/^90/,'').replace(/^0/,''); return /^5\d{9}$/.test(d); }
 function isValidTc(v){ return /^\d{11}$/.test(String(v||'').trim()); }
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
-}
-window.showToast = showToast;
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastTimer); window._toastTimer=setTimeout(()=>t.classList.remove('show'),2800); }
 window.openModal = id => document.getElementById(id).classList.remove('hidden');
 window.closeModal = id => document.getElementById(id).classList.add('hidden');
-function markInvalid(fieldId, invalid){
-  const el = document.getElementById(fieldId);
-  if(el) el.classList.toggle('invalid', !!invalid);
-}
-function setBtnLoading(btn, loading, label){
-  if(!btn) return;
-  btn.disabled = loading;
-  btn.innerHTML = loading ? '<span class="spinner"></span> İşleniyor…' : label;
+function markInvalid(fieldId, invalid){ const el=document.getElementById(fieldId); if(el) el.classList.toggle('invalid', !!invalid); }
+function setBtnLoading(btn, loading, label){ if(!btn) return; btn.disabled=loading; btn.innerHTML = loading ? '<span class="spinner"></span> İşleniyor…' : label; }
+function csvEscape(v){ const s=String(v==null?'':v); return '"'+s.replace(/"/g,'""')+'"'; }
+function downloadCsv(filename, rows){
+  const csv = rows.map(r=>r.map(csvEscape).join(',')).join('\r\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
 }
 
-/* =========================================================
-   EKRAN YÖNLENDİRME
-========================================================== */
-function showScreen(name){
-  ['public','customer','admin'].forEach(s => document.getElementById('screen-'+s).classList.toggle('hidden', s!==name));
-  window.scrollTo(0,0);
-}
-window.goPublic = function(){ showScreen('public'); renderNavAuth(); };
+/* ---------------- ekran yönlendirme ---------------- */
+function showScreen(name){ ['public','customer','admin'].forEach(s=>document.getElementById('screen-'+s).classList.toggle('hidden', s!==name)); window.scrollTo(0,0); }
+window.goPublic = function(){ stopActiveListeners(); showScreen('public'); renderNavAuth(); };
 
 function renderNavAuth(){
   const el = document.getElementById('navAuthArea');
   if(currentUser && currentProfile && currentProfile.role === 'customer'){
-    el.innerHTML = '<button onclick="showCustomerScreen()" class="btn btn-outline btn-sm">'+escapeHtml((currentProfile.fullName||'Panelim').split(' ')[0])+'</button>'
+    el.innerHTML = '<button onclick="requestCustomerPanel()" class="btn btn-outline btn-sm">'+escapeHtml((currentProfile.fullName||'Panelim').split(' ')[0])+'</button>'
                  + '<button onclick="doLogout()" class="btn btn-navy btn-sm">Çıkış</button>';
+  } else if(currentUser){
+    el.innerHTML = '<button onclick="doLogout()" class="btn btn-navy btn-sm">Çıkış</button>';
   } else {
     el.innerHTML = '<button onclick="switchAuthTab(\'login\');openModal(\'modal-auth\');" class="btn btn-outline btn-sm">Giriş Yap</button>'
                  + '<button onclick="switchAuthTab(\'register\');openModal(\'modal-auth\');" class="btn btn-navy btn-sm">Üye Ol</button>';
   }
 }
-window.showCustomerScreen = function(){ showScreen('customer'); renderCustomerDashboard(); };
 
-/* =========================================================
-   OTURUM DİNLEYİCİ (Firebase Auth)
-========================================================== */
+// "Panelim" tıklandığında: doğrulama/profil kontrolünden geçirip dashboard'a al
+window.requestCustomerPanel = async function(){
+  if(!currentUser){ switchAuthTab('login'); openModal('modal-auth'); return; }
+  await reload(currentUser);
+  if(!currentUser.emailVerified){
+    document.getElementById('verifyEmailAddr').textContent = currentUser.email || '';
+    openModal('modal-verify-email');
+    return;
+  }
+  if(!currentProfile || !currentProfile.phone || !currentProfile.tcNo){
+    openModal('modal-complete-profile');
+    return;
+  }
+  showScreen('customer');
+  renderCustomerDashboard();
+};
+
+/* ---------------- oturum dinleyici ---------------- */
 onAuthStateChanged(auth, async (user) => {
   currentUser = user;
   if(!user){ currentProfile = null; renderNavAuth(); return; }
   try{
-    const snap = await getDoc(doc(db, 'users', user.uid));
+    const snap = await getDoc(doc(db,'users',user.uid));
     currentProfile = snap.exists() ? snap.data() : null;
-  }catch(e){
-    console.error(e);
-    currentProfile = null;
-  }
-
-  if(!currentProfile){
-    // Firestore profili yoksa (beklenmedik durum) güvenli tarafta kal, çıkış yaptır
-    renderNavAuth();
-    return;
-  }
+  }catch(e){ console.error(e); currentProfile = null; }
 
   if(wantsAdminAccess){
     wantsAdminAccess = false;
-    if(currentProfile.role === 'admin'){
+    if(currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'staff')){
       closeModal('modal-admin-login');
       document.getElementById('adminLoginForm').reset();
       showScreen('admin');
       adminShowTab('overview');
-      showToast('Yönetici oturumu açıldı.');
+      showToast('Oturum açıldı.');
     } else {
       markInvalid('admin_pwField', true);
       await signOut(auth);
@@ -603,28 +616,184 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   renderNavAuth();
-  if(currentProfile.role === 'admin'){
-    showScreen('admin');
-    adminShowTab('overview');
-  } else {
-    // sayfa yenilendiğinde ya da yeni giriş sonrası müşteri panelini otomatik göstermiyoruz;
-    // kullanıcı ana sayfada kalabilir, "Panelim" butonuyla girer. İlk girişte doğrudan yönlendiriyoruz:
+
+  if(currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'staff')){
     if(document.getElementById('screen-customer').classList.contains('hidden') && document.getElementById('screen-admin').classList.contains('hidden')){
-      // ilk yükleme: kullanıcı zaten girişliyse otomatik panele al
-      showScreen('customer');
-      renderCustomerDashboard();
+      showScreen('admin'); adminShowTab('overview');
     }
+    return;
+  }
+
+  // Google ile ilk kez giriş yapan ve henüz Firestore profili olmayan kullanıcı
+  if(!currentProfile){
+    closeModal('modal-auth');
+    openModal('modal-complete-profile');
+    return;
   }
 });
 
-window.doLogout = async function(){
-  await signOut(auth);
-  goPublic();
-  showToast('Çıkış yapıldı.');
+window.doLogout = async function(){ stopActiveListeners(); await signOut(auth); goPublic(); showToast('Çıkış yapıldı.'); };
+
+/* ---------------- Google girişi ---------------- */
+document.getElementById('googleSignInBtn').addEventListener('click', async function(){
+  const provider = new GoogleAuthProvider();
+  try{
+    await signInWithPopup(auth, provider);
+    // profil eksikse onAuthStateChanged modal-complete-profile'ı açar
+  }catch(err){
+    console.error(err);
+    showToast('Google girişi başarısız oldu.');
+  }
+});
+
+/* ---------------- profil tamamlama (Google sonrası) ---------------- */
+document.getElementById('completeProfileForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const tcNo = document.getElementById('cp_tc').value.trim();
+  const phoneRaw = document.getElementById('cp_phone').value.trim();
+  let valid = true;
+  markInvalid('cp_tcField', !isValidTc(tcNo)); if(!isValidTc(tcNo)) valid=false;
+  markInvalid('cp_phoneField', !isValidTRPhone(phoneRaw)); if(!isValidTRPhone(phoneRaw)) valid=false;
+  if(!valid) return;
+  try{
+    await setDoc(doc(db,'users',currentUser.uid), {
+      fullName: currentUser.displayName || 'Müşteri', tcNo, phone: normalizeTRPhone(phoneRaw),
+      email: currentUser.email || '', role:'customer', quickAdd:false, createdAt: serverTimestamp()
+    }, { merge:true });
+    const snap = await getDoc(doc(db,'users',currentUser.uid));
+    currentProfile = snap.data();
+    closeModal('modal-complete-profile');
+    renderNavAuth();
+    showScreen('customer');
+    renderCustomerDashboard();
+    showToast('Profiliniz tamamlandı.');
+  }catch(err){ console.error(err); showToast('Kaydedilemedi, tekrar deneyin.'); }
+});
+
+/* ---------------- e-posta doğrulama ekranı ---------------- */
+document.getElementById('resendVerifyBtn').addEventListener('click', async function(){
+  try{ await sendEmailVerification(currentUser); showToast('Doğrulama e-postası tekrar gönderildi.'); }
+  catch(err){ showToast('Gönderilemedi, birazdan tekrar deneyin.'); }
+});
+document.getElementById('checkVerifyBtn').addEventListener('click', async function(){
+  await reload(currentUser);
+  if(currentUser.emailVerified){
+    closeModal('modal-verify-email');
+    window.requestCustomerPanel();
+  } else {
+    showToast('Henüz doğrulanmamış görünüyor.');
+  }
+});
+
+/* ---------------- footer 3x tık -> admin/personel girişi ---------------- */
+(function(){
+  let clicks = [];
+  document.getElementById('footerCopyright').addEventListener('click', function(){
+    const now = Date.now(); clicks.push(now); clicks = clicks.filter(t=>now-t<1200);
+    if(clicks.length>=3){ clicks=[]; openModal('modal-admin-login'); }
+  });
+})();
+document.getElementById('adminLoginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('admin_email').value.trim();
+  const pw = document.getElementById('admin_pw').value;
+  markInvalid('admin_emailField', !email); markInvalid('admin_pwField', false);
+  if(!email || !pw) return;
+  const btn = document.getElementById('adminLoginSubmitBtn');
+  setBtnLoading(btn, true); wantsAdminAccess = true;
+  try{ await signInWithEmailAndPassword(auth, email, pw); }
+  catch(err){ wantsAdminAccess=false; markInvalid('admin_pwField', true); }
+  setBtnLoading(btn, false, 'Panele Gir');
+});
+
+/* ---------------- giriş / üye ol / şifre sıfırlama ---------------- */
+window.switchAuthTab = function(tab){
+  ['login','register','reset'].forEach(t=>{
+    document.getElementById('tab'+t[0].toUpperCase()+t.slice(1)+'Btn').classList.toggle('active', t===tab);
+    document.getElementById(t+'Form').classList.toggle('hidden', t!==tab);
+  });
+  document.getElementById('authError').classList.add('hidden');
+  document.getElementById('authSuccess').classList.add('hidden');
 };
 
+document.getElementById('registerForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const fullName = document.getElementById('rg_name').value.trim();
+  const tcNo = document.getElementById('rg_tc').value.trim();
+  const phoneRaw = document.getElementById('rg_phone').value.trim();
+  const email = document.getElementById('rg_email').value.trim();
+  const password = document.getElementById('rg_pw').value;
+  let valid = true;
+  markInvalid('rg_nameField', !fullName); if(!fullName) valid=false;
+  markInvalid('rg_tcField', !isValidTc(tcNo)); if(!isValidTc(tcNo)) valid=false;
+  markInvalid('rg_phoneField', !isValidTRPhone(phoneRaw)); if(!isValidTRPhone(phoneRaw)) valid=false;
+  markInvalid('rg_emailField', !email); if(!email) valid=false;
+  markInvalid('rg_pwField', password.length<6); if(password.length<6) valid=false;
+  if(!valid) return;
+
+  const errEl = document.getElementById('authError'); errEl.classList.add('hidden');
+  const btn = document.getElementById('registerSubmitBtn'); setBtnLoading(btn, true);
+  try{
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(cred.user, { displayName: fullName });
+    await setDoc(doc(db,'users',cred.user.uid), { fullName, tcNo, phone: normalizeTRPhone(phoneRaw), email, role:'customer', quickAdd:false, createdAt: serverTimestamp() });
+    await sendEmailVerification(cred.user);
+    document.getElementById('verifyEmailAddr').textContent = email;
+    closeModal('modal-auth'); this.reset();
+    openModal('modal-verify-email');
+    showToast('Kayıt tamamlandı, e-postanızı doğrulayın.');
+  }catch(err){ console.error(err); errEl.textContent = firebaseErrorToTr(err); errEl.classList.remove('hidden'); }
+  setBtnLoading(btn, false, 'Üye Ol');
+});
+
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('li_email').value.trim();
+  const pw = document.getElementById('li_pw').value;
+  markInvalid('li_emailField', !email);
+  if(!email || !pw){ markInvalid('li_pwField', !pw); return; }
+  const errEl = document.getElementById('authError'); errEl.classList.add('hidden');
+  const btn = document.getElementById('loginSubmitBtn'); setBtnLoading(btn, true);
+  try{
+    await signInWithEmailAndPassword(auth, email, pw);
+    markInvalid('li_pwField', false);
+    closeModal('modal-auth'); this.reset();
+    showToast('Giriş başarılı.');
+  }catch(err){ markInvalid('li_pwField', true); errEl.textContent = firebaseErrorToTr(err); errEl.classList.remove('hidden'); }
+  setBtnLoading(btn, false, 'Giriş Yap');
+});
+
+document.getElementById('resetForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('rs_email').value.trim();
+  markInvalid('rs_emailField', !email); if(!email) return;
+  const successEl = document.getElementById('authSuccess'); const errEl = document.getElementById('authError');
+  errEl.classList.add('hidden'); successEl.classList.add('hidden');
+  const btn = document.getElementById('resetSubmitBtn'); setBtnLoading(btn, true);
+  try{
+    await sendPasswordResetEmail(auth, email);
+    successEl.textContent = 'Sıfırlama bağlantısı e-postanıza gönderildi.';
+    successEl.classList.remove('hidden'); this.reset();
+  }catch(err){ errEl.textContent = firebaseErrorToTr(err); errEl.classList.remove('hidden'); }
+  setBtnLoading(btn, false, 'Şifre Sıfırlama Bağlantısı Gönder');
+});
+
+function firebaseErrorToTr(err){
+  const code = err && err.code || '';
+  const map = {
+    'auth/email-already-in-use':'Bu e-posta adresi zaten kayıtlı.',
+    'auth/invalid-email':'Geçersiz e-posta adresi.',
+    'auth/weak-password':'Şifre en az 6 karakter olmalı.',
+    'auth/user-not-found':'Kullanıcı bulunamadı.',
+    'auth/wrong-password':'Şifre hatalı.',
+    'auth/invalid-credential':'E-posta veya şifre hatalı.',
+    'auth/too-many-requests':'Çok fazla deneme yapıldı, biraz sonra tekrar deneyin.'
+  };
+  return map[code] || ('Bir hata oluştu (' + (code || 'bilinmeyen') + ').');
+}
+
 /* =========================================================
-   PUBLIC: PAKETLER
+   PUBLIC: PAKETLER + DİNAMİK TEKLİF FORMU
 ========================================================== */
 const PKG_ICONS = {
   "Kasko Sigortası":'<path d="M3 13 L5 8 H19 L21 13 V18 H3 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7.5" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="18" r="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M3 13 H21" stroke="currentColor" stroke-width="1.6"/>',
@@ -635,11 +804,9 @@ const PKG_ICONS = {
   "İşyeri Sigortası":'<rect x="4" y="9" width="16" height="11" stroke="currentColor" stroke-width="1.6"/><path d="M9 9 V6 C9 5 9.8 4 11 4 H13 C14.2 4 15 5 15 6 V9" stroke="currentColor" stroke-width="1.6"/><path d="M4 13 H20" stroke="currentColor" stroke-width="1.6"/>',
   "Seyahat Sigortası":'<path d="M3 12 L21 5 L14 21 L11 14 L3 12 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'
 };
-let selectedPackage = null;
 
 function renderPackages(){
-  const grid = document.getElementById('pkgGrid');
-  grid.innerHTML = PACKAGES.map(pkg => (
+  document.getElementById('pkgGrid').innerHTML = PACKAGES.map(pkg => (
     '<button type="button" class="pkg-card text-left p-6 border border-gold-light/25 bg-paper/[0.03] hover:border-gold-light hover:-translate-y-0.5 transition-all" data-pkg="'+escapeHtml(pkg)+'" aria-pressed="false" onclick="selectPackage(this)">'
     + '<svg class="w-7 h-7 text-gold-light mb-4" viewBox="0 0 24 24" fill="none">'+(PKG_ICONS[pkg]||'')+'</svg>'
     + '<h3 class="font-display text-[17px] text-paper mb-1.5">'+escapeHtml(pkg)+'</h3>'
@@ -652,6 +819,10 @@ window.selectPackage = function(btn){
   btn.setAttribute('aria-pressed','true');
   selectedPackage = btn.getAttribute('data-pkg');
   document.getElementById('selectedPkgBox').innerHTML = 'Seçilen paket: <strong class="font-display text-navy-950">'+escapeHtml(selectedPackage)+'</strong>';
+  ['q_group_vehicle','q_group_home','q_group_health'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  if(VEHICLE_PKGS.includes(selectedPackage)) document.getElementById('q_group_vehicle').classList.remove('hidden');
+  else if(HOME_PKGS.includes(selectedPackage)) document.getElementById('q_group_home').classList.remove('hidden');
+  else if(HEALTH_PKGS.includes(selectedPackage)) document.getElementById('q_group_health').classList.remove('hidden');
   document.getElementById('teklif').scrollIntoView({behavior:'smooth', block:'start'});
 };
 
@@ -659,10 +830,17 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   e.preventDefault();
   const name = document.getElementById('q_name').value.trim();
   const phone = document.getElementById('q_phone').value.trim();
+  const tcNo = document.getElementById('q_tc').value.trim();
+  const payment = document.getElementById('q_payment').value;
   const note = document.getElementById('q_note').value.trim();
+  const kvkk = document.getElementById('q_kvkk').checked;
+
   let valid = true;
   markInvalid('q_nameField', !name); if(!name) valid=false;
-  markInvalid('q_phoneField', !isValidPhone(phone)); if(!isValidPhone(phone)) valid=false;
+  markInvalid('q_phoneField', !isValidTRPhone(phone)); if(!isValidTRPhone(phone)) valid=false;
+  markInvalid('q_tcField', !isValidTc(tcNo)); if(!isValidTc(tcNo)) valid=false;
+  document.getElementById('q_kvkkError').style.display = kvkk ? 'none' : 'block';
+  if(!kvkk) valid=false;
   if(!selectedPackage){
     document.getElementById('selectedPkgBox').innerHTML = '<strong style="color:#a13d3d;">Lütfen önce bir sigorta paketi seçin.</strong>';
     document.getElementById('paketler').scrollIntoView({behavior:'smooth', block:'start'});
@@ -670,167 +848,57 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   }
   if(!valid) return;
 
+  const extra = {};
+  let extraMsgLines = [];
+  if(VEHICLE_PKGS.includes(selectedPackage)){
+    extra.plaka = document.getElementById('q_plaka').value.trim();
+    extra.ruhsatSeri = document.getElementById('q_ruhsatSeri').value.trim();
+    extra.ruhsatNo = document.getElementById('q_ruhsatNo').value.trim();
+    if(extra.plaka) extraMsgLines.push('- Plaka: '+extra.plaka);
+  } else if(HOME_PKGS.includes(selectedPackage)){
+    extra.address = document.getElementById('q_address').value.trim();
+    extra.flat = document.getElementById('q_flat').value.trim();
+    if(extra.address) extraMsgLines.push('- Adres: '+extra.address);
+  } else if(HEALTH_PKGS.includes(selectedPackage)){
+    extra.birthDate = document.getElementById('q_birth').value;
+    extra.height = document.getElementById('q_height').value.trim();
+    extra.weight = document.getElementById('q_weight').value.trim();
+  }
+
   const btn = document.getElementById('quoteSubmitBtn');
   setBtnLoading(btn, true);
   try{
-    await addDoc(collection(db, 'quotes'), {
-      package: selectedPackage, name, phone, note, status: 'Yeni', createdAt: serverTimestamp()
+    await addDoc(collection(db,'quotes'), {
+      package: selectedPackage, name, phone, tcNo, note, paymentPreference: payment,
+      kvkkAccepted: true, extra, status:'Yeni', createdAt: serverTimestamp()
     });
-  }catch(err){
-    console.error(err);
-    showToast('Talep kaydedilemedi, yine de WhatsApp açılıyor.');
-  }
+  }catch(err){ console.error(err); showToast('Talep kaydedilemedi, yine de WhatsApp açılıyor.'); }
   setBtnLoading(btn, false, '<svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.4-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.4 0-.5C11 9.3 10.5 8 10.3 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.4 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.4 10-10S17.5 2 12 2zm0 18c-1.7 0-3.4-.5-4.8-1.4l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 14.6 3 13.3 3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9z"/></svg><span>WhatsApp ile Gönder</span>');
 
   let msg = "Merhaba Ahmetcan Bey, Öz Grup Sigorta web sitenizden yeni bir teklif talebi var!\n"
-    + "- Seçilen Paket: " + selectedPackage + "\n"
-    + "- Müşteri Ad Soyad: " + name + "\n"
-    + "- Müşteri Telefonu: " + phone;
+    + "- Seçilen Paket: " + selectedPackage + "\n- Müşteri Ad Soyad: " + name + "\n- Müşteri Telefonu: " + phone
+    + "\n- T.C. No: " + tcNo + "\n- Ödeme Tercihi: " + payment;
+  if(extraMsgLines.length) msg += "\n" + extraMsgLines.join("\n");
   if(note) msg += "\n- Not: " + note;
   openWhatsApp(WHATSAPP_NUMBER, msg);
   showToast("WhatsApp açılıyor, mesajınızı göndermeniz yeterli.");
   this.reset();
   document.querySelectorAll('.pkg-card').forEach(b=>b.setAttribute('aria-pressed','false'));
+  ['q_group_vehicle','q_group_home','q_group_health'].forEach(id=>document.getElementById(id).classList.add('hidden'));
   selectedPackage = null;
   document.getElementById('selectedPkgBox').innerHTML = 'Henüz paket seçilmedi — <strong class="font-display text-navy-950">lütfen yukarıdan bir paket seçin.</strong>';
 });
 
 /* =========================================================
-   FOOTER ÜÇLÜ TIKLAMA -> GİZLİ ADMİN GİRİŞİ
-========================================================== */
-(function(){
-  let clicks = [];
-  document.getElementById('footerCopyright').addEventListener('click', function(){
-    const now = Date.now();
-    clicks.push(now);
-    clicks = clicks.filter(t => now - t < 1200);
-    if(clicks.length >= 3){ clicks = []; openModal('modal-admin-login'); }
-  });
-})();
-
-document.getElementById('adminLoginForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const email = document.getElementById('admin_email').value.trim();
-  const pw = document.getElementById('admin_pw').value;
-  markInvalid('admin_emailField', !email);
-  markInvalid('admin_pwField', false);
-  if(!email || !pw) return;
-
-  const btn = document.getElementById('adminLoginSubmitBtn');
-  setBtnLoading(btn, true);
-  wantsAdminAccess = true;
-  try{
-    await signInWithEmailAndPassword(auth, email, pw);
-    // sonucu onAuthStateChanged işler
-  }catch(err){
-    wantsAdminAccess = false;
-    markInvalid('admin_pwField', true);
-  }
-  setBtnLoading(btn, false, 'Panele Gir');
-});
-
-/* =========================================================
-   MÜŞTERİ: GİRİŞ / ÜYELİK (Firebase Authentication)
-========================================================== */
-window.switchAuthTab = function(tab){
-  document.getElementById('tabLoginBtn').classList.toggle('active', tab==='login');
-  document.getElementById('tabRegisterBtn').classList.toggle('active', tab==='register');
-  document.getElementById('loginForm').classList.toggle('hidden', tab!=='login');
-  document.getElementById('registerForm').classList.toggle('hidden', tab!=='register');
-  document.getElementById('authError').classList.add('hidden');
-};
-
-document.getElementById('registerForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const fullName = document.getElementById('rg_name').value.trim();
-  const tcNo = document.getElementById('rg_tc').value.trim();
-  const phone = document.getElementById('rg_phone').value.trim();
-  const email = document.getElementById('rg_email').value.trim();
-  const password = document.getElementById('rg_pw').value;
-
-  let valid = true;
-  markInvalid('rg_nameField', !fullName); if(!fullName) valid=false;
-  markInvalid('rg_tcField', !isValidTc(tcNo)); if(!isValidTc(tcNo)) valid=false;
-  markInvalid('rg_phoneField', !isValidPhone(phone)); if(!isValidPhone(phone)) valid=false;
-  markInvalid('rg_emailField', !email); if(!email) valid=false;
-  markInvalid('rg_pwField', password.length < 6); if(password.length < 6) valid=false;
-  if(!valid) return;
-
-  const errEl = document.getElementById('authError');
-  errEl.classList.add('hidden');
-  const btn = document.getElementById('registerSubmitBtn');
-  setBtnLoading(btn, true);
-  try{
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(cred.user, { displayName: fullName });
-    await setDoc(doc(db, 'users', cred.user.uid), {
-      fullName, tcNo, phone, email, role: 'customer', quickAdd:false, createdAt: serverTimestamp()
-    });
-    closeModal('modal-auth');
-    this.reset();
-    showToast('Üyeliğiniz oluşturuldu, hoş geldiniz!');
-    // onAuthStateChanged otomatik olarak müşteri paneline yönlendirir
-  }catch(err){
-    console.error(err);
-    errEl.textContent = firebaseErrorToTr(err);
-    errEl.classList.remove('hidden');
-  }
-  setBtnLoading(btn, false, 'Üye Ol');
-});
-
-document.getElementById('loginForm').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const email = document.getElementById('li_email').value.trim();
-  const pw = document.getElementById('li_pw').value;
-  markInvalid('li_emailField', !email);
-  if(!email || !pw){ markInvalid('li_pwField', !pw); return; }
-
-  const errEl = document.getElementById('authError');
-  errEl.classList.add('hidden');
-  const btn = document.getElementById('loginSubmitBtn');
-  setBtnLoading(btn, true);
-  try{
-    await signInWithEmailAndPassword(auth, email, pw);
-    markInvalid('li_pwField', false);
-    closeModal('modal-auth');
-    this.reset();
-    showToast('Giriş başarılı, hoş geldiniz!');
-  }catch(err){
-    markInvalid('li_pwField', true);
-    errEl.textContent = firebaseErrorToTr(err);
-    errEl.classList.remove('hidden');
-  }
-  setBtnLoading(btn, false, 'Giriş Yap');
-});
-
-function firebaseErrorToTr(err){
-  const code = err && err.code || '';
-  const map = {
-    'auth/email-already-in-use':'Bu e-posta adresi zaten kayıtlı.',
-    'auth/invalid-email':'Geçersiz e-posta adresi.',
-    'auth/weak-password':'Şifre en az 6 karakter olmalı.',
-    'auth/user-not-found':'Kullanıcı bulunamadı.',
-    'auth/wrong-password':'Şifre hatalı.',
-    'auth/invalid-credential':'E-posta veya şifre hatalı.',
-    'auth/too-many-requests':'Çok fazla deneme yapıldı, lütfen biraz sonra tekrar deneyin.'
-  };
-  return map[code] || 'Bir hata oluştu, lütfen tekrar deneyin.';
-}
-
-/* =========================================================
    MÜŞTERİ PANELİ
 ========================================================== */
-function paymentBadge(status){ return status==='Ödendi' ? '<span class="badge badge-green">Ödendi</span>' : '<span class="badge badge-amber">Bekliyor</span>'; }
-function claimBadge(status){
-  if(status==='Sonuçlandı') return '<span class="badge badge-green">Sonuçlandı</span>';
-  if(status==='İnceleniyor') return '<span class="badge badge-amber">İnceleniyor</span>';
-  return '<span class="badge badge-navy">Beklemede</span>';
-}
+function paymentBadge(s){ return s==='Ödendi' ? '<span class="badge badge-green">Ödendi</span>' : '<span class="badge badge-amber">Bekliyor</span>'; }
+function claimBadge(s){ if(s==='Sonuçlandı') return '<span class="badge badge-green">Sonuçlandı</span>'; if(s==='İnceleniyor') return '<span class="badge badge-amber">İnceleniyor</span>'; return '<span class="badge badge-navy">Beklemede</span>'; }
+function renewalTier(days){ if(days<0) return {label:'Süresi Doldu', cls:'badge-red'}; if(days<=7) return {label:days+' gün kaldı', cls:'badge-red'}; if(days<=15) return {label:days+' gün kaldı', cls:'badge-orange'}; if(days<=30) return {label:days+' gün kaldı', cls:'badge-amber'}; return {label:days+' gün kaldı', cls:'badge-green'}; }
 
 async function renderCustomerDashboard(){
-  if(!currentUser || !currentProfile){ goPublic(); return; }
+  if(!currentUser || !currentProfile) { goPublic(); return; }
   const c = currentProfile;
-
   document.getElementById('custWelcome').innerHTML =
     '<p class="font-mono text-[11px] tracking-widest uppercase text-gold mb-1.5">Hoş geldiniz</p>'
     + '<h2 class="font-display text-[22px] text-navy-950">'+escapeHtml(c.fullName)+'</h2>'
@@ -850,21 +918,48 @@ async function renderCustomerDashboard(){
 
   const tbody = document.querySelector('#custPolicyTable tbody');
   tbody.innerHTML = policies.length ? policies.map(p => {
-    const docCell = p.docUrl ? '<a class="text-navy-950 underline font-medium" href="'+p.docUrl+'" target="_blank" rel="noopener">Görüntüle / İndir</a>' : 'Belge yok';
+    const docCell = p.docUrl ? '<a class="text-navy-950 underline font-medium" href="'+p.docUrl+'" target="_blank" rel="noopener">Görüntüle</a>' : 'Belge yok';
     return '<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.startDate)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+escapeHtml(p.premium)+' ₺</td><td>'+paymentBadge(p.paymentStatus)+'</td><td>'+docCell+'</td></tr>';
   }).join('') : '<tr><td colspan="7" class="text-center text-ink-soft py-6">Henüz tanımlı poliçeniz bulunmuyor.</td></tr>';
 
   const policySelect = document.getElementById('claim_policy');
-  policySelect.innerHTML = policies.length
-    ? policies.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.policyNo)+' — '+escapeHtml(p.type)+'</option>').join('')
-    : '<option value="">Poliçe bulunamadı</option>';
+  policySelect.innerHTML = policies.length ? policies.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.policyNo)+' — '+escapeHtml(p.type)+'</option>').join('') : '<option value="">Poliçe bulunamadı</option>';
 
   const claimTbody = document.querySelector('#custClaimTable tbody');
-  claimTbody.innerHTML = claims.length ? claims.map(k => {
-    const pol = policies.find(p=>p.id===k.policyId);
-    return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(pol?escapeHtml(pol.policyNo):'—')+'</td><td>'+claimBadge(k.status)+'</td></tr>';
-  }).join('') : '<tr><td colspan="3" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>';
+  claimTbody.innerHTML = claims.length ? claims.map(k => { const pol = policies.find(p=>p.id===k.policyId); return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(pol?escapeHtml(pol.policyNo):'—')+'</td><td>'+claimBadge(k.status)+'</td></tr>'; }).join('') : '<tr><td colspan="3" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>';
+
+  // Yenileme teklifi kutusu
+  const withOffer = policies.filter(p => p.renewalOfferPrice && daysUntil(p.endDate) <= 30 && daysUntil(p.endDate) >= 0 && !p.renewalRequested);
+  const offerBox = document.getElementById('renewalOfferBox');
+  offerBox.innerHTML = withOffer.map(p => (
+    '<div class="card p-5 mb-5 border-gold bg-gold/[0.06] flex items-center justify-between flex-wrap gap-3">'
+    + '<div><p class="font-display text-[15.5px] text-navy-950">'+escapeHtml(p.type)+' poliçenizin bitmesine '+daysUntil(p.endDate)+' gün kaldı</p>'
+    + '<p class="text-ink-soft text-[13.5px]">Yenileme fiyatınız: <strong class="text-navy-950">'+escapeHtml(p.renewalOfferPrice)+' ₺</strong></p></div>'
+    + '<button class="btn btn-gold btn-sm" onclick="acceptRenewalOffer(\''+p.id+'\')">Tek Tıkla Onayla</button></div>'
+  )).join('');
+
+  // Çapraz satış: Kasko var, Sağlık yok
+  const hasKasko = policies.some(p=>p.type==='Kasko Sigortası');
+  const hasHealth = policies.some(p=>p.type==='Özel Sağlık Sigortası');
+  document.getElementById('crossSellBox').innerHTML = (hasKasko && !hasHealth) ? (
+    '<div class="card p-5 mb-5 border-ok bg-ok/[0.06] flex items-center justify-between flex-wrap gap-3">'
+    + '<p class="text-[14px] text-navy-950">💡 Kasko sahiplerine özel <strong>Tamamlayıcı Sağlık Sigortası</strong>\'nda indirim fırsatı!</p>'
+    + '<button class="btn btn-ok btn-sm" onclick="crossSellWhatsApp()">Bilgi Al</button></div>'
+  ) : '';
 }
+window.crossSellWhatsApp = function(){
+  openWhatsApp(WHATSAPP_NUMBER, "Merhaba, Kasko poliçem var; Tamamlayıcı Sağlık Sigortası indirim fırsatı hakkında bilgi almak istiyorum. Ad Soyad: " + (currentProfile ? currentProfile.fullName : ''));
+};
+window.acceptRenewalOffer = async function(policyId){
+  try{
+    await updateDoc(doc(db,'policies',policyId), { renewalRequested: true });
+    const pSnap = await getDoc(doc(db,'policies',policyId));
+    const p = pSnap.data();
+    openWhatsApp(WHATSAPP_NUMBER, "Merhaba, " + (currentProfile?currentProfile.fullName:'') + " olarak " + p.type + " poliçemin " + p.renewalOfferPrice + " TL'lik yenileme teklifini onaylıyorum.");
+    renderCustomerDashboard();
+    showToast('Onayınız iletildi.');
+  }catch(err){ console.error(err); showToast('İşlem başarısız.'); }
+};
 
 document.getElementById('claimForm').addEventListener('submit', async function(e){
   e.preventDefault();
@@ -872,82 +967,89 @@ document.getElementById('claimForm').addEventListener('submit', async function(e
   const policyId = document.getElementById('claim_policy').value;
   const desc = document.getElementById('claim_desc').value.trim();
   if(!policyId){ showToast('Önce bir poliçeniz olmalı.'); return; }
-  markInvalid('claim_descField', !desc);
-  if(!desc) return;
-
+  markInvalid('claim_descField', !desc); if(!desc) return;
   try{
-    await addDoc(collection(db,'claims'), {
-      customerId: currentUser.uid, policyId, description: desc,
-      date: new Date().toISOString().slice(0,10), status: 'Beklemede', createdAt: serverTimestamp()
-    });
+    await addDoc(collection(db,'claims'), { customerId: currentUser.uid, policyId, description: desc, date: new Date().toISOString().slice(0,10), status:'Beklemede', createdAt: serverTimestamp() });
     document.getElementById('claim_desc').value = '';
     await renderCustomerDashboard();
     showToast('Hasar bildiriminiz alındı.');
-  }catch(err){
-    console.error(err);
-    showToast('Bildirim gönderilemedi, lütfen tekrar deneyin.');
-  }
+  }catch(err){ console.error(err); showToast('Bildirim gönderilemedi.'); }
+});
+
+/* ---------------- Acil Yol Yardım (GPS) ---------------- */
+document.getElementById('roadsideBtn').addEventListener('click', function(){
+  if(!navigator.geolocation){ showToast('Cihazınız konum özelliğini desteklemiyor.'); return; }
+  const btn = this; setBtnLoading(btn, true);
+  navigator.geolocation.getCurrentPosition(async function(pos){
+    const lat = pos.coords.latitude, lng = pos.coords.longitude;
+    const mapsUrl = 'https://maps.google.com/?q=' + lat + ',' + lng;
+    try{
+      await addDoc(collection(db,'roadside_requests'), {
+        customerId: currentUser.uid, customerName: currentProfile.fullName, customerPhone: currentProfile.phone,
+        lat, lng, mapsUrl, status:'Yeni', createdAt: serverTimestamp()
+      });
+    }catch(err){ console.error(err); }
+    setBtnLoading(btn, false, 'Çekici Çağır');
+    openWhatsApp(WHATSAPP_NUMBER, "🚨 ACİL YOL YARDIM TALEBİ\nAd Soyad: " + currentProfile.fullName + "\nTelefon: " + currentProfile.phone + "\nKonum: " + mapsUrl);
+    showToast('Konumunuz iletildi, WhatsApp açılıyor.');
+  }, function(err){
+    setBtnLoading(btn, false, 'Çekici Çağır');
+    showToast('Konum alınamadı: tarayıcı izinlerini kontrol edin.');
+  }, { enableHighAccuracy:true, timeout:10000 });
 });
 
 /* =========================================================
-   ADMİN PANELİ
+   ADMİN / PERSONEL PANELİ
 ========================================================== */
+function isSuperAdmin(){ return currentProfile && currentProfile.role === 'admin'; }
+
 window.adminShowTab = function(tab){
+  stopActiveListeners();
   document.querySelectorAll('.sidebar-link').forEach(el=>el.classList.toggle('active', el.getAttribute('data-tab')===tab));
   document.querySelector('.admin-sidebar').classList.remove('open');
-  const map = { overview:renderAdminOverview, addpolicy:renderAdminAddPolicy, customers:renderAdminCustomers, renewals:renderAdminRenewals, leads:renderAdminLeads, claims:renderAdminClaims };
+  document.getElementById('staffTabLink').classList.toggle('hidden', !isSuperAdmin());
+  document.getElementById('adminRoleTag').textContent = isSuperAdmin() ? 'Süper Admin' : 'Personel';
+  document.getElementById('adminWhoAmI').textContent = currentProfile ? currentProfile.fullName : '';
+  const map = { overview:renderAdminOverview, addpolicy:renderAdminAddPolicy, customers:renderAdminCustomers, renewals:renderAdminRenewals, leads:renderAdminLeads, roadside:renderAdminRoadside, claims:renderAdminClaims, staff:renderAdminStaff };
   (map[tab] || renderAdminOverview)();
 };
 
-function sectionHeader(title, subtitle){
-  return '<h2 class="font-display text-[24px] text-navy-950 mb-1">'+title+'</h2>' + (subtitle ? '<p class="text-ink-soft text-[14px] mb-7">'+subtitle+'</p>' : '<div class="mb-7"></div>');
-}
-function statCard(label, value){
-  return '<div class="card p-5"><div class="font-mono text-[10.5px] uppercase tracking-wide text-ink-soft mb-2">'+label+'</div><div class="font-display text-[26px] text-navy-950">'+value+'</div></div>';
-}
-function renewalInfo(policy){
-  const days = daysUntil(policy.endDate);
-  if(days < 0) return { label:'Süresi Doldu', cls:'badge-red' };
-  if(days <= 15) return { label: days+' gün kaldı', cls:'badge-red' };
-  if(days <= 30) return { label: days+' gün kaldı', cls:'badge-amber' };
-  return { label: days+' gün kaldı', cls:'badge-green' };
-}
-async function fetchAll(colName){
-  const snap = await getDocs(collection(db, colName));
-  return snap.docs.map(d=>({id:d.id, ...d.data()}));
-}
+function sectionHeader(title, subtitle){ return '<h2 class="font-display text-[24px] text-navy-950 mb-1">'+title+'</h2>' + (subtitle ? '<p class="text-ink-soft text-[14px] mb-7">'+subtitle+'</p>' : '<div class="mb-7"></div>'); }
+function statCard(label, value){ return '<div class="card p-5"><div class="font-mono text-[10.5px] uppercase tracking-wide text-ink-soft mb-2">'+label+'</div><div class="font-display text-[26px] text-navy-950">'+value+'</div></div>'; }
+async function fetchAll(colName){ const snap = await getDocs(collection(db,colName)); return snap.docs.map(d=>({id:d.id, ...d.data()})); }
 
 async function renderAdminOverview(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Genel Bakış','Yükleniyor…');
-  const [customers, policies, quotes, claims] = await Promise.all([
-    fetchAll('users').then(r=>r.filter(u=>u.role==='customer')), fetchAll('policies'), fetchAll('quotes'), fetchAll('claims')
-  ]);
+  const [customersAll, policies, quotes, claims] = await Promise.all([fetchAll('users'), fetchAll('policies'), fetchAll('quotes'), fetchAll('claims')]);
+  const customers = customersAll.filter(u=>u.role==='customer');
   const pending = policies.filter(p=>p.paymentStatus==='Bekliyor').length;
-  const renewals = policies.filter(p=>daysUntil(p.endDate) <= 30).length;
+  const renewals = policies.filter(p=>daysUntil(p.endDate)<=30).length;
   const newLeads = quotes.filter(q=>q.status==='Yeni').length;
 
-  content.innerHTML =
-    sectionHeader('Genel Bakış', 'Öz Grup Sigorta acente yönetim özeti')
+  content.innerHTML = sectionHeader('Genel Bakış', 'Öz Grup Sigorta acente yönetim özeti')
     + '<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">'
     + statCard('Toplam Müşteri', customers.length) + statCard('Aktif Poliçe', policies.length)
-    + statCard('Bekleyen Ödeme', pending) + statCard('Yaklaşan Yenileme', renewals) + statCard('Yeni Teklif Talebi', newLeads)
+    + statCard('Bekleyen Ödeme', pending) + statCard('Yaklaşan Yenileme', renewals) + statCard('Bekleyen Başvuru', newLeads)
     + '</div>'
     + '<div class="grid md:grid-cols-2 gap-6 mt-9">'
-    + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Teklif Talepleri</h3>' + miniLeadsList(quotes.slice(0,5)) + '</div>'
-    + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Hasar Bildirimleri</h3>' + miniClaimsList(claims.slice(0,5), customers) + '</div>'
+    + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Teklif Talepleri</h3><ul id="ovLeads" class="flex flex-col gap-3"></ul></div>'
+    + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Hasar Bildirimleri</h3><ul id="ovClaims" class="flex flex-col gap-3"></ul></div>'
     + '</div>';
-}
-function miniLeadsList(list){
-  if(!list.length) return '<p class="text-ink-soft text-[13.5px]">Kayıt yok.</p>';
-  return '<ul class="flex flex-col gap-3">' + list.map(q => '<li class="text-[13.5px] flex justify-between gap-3"><span>'+escapeHtml(q.name)+' — '+escapeHtml(q.package)+'</span></li>').join('') + '</ul>';
-}
-function miniClaimsList(list, customers){
-  if(!list.length) return '<p class="text-ink-soft text-[13.5px]">Kayıt yok.</p>';
-  return '<ul class="flex flex-col gap-3">' + list.map(k => {
-    const cust = customers.find(c=>c.id===k.customerId);
-    return '<li class="text-[13.5px] flex justify-between gap-3"><span>'+(cust?escapeHtml(cust.fullName):'—')+'</span>'+claimBadge(k.status)+'</li>';
-  }).join('') + '</ul>';
+
+  // Canlı güncellenen listeler (yeni teklif geldiğinde admin ekranı otomatik yenilenir)
+  const unsub1 = onSnapshot(collection(db,'quotes'), snap => {
+    const list = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)).slice(0,5);
+    const el = document.getElementById('ovLeads'); if(!el) return;
+    el.innerHTML = list.length ? list.map(q=>'<li class="text-[13.5px] flex justify-between gap-3"><span>'+escapeHtml(q.name)+' — '+escapeHtml(q.package)+'</span></li>').join('') : '<p class="text-ink-soft text-[13.5px]">Kayıt yok.</p>';
+  });
+  const unsub2 = onSnapshot(collection(db,'claims'), async snap => {
+    const list = snap.docs.map(d=>({id:d.id,...d.data()})).slice(0,5);
+    const el = document.getElementById('ovClaims'); if(!el) return;
+    const users = await fetchAll('users');
+    el.innerHTML = list.length ? list.map(k=>{ const c=users.find(u=>u.id===k.customerId); return '<li class="text-[13.5px] flex justify-between gap-3"><span>'+(c?escapeHtml(c.fullName):'—')+'</span>'+claimBadge(k.status)+'</li>'; }).join('') : '<p class="text-ink-soft text-[13.5px]">Kayıt yok.</p>';
+  });
+  activeListeners.push(unsub1, unsub2);
 }
 
 /* ---- Poliçe Ekle ---- */
@@ -957,44 +1059,26 @@ async function renderAdminAddPolicy(){
   const allUsers = await fetchAll('users');
   const customers = allUsers.filter(u=>u.role==='customer');
 
-  content.innerHTML =
-    sectionHeader('Poliçe Ekle', 'Mevcut bir müşteriye yeni poliçe tanımlayın veya hızlıca yeni müşteri ekleyin.')
+  content.innerHTML = sectionHeader('Poliçe Ekle', 'Mevcut bir müşteriye yeni poliçe tanımlayın veya hızlıca yeni müşteri ekleyin.')
     + '<div class="grid lg:grid-cols-2 gap-8">'
     + '<form id="policyForm" class="card p-6">'
-      + '<div class="field mb-4" id="pf_customerField">'
-        + '<label class="label" for="pf_customer">Müşteri</label>'
-        + '<select class="input" id="pf_customer"><option value="">— Müşteri Seçin —</option>'
-          + customers.map(c=>'<option value="'+c.id+'">'+escapeHtml(c.fullName)+' · '+escapeHtml(c.phone)+'</option>').join('')
-        + '</select>'
-        + '<div class="field-error">Müşteri seçiniz.</div>'
-      + '</div>'
-      + '<div class="grid grid-cols-2 gap-3 mb-4">'
-        + '<div class="field" id="pf_noField"><label class="label" for="pf_no">Poliçe No</label><input class="input" id="pf_no" placeholder="OZG-2026-0003"><div class="field-error">Zorunlu alan.</div></div>'
-        + '<div class="field"><label class="label" for="pf_type">Tür</label><select class="input" id="pf_type">'+PACKAGES.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div>'
-      + '</div>'
-      + '<div class="grid grid-cols-2 gap-3 mb-4">'
-        + '<div class="field" id="pf_startField"><label class="label" for="pf_start">Başlangıç</label><input class="input" type="date" id="pf_start"><div class="field-error">Tarih giriniz.</div></div>'
-        + '<div class="field" id="pf_endField"><label class="label" for="pf_end">Bitiş</label><input class="input" type="date" id="pf_end"><div class="field-error">Tarih giriniz.</div></div>'
-      + '</div>'
-      + '<div class="grid grid-cols-2 gap-3 mb-4">'
-        + '<div class="field" id="pf_premiumField"><label class="label" for="pf_premium">Prim Tutarı (₺)</label><input class="input" id="pf_premium" inputmode="numeric" placeholder="Örn. 3500"><div class="field-error">Tutar giriniz.</div></div>'
-        + '<div class="field"><label class="label" for="pf_payment">Ödeme Durumu</label><select class="input" id="pf_payment">'+PAYMENT_STATUSES.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div>'
-      + '</div>'
-      + '<div class="field mb-5"><label class="label" for="pf_doc">Poliçe Belgesi (opsiyonel — Firebase Storage\'a yüklenir)</label><input class="input" type="file" id="pf_doc" accept=".pdf,.jpg,.jpeg,.png"></div>'
+      + '<div class="field mb-4" id="pf_customerField"><label class="label" for="pf_customer">Müşteri</label><select class="input" id="pf_customer"><option value="">— Müşteri Seçin —</option>'+customers.map(c=>'<option value="'+c.id+'">'+escapeHtml(c.fullName)+' · '+escapeHtml(c.phone)+'</option>').join('')+'</select><div class="field-error">Müşteri seçiniz.</div></div>'
+      + '<div class="grid grid-cols-2 gap-3 mb-4"><div class="field" id="pf_noField"><label class="label" for="pf_no">Poliçe No</label><input class="input" id="pf_no" placeholder="OZG-2026-0003"><div class="field-error">Zorunlu alan.</div></div><div class="field"><label class="label" for="pf_type">Tür</label><select class="input" id="pf_type">'+PACKAGES.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div></div>'
+      + '<div class="grid grid-cols-2 gap-3 mb-4"><div class="field" id="pf_startField"><label class="label" for="pf_start">Başlangıç</label><input class="input" type="date" id="pf_start"><div class="field-error">Tarih giriniz.</div></div><div class="field" id="pf_endField"><label class="label" for="pf_end">Bitiş</label><input class="input" type="date" id="pf_end"><div class="field-error">Tarih giriniz.</div></div></div>'
+      + '<div class="grid grid-cols-2 gap-3 mb-4"><div class="field" id="pf_premiumField"><label class="label" for="pf_premium">Prim Tutarı (₺)</label><input class="input" id="pf_premium" inputmode="numeric" placeholder="Örn. 3500"><div class="field-error">Tutar giriniz.</div></div><div class="field"><label class="label" for="pf_payment">Ödeme Durumu</label><select class="input" id="pf_payment">'+PAYMENT_STATUSES.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div></div>'
+      + '<div class="field mb-5"><label class="label" for="pf_doc">Poliçe Belgesi (opsiyonel)</label><input class="input" type="file" id="pf_doc" accept=".pdf,.jpg,.jpeg,.png"></div>'
       + '<button type="submit" id="policySubmitBtn" class="btn btn-navy w-full justify-center">Poliçeyi Kaydet</button>'
     + '</form>'
     + '<div class="card p-6">'
-      + '<h3 class="font-display text-[16px] mb-1.5 text-navy-950">Hızlı Müşteri Ekle</h3>'
-      + '<p class="text-ink-soft text-[13px] mb-4">Sisteme üye olmamış bir müşteri için hızlıca kayıt oluşturun (poliçe atamak için gereklidir; bu müşteri panele giriş yapamaz).</p>'
+      + '<h3 class="font-display text-[16px] mb-1.5 text-navy-950">Hızlı Müşteri Ekle</h3><p class="text-ink-soft text-[13px] mb-4">Üye olmamış bir müşteri için kayıt oluşturun (bu müşteri panele giriş yapamaz).</p>'
       + '<form id="quickCustomerForm">'
         + '<div class="field mb-3.5" id="qc_nameField"><label class="label" for="qc_name">Ad Soyad</label><input class="input" id="qc_name"><div class="field-error">Zorunlu alan.</div></div>'
         + '<div class="field mb-3.5" id="qc_phoneField"><label class="label" for="qc_phone">Telefon</label><input class="input" id="qc_phone" placeholder="05XX XXX XX XX"><div class="field-error">Geçerli telefon giriniz.</div></div>'
-        + '<div class="field mb-4"><label class="label" for="qc_tc">T.C. No / Plaka / Not (opsiyonel)</label><input class="input" id="qc_tc"></div>'
+        + '<div class="field mb-4"><label class="label" for="qc_tc">T.C. No / Plaka / Not</label><input class="input" id="qc_tc"></div>'
         + '<button type="submit" id="quickCustomerSubmitBtn" class="btn btn-outline w-full justify-center">Müşteri Ekle</button>'
       + '</form>'
       + '<div class="mt-7 pt-6 border-t border-line"><h4 class="font-mono text-[11px] uppercase tracking-widest text-ink-soft mb-3">Kayıtlı Müşteri Sayısı</h4><div class="font-display text-[30px] text-navy-950">'+customers.length+'</div></div>'
-    + '</div>'
-    + '</div>';
+    + '</div></div>';
 
   document.getElementById('policyForm').addEventListener('submit', handlePolicyFormSubmit);
   document.getElementById('quickCustomerForm').addEventListener('submit', handleQuickCustomerSubmit);
@@ -1010,7 +1094,6 @@ async function handlePolicyFormSubmit(e){
   const premium = document.getElementById('pf_premium').value.trim();
   const paymentStatus = document.getElementById('pf_payment').value;
   const fileInput = document.getElementById('pf_doc');
-
   let valid = true;
   markInvalid('pf_customerField', !customerId); if(!customerId) valid=false;
   markInvalid('pf_noField', !policyNo); if(!policyNo) valid=false;
@@ -1018,30 +1101,19 @@ async function handlePolicyFormSubmit(e){
   markInvalid('pf_endField', !endDate); if(!endDate) valid=false;
   markInvalid('pf_premiumField', !premium); if(!premium) valid=false;
   if(!valid) return;
-
-  const btn = document.getElementById('policySubmitBtn');
-  setBtnLoading(btn, true);
+  const btn = document.getElementById('policySubmitBtn'); setBtnLoading(btn, true);
   try{
-    let docUrl = '', docName = '';
+    let docUrl='', docName='';
     const file = fileInput.files[0];
     if(file){
-      const storageRef = ref(storage, 'policies/' + customerId + '/' + Date.now() + '_' + file.name);
-      await uploadBytes(storageRef, file);
-      docUrl = await getDownloadURL(storageRef);
-      docName = file.name;
+      const sref = ref(storage, 'policies/'+customerId+'/'+Date.now()+'_'+file.name);
+      await uploadBytes(sref, file); docUrl = await getDownloadURL(sref); docName = file.name;
     }
-    await addDoc(collection(db,'policies'), {
-      customerId, policyNo, type, startDate, endDate, premium, paymentStatus, docUrl, docName, createdAt: serverTimestamp()
-    });
-    showToast('Poliçe kaydedildi.');
-    renderAdminAddPolicy();
-  }catch(err){
-    console.error(err);
-    showToast('Poliçe kaydedilemedi: ' + (err.code || 'hata'));
-  }
+    await addDoc(collection(db,'policies'), { customerId, policyNo, type, startDate, endDate, premium, paymentStatus, docUrl, docName, createdAt: serverTimestamp() });
+    showToast('Poliçe kaydedildi.'); renderAdminAddPolicy();
+  }catch(err){ console.error(err); showToast('Poliçe kaydedilemedi: '+(err.code||'hata')); }
   setBtnLoading(btn, false, 'Poliçeyi Kaydet');
 }
-
 async function handleQuickCustomerSubmit(e){
   e.preventDefault();
   const fullName = document.getElementById('qc_name').value.trim();
@@ -1049,101 +1121,158 @@ async function handleQuickCustomerSubmit(e){
   const tcNo = document.getElementById('qc_tc').value.trim();
   let valid = true;
   markInvalid('qc_nameField', !fullName); if(!fullName) valid=false;
-  markInvalid('qc_phoneField', !isValidPhone(phone)); if(!isValidPhone(phone)) valid=false;
+  markInvalid('qc_phoneField', !isValidTRPhone(phone)); if(!isValidTRPhone(phone)) valid=false;
   if(!valid) return;
-
-  const btn = document.getElementById('quickCustomerSubmitBtn');
-  setBtnLoading(btn, true);
+  const btn = document.getElementById('quickCustomerSubmitBtn'); setBtnLoading(btn, true);
   try{
     const newRef = doc(collection(db,'users'));
-    await setDoc(newRef, { fullName, phone, tcNo, email:'', role:'customer', quickAdd:true, createdAt: serverTimestamp() });
-    showToast('Müşteri eklendi.');
-    renderAdminAddPolicy();
-  }catch(err){
-    console.error(err);
-    showToast('Müşteri eklenemedi.');
-  }
+    await setDoc(newRef, { fullName, phone: normalizeTRPhone(phone), tcNo, email:'', role:'customer', quickAdd:true, notes:[], createdAt: serverTimestamp() });
+    showToast('Müşteri eklendi.'); renderAdminAddPolicy();
+  }catch(err){ console.error(err); showToast('Müşteri eklenemedi.'); }
   setBtnLoading(btn, false, 'Müşteri Ekle');
 }
 
-/* ---- Müşteriler ---- */
+/* ---- Müşteriler (arama + CSV + notlar) ---- */
+let _allCustomersCache = [];
 async function renderAdminCustomers(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Müşteriler','Yükleniyor…');
   const [allUsers, policies] = await Promise.all([fetchAll('users'), fetchAll('policies')]);
-  const customers = allUsers.filter(u=>u.role==='customer');
+  _allCustomersCache = allUsers.filter(u=>u.role==='customer');
+  const customers = _allCustomersCache;
 
-  content.innerHTML =
-    sectionHeader('Müşteriler', customers.length + ' kayıtlı müşteri')
-    + '<div class="card overflow-x-auto"><table><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>E-posta</th><th>Poliçe Sayısı</th><th></th></tr></thead><tbody>'
-    + (customers.length ? customers.map(c => {
-        const count = policies.filter(p=>p.customerId===c.id).length;
-        return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+'</td><td>'+escapeHtml(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
-      }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Kayıtlı müşteri yok.</td></tr>')
-    + '</tbody></table></div>';
+  content.innerHTML = sectionHeader('Müşteriler', customers.length + ' kayıtlı müşteri')
+    + '<div class="flex flex-wrap gap-3 mb-4">'
+    + '<input class="input flex-1 min-w-[200px]" id="customerSearch" placeholder="İsim, T.C. veya telefon ile ara…">'
+    + '<button class="btn btn-outline btn-sm" onclick="exportCustomersCsv()">Excel/CSV İndir</button>'
+    + '</div>'
+    + '<div class="card overflow-x-auto"><table id="customersTable"><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>E-posta</th><th>Poliçe Sayısı</th><th></th></tr></thead><tbody></tbody></table></div>';
+
+  function renderRows(list){
+    document.querySelector('#customersTable tbody').innerHTML = list.length ? list.map(c=>{
+      const count = policies.filter(p=>p.customerId===c.id).length;
+      return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+'</td><td>'+escapeHtml(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
+    }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Sonuç yok.</td></tr>';
+  }
+  renderRows(customers);
+  document.getElementById('customerSearch').addEventListener('input', function(){
+    const q = this.value.trim().toLowerCase();
+    renderRows(customers.filter(c => (c.fullName||'').toLowerCase().includes(q) || (c.phone||'').includes(q) || (c.tcNo||'').includes(q)));
+  });
 }
+window.exportCustomersCsv = function(){
+  const rows = [['Ad Soyad','Telefon','E-posta','T.C./Not']];
+  _allCustomersCache.forEach(c=>rows.push([c.fullName, c.phone, c.email||'', c.tcNo||'']));
+  downloadCsv('oz-grup-musteriler.csv', rows);
+};
 
 window.showCustomerDetail = async function(customerId){
   openModal('modal-customer-detail');
   document.getElementById('customerDetailContent').innerHTML = '<p class="text-ink-soft">Yükleniyor…</p>';
-  const [userSnap, policies, quotesAll, claims] = await Promise.all([
-    getDoc(doc(db,'users',customerId)), fetchAll('policies'), fetchAll('quotes'), fetchAll('claims')
-  ]);
+  const [userSnap, policies, quotesAll, claims] = await Promise.all([getDoc(doc(db,'users',customerId)), fetchAll('policies'), fetchAll('quotes'), fetchAll('claims')]);
   if(!userSnap.exists()) return;
   const c = userSnap.data();
   const custPolicies = policies.filter(p=>p.customerId===customerId);
   const custQuotes = quotesAll.filter(q=>q.phone && c.phone && q.phone.replace(/\D/g,'')===c.phone.replace(/\D/g,''));
   const custClaims = claims.filter(k=>k.customerId===customerId);
+  const notes = c.notes || [];
 
   document.getElementById('customerDetailContent').innerHTML =
     '<div class="font-mono text-[11px] uppercase tracking-widest text-gold mb-1.5">Müşteri Detayı</div>'
     + '<h2 class="font-display text-[22px] text-navy-950 mb-1">'+escapeHtml(c.fullName)+'</h2>'
     + '<p class="text-ink-soft text-[13.5px] mb-6">'+escapeHtml(c.phone)+(c.email?' · '+escapeHtml(c.email):'')+(c.tcNo?' · TC/Not: '+escapeHtml(c.tcNo):'')+'</p>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Poliçeler</h4>'
-    + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>No</th><th>Tür</th><th>Bitiş</th><th>Ödeme</th></tr></thead><tbody>'
-      + (custPolicies.length ? custPolicies.map(p=>'<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+paymentBadge(p.paymentStatus)+'</td></tr>').join('') : '<tr><td colspan="4" class="text-ink-soft text-center py-4">Poliçe yok.</td></tr>')
+    + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>No</th><th>Tür</th><th>Bitiş</th><th>Ödeme</th><th></th></tr></thead><tbody>'
+      + (custPolicies.length ? custPolicies.map(p=>'<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+paymentBadge(p.paymentStatus)+'</td><td><button class="btn btn-outline btn-sm" onclick="openEditPolicy(\''+p.id+'\',\''+p.startDate+'\',\''+p.endDate+'\',\''+p.paymentStatus+'\',\''+(p.renewalOfferPrice||'')+'\')">Düzenle</button></td></tr>').join('') : '<tr><td colspan="5" class="text-ink-soft text-center py-4">Poliçe yok.</td></tr>')
     + '</tbody></table></div>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Teklif Geçmişi</h4>'
     + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>Paket</th><th>Durum</th></tr></thead><tbody>'
       + (custQuotes.length ? custQuotes.map(q=>'<tr><td>'+escapeHtml(q.package)+'</td><td>'+escapeHtml(q.status)+'</td></tr>').join('') : '<tr><td colspan="2" class="text-ink-soft text-center py-4">Teklif talebi yok.</td></tr>')
     + '</tbody></table></div>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Hasar Bildirimleri</h4>'
-    + '<div class="overflow-x-auto"><table><thead><tr><th>Tarih</th><th>Açıklama</th><th>Durum</th></tr></thead><tbody>'
+    + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>Tarih</th><th>Açıklama</th><th>Durum</th></tr></thead><tbody>'
       + (custClaims.length ? custClaims.map(k=>'<tr><td>'+fmtDate(k.date)+'</td><td>'+escapeHtml(k.description)+'</td><td>'+claimBadge(k.status)+'</td></tr>').join('') : '<tr><td colspan="3" class="text-ink-soft text-center py-4">Hasar bildirimi yok.</td></tr>')
-    + '</tbody></table></div>';
+    + '</tbody></table></div>'
+    + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Görüşme Notları (CRM)</h4>'
+    + '<div id="custNotesList" class="flex flex-col gap-2 mb-3">' + (notes.length ? notes.slice().reverse().map(n=>'<div class="text-[13px] border border-line p-2.5"><span class="font-mono text-[11px] text-ink-soft">'+fmtDate(n.date)+'</span> — '+escapeHtml(n.text)+'</div>').join('') : '<p class="text-ink-soft text-[13px]">Henüz not yok.</p>') + '</div>'
+    + '<form id="addNoteForm" class="flex gap-2"><input class="input flex-1" id="noteText" placeholder="Örn. 12 Ağustos\'ta arandı, fiyat yüksek geldi"><button class="btn btn-navy btn-sm" type="submit">Ekle</button></form>'
+    + (isSuperAdmin() ? '<div class="mt-6 pt-5 border-t border-line"><button class="btn btn-danger btn-sm" onclick="deleteCustomer(\''+customerId+'\')">Müşteriyi Sil</button></div>' : '');
+
+  document.getElementById('addNoteForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const text = document.getElementById('noteText').value.trim();
+    if(!text) return;
+    try{
+      await updateDoc(doc(db,'users',customerId), { notes: arrayUnion({ text, date:new Date().toISOString().slice(0,10), createdAt:new Date().toISOString() }) });
+      showToast('Not eklendi.'); showCustomerDetail(customerId);
+    }catch(err){ console.error(err); showToast('Not eklenemedi.'); }
+  });
 };
+window.deleteCustomer = async function(customerId){
+  if(!isSuperAdmin()) return;
+  if(!confirm('Bu müşteriyi silmek istediğinize emin misiniz?')) return;
+  try{ await updateDoc(doc(db,'users',customerId), { role:'deleted' }); showToast('Müşteri silindi.'); closeModal('modal-customer-detail'); renderAdminCustomers(); }
+  catch(err){ console.error(err); showToast('Silinemedi.'); }
+};
+
+window.openEditPolicy = function(id, startDate, endDate, paymentStatus, renewalOfferPrice){
+  document.getElementById('ep_id').value = id;
+  document.getElementById('ep_start').value = startDate;
+  document.getElementById('ep_end').value = endDate;
+  document.getElementById('ep_payment').value = paymentStatus;
+  document.getElementById('ep_renewal').value = renewalOfferPrice || '';
+  openModal('modal-edit-policy');
+};
+document.getElementById('editPolicyForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const id = document.getElementById('ep_id').value;
+  const startDate = document.getElementById('ep_start').value;
+  const endDate = document.getElementById('ep_end').value;
+  const paymentStatus = document.getElementById('ep_payment').value;
+  const renewalRaw = document.getElementById('ep_renewal').value.trim();
+  try{
+    const update = { startDate, endDate, paymentStatus };
+    if(renewalRaw) update.renewalOfferPrice = renewalRaw;
+    await updateDoc(doc(db,'policies',id), update);
+    closeModal('modal-edit-policy');
+    showToast('Poliçe güncellendi.');
+  }catch(err){ console.error(err); showToast('Güncellenemedi.'); }
+});
 
 /* ---- Yaklaşan Yenilemeler ---- */
 async function renderAdminRenewals(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Yaklaşan Yenilemeler','Yükleniyor…');
   const [allUsers, allPolicies] = await Promise.all([fetchAll('users'), fetchAll('policies')]);
-  const customers = allUsers;
-  const policies = allPolicies.filter(p=>daysUntil(p.endDate) <= 30).sort((a,b)=>daysUntil(a.endDate)-daysUntil(b.endDate));
-
-  content.innerHTML =
-    sectionHeader('Yaklaşan Yenilemeler', 'Bitiş tarihine 30 gün veya daha az kalan poliçeler')
-    + '<div class="card overflow-x-auto"><table><thead><tr><th>Müşteri</th><th>Poliçe</th><th>Bitiş</th><th>Kalan Süre</th><th></th></tr></thead><tbody>'
-    + (policies.length ? policies.map(p => {
-        const c = customers.find(x=>x.id===p.customerId);
-        const info = renewalInfo(p);
+  const policies = allPolicies.filter(p=>daysUntil(p.endDate)<=30).sort((a,b)=>daysUntil(a.endDate)-daysUntil(b.endDate));
+  content.innerHTML = sectionHeader('Yaklaşan Yenilemeler', 'Bitiş tarihine 30 gün veya daha az kalan poliçeler (30: sarı, 15: turuncu, 7: kırmızı)')
+    + '<div class="card overflow-x-auto"><table><thead><tr><th>Müşteri</th><th>Poliçe</th><th>Bitiş</th><th>Kalan</th><th>İşlemler</th></tr></thead><tbody>'
+    + (policies.length ? policies.map(p=>{
+        const c = allUsers.find(x=>x.id===p.customerId); const info = renewalTier(daysUntil(p.endDate));
         return '<tr><td>'+(c?escapeHtml(c.fullName):'—')+'</td><td>'+escapeHtml(p.type)+' <span class="font-mono text-[11px] text-ink-soft">('+escapeHtml(p.policyNo)+')</span></td><td>'+fmtDate(p.endDate)+'</td><td><span class="badge '+info.cls+'">'+info.label+'</span></td>'
-          + '<td>'+(c && c.phone ? '<button class="btn btn-ok btn-sm" onclick="sendRenewalReminder(\''+p.id+'\')">WhatsApp ile Müşteriye Hatırlat</button>' : '<span class="text-ink-soft text-[12px]">Telefon yok</span>')+'</td></tr>';
+          + '<td class="flex flex-wrap gap-1.5">'
+          + (c && c.phone ? '<button class="btn btn-ok btn-sm" onclick="waTemplate(\''+p.id+'\',\'remind\')">Yenileme Hatırlat</button>'
+                          + '<button class="btn btn-outline btn-sm" onclick="waTemplate(\''+p.id+'\',\'ready\')">Teklifiniz Hazır</button>' : '<span class="text-ink-soft text-[12px]">Telefon yok</span>')
+          + '</td></tr>';
       }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Yaklaşan yenileme bulunmuyor.</td></tr>')
     + '</tbody></table></div>';
 }
-
-window.sendRenewalReminder = async function(policyId){
-  const pSnap = await getDoc(doc(db,'policies',policyId));
-  if(!pSnap.exists()) return;
+window.waTemplate = async function(policyId, kind){
+  const pSnap = await getDoc(doc(db,'policies',policyId)); if(!pSnap.exists()) return;
   const p = pSnap.data();
   const cSnap = await getDoc(doc(db,'users',p.customerId));
   if(!cSnap.exists() || !cSnap.data().phone){ showToast('Müşteri telefonu bulunamadı.'); return; }
   const c = cSnap.data();
   const days = daysUntil(p.endDate);
-  const msg = days >= 0
-    ? "Sayın " + c.fullName + ", Öz Grup Sigorta güvencesindeki " + p.type + " poliçenizin bitmesine " + days + " gün kalmıştır. Yenilemek için lütfen bizimle iletişime geçin."
-    : "Sayın " + c.fullName + ", Öz Grup Sigorta güvencesindeki " + p.type + " poliçenizin süresi dolmuştur. Yenilemek için lütfen bizimle iletişime geçin.";
+  let msg;
+  if(kind==='remind'){
+    msg = days>=0 ? ("Sayın "+c.fullName+", Öz Grup Sigorta güvencesindeki "+p.type+" poliçenizin bitmesine "+days+" gün kalmıştır. Yenilemek için lütfen bizimle iletişime geçin.")
+                  : ("Sayın "+c.fullName+", Öz Grup Sigorta güvencesindeki "+p.type+" poliçenizin süresi dolmuştur. Yenilemek için lütfen bizimle iletişime geçin.");
+  } else if(kind==='ready'){
+    msg = "Sayın "+c.fullName+", "+p.type+" teklifiniz hazır" + (p.renewalOfferPrice ? (": "+p.renewalOfferPrice+" TL") : "") + ". Detaylar için sizi arayabiliriz.";
+  } else if(kind==='approved'){
+    msg = "Sayın "+c.fullName+", "+p.type+" poliçeniz onaylanmıştır. Öz Grup Sigorta'yı tercih ettiğiniz için teşekkür ederiz.";
+  }
   openWhatsApp(c.phone, msg);
 };
 
@@ -1151,52 +1280,146 @@ window.sendRenewalReminder = async function(policyId){
 async function renderAdminLeads(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Teklif Talepleri','Yükleniyor…');
-  const quotes = await fetchAll('quotes');
-  quotes.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  content.innerHTML = sectionHeader('Teklif Talepleri', 'Liste yeni talep geldiğinde otomatik güncellenir.')
+    + '<div class="flex flex-wrap gap-3 mb-4"><input class="input flex-1 min-w-[200px]" id="leadSearch" placeholder="İsim, T.C. veya telefon ile ara…"><button class="btn btn-outline btn-sm" onclick="exportLeadsCsv()">Excel/CSV İndir</button></div>'
+    + '<div class="card overflow-x-auto"><table id="leadsTable"><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>Paket</th><th>Ek Bilgi</th><th>Durum</th><th></th></tr></thead><tbody></tbody></table></div>';
 
-  content.innerHTML =
-    sectionHeader('Teklif Talepleri', quotes.length + ' talep alındı')
-    + '<div class="card overflow-x-auto"><table><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>Paket</th><th>Not</th><th>Durum</th><th></th></tr></thead><tbody>'
-    + (quotes.length ? quotes.map(q =>
-        '<tr><td>'+escapeHtml(q.name)+'</td><td>'+escapeHtml(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[160px] truncate">'+escapeHtml(q.note||'—')+'</td>'
-          + '<td><select class="input !py-1.5 !text-[12.5px]" onchange="updateLeadStatus(\''+q.id+'\', this.value)">'+LEAD_STATUSES.map(s=>'<option value="'+s+'" '+(s===q.status?'selected':'')+'>'+s+'</option>').join('')+'</select></td>'
-          + '<td><button class="btn btn-ok btn-sm" onclick="replyLead(\''+q.id+'\')">WhatsApp</button></td></tr>'
-      ).join('') : '<tr><td colspan="6" class="text-center text-ink-soft py-6">Teklif talebi yok.</td></tr>')
-    + '</tbody></table></div>';
+  const unsub = onSnapshot(collection(db,'quotes'), snap => {
+    window._leadsCache = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    renderLeadRows(window._leadsCache);
+  });
+  activeListeners.push(unsub);
+  document.getElementById('leadSearch').addEventListener('input', function(){
+    const q = this.value.trim().toLowerCase();
+    renderLeadRows((window._leadsCache||[]).filter(l => (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q) || (l.tcNo||'').includes(q)));
+  });
+}
+function extraSummary(q){
+  const e = q.extra || {};
+  const parts = [];
+  if(e.plaka) parts.push('Plaka: '+e.plaka);
+  if(e.address) parts.push('Adres: '+e.address);
+  if(e.birthDate) parts.push('D.Tarihi: '+e.birthDate);
+  if(q.tcNo) parts.push('TC: '+q.tcNo);
+  return parts.join(' · ') || '—';
+}
+function renderLeadRows(list){
+  const tbody = document.querySelector('#leadsTable tbody');
+  if(!tbody) return;
+  tbody.innerHTML = list.length ? list.map(q =>
+    '<tr><td>'+escapeHtml(q.name)+'</td><td>'+escapeHtml(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[180px] truncate text-[12px]">'+escapeHtml(extraSummary(q))+'</td>'
+      + '<td><span class="badge '+(q.status==='Onaylandı'?'badge-green':q.status==='Reddedildi'?'badge-red':q.status==='İletişime Geçildi'?'badge-amber':'badge-navy')+'">'+escapeHtml(q.status)+'</span></td>'
+      + '<td class="flex flex-wrap gap-1.5">'
+      + '<button class="btn btn-ok btn-sm" onclick="replyLead(\''+q.id+'\')">WhatsApp</button>'
+      + '<button class="btn btn-outline btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'İletişime Geçildi\')">İletişime Geçildi</button>'
+      + '<button class="btn btn-outline btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'Onaylandı\')">Onayla</button>'
+      + '<button class="btn btn-danger btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'Reddedildi\')">Reddet</button>'
+      + '</td></tr>'
+  ).join('') : '<tr><td colspan="6" class="text-center text-ink-soft py-6">Teklif talebi yok.</td></tr>';
 }
 window.updateLeadStatus = async function(id, status){
-  try{ await updateDoc(doc(db,'quotes',id), { status }); showToast('Durum güncellendi.'); }
+  try{ await updateDoc(doc(db,'quotes',id), { status }); showToast('Durum: '+status); }
   catch(err){ console.error(err); showToast('Güncellenemedi.'); }
 };
 window.replyLead = async function(id){
-  const snap = await getDoc(doc(db,'quotes',id));
-  if(!snap.exists()) return;
+  const snap = await getDoc(doc(db,'quotes',id)); if(!snap.exists()) return;
   const q = snap.data();
-  const msg = "Merhaba " + q.name + ", Öz Grup Sigorta'dan Ahmetcan Öz yazıyorum. " + q.package + " talebiniz için sizinle görüşmek istiyorum.";
-  openWhatsApp(q.phone, msg);
+  openWhatsApp(q.phone, "Merhaba "+q.name+", Öz Grup Sigorta'dan Ahmetcan Öz yazıyorum. "+q.package+" talebiniz için sizinle görüşmek istiyorum.");
 };
+window.exportLeadsCsv = function(){
+  const rows = [['Ad Soyad','Telefon','T.C.','Paket','Ödeme Tercihi','Durum','Not']];
+  (window._leadsCache||[]).forEach(q=>rows.push([q.name,q.phone,q.tcNo||'',q.package,q.paymentPreference||'',q.status,q.note||'']));
+  downloadCsv('oz-grup-teklif-talepleri.csv', rows);
+};
+
+/* ---- Yol Yardım Talepleri ---- */
+async function renderAdminRoadside(){
+  const content = document.getElementById('adminContent');
+  content.innerHTML = sectionHeader('Yol Yardım Talepleri','Liste anlık güncellenir.')
+    + '<div class="card overflow-x-auto"><table><thead><tr><th>Müşteri</th><th>Telefon</th><th>Konum</th><th>Tarih</th><th></th></tr></thead><tbody id="roadsideBody"><tr><td colspan="5" class="text-center text-ink-soft py-6">Yükleniyor…</td></tr></tbody></table></div>';
+  const unsub = onSnapshot(collection(db,'roadside_requests'), snap => {
+    const list = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+    document.getElementById('roadsideBody').innerHTML = list.length ? list.map(r =>
+      '<tr><td>'+escapeHtml(r.customerName)+'</td><td>'+escapeHtml(r.customerPhone)+'</td><td><a class="text-navy-950 underline" href="'+r.mapsUrl+'" target="_blank" rel="noopener">Haritada Gör</a></td><td>'+(r.createdAt&&r.createdAt.toDate?fmtDate(r.createdAt.toDate().toISOString().slice(0,10)):'—')+'</td>'
+      + '<td><button class="btn btn-ok btn-sm" onclick="openWhatsApp(\''+r.customerPhone+'\',\'Merhaba, yol yardım talebiniz alınmıştır, ekibimiz yola çıkıyor.\')">WhatsApp</button></td></tr>'
+    ).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Yol yardım talebi yok.</td></tr>';
+  });
+  activeListeners.push(unsub);
+}
+window.openWhatsApp = openWhatsApp;
 
 /* ---- Hasar Bildirimleri ---- */
 async function renderAdminClaims(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Hasar Bildirimleri','Yükleniyor…');
-  const [claims, allUsers, policies] = await Promise.all([fetchAll('claims'), fetchAll('users'), fetchAll('policies')]);
-
-  content.innerHTML =
-    sectionHeader('Hasar Bildirimleri', claims.length + ' bildirim alındı')
-    + '<div class="card overflow-x-auto"><table><thead><tr><th>Tarih</th><th>Müşteri</th><th>Poliçe</th><th>Açıklama</th><th>Durum</th></tr></thead><tbody>'
-    + (claims.length ? claims.map(k => {
-        const c = allUsers.find(x=>x.id===k.customerId);
-        const p = policies.find(x=>x.id===k.policyId);
-        return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(c?escapeHtml(c.fullName):'—')+'</td><td class="font-mono">'+(p?escapeHtml(p.policyNo):'—')+'</td><td class="max-w-[240px]">'+escapeHtml(k.description)+'</td>'
-          + '<td><select class="input !py-1.5 !text-[12.5px]" onchange="updateClaimStatus(\''+k.id+'\', this.value)">'+CLAIM_STATUSES.map(s=>'<option value="'+s+'" '+(s===k.status?'selected':'')+'>'+s+'</option>').join('')+'</select></td></tr>';
-      }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>')
-    + '</tbody></table></div>';
+  const [allUsers, policies] = await Promise.all([fetchAll('users'), fetchAll('policies')]);
+  content.innerHTML = sectionHeader('Hasar Bildirimleri','Liste anlık güncellenir.')
+    + '<div class="card overflow-x-auto"><table><thead><tr><th>Tarih</th><th>Müşteri</th><th>Poliçe</th><th>Açıklama</th><th>Durum</th></tr></thead><tbody id="claimsBody"></tbody></table></div>';
+  const unsub = onSnapshot(collection(db,'claims'), snap => {
+    const claims = snap.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('claimsBody').innerHTML = claims.length ? claims.map(k=>{
+      const c = allUsers.find(x=>x.id===k.customerId); const p = policies.find(x=>x.id===k.policyId);
+      return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(c?escapeHtml(c.fullName):'—')+'</td><td class="font-mono">'+(p?escapeHtml(p.policyNo):'—')+'</td><td class="max-w-[240px]">'+escapeHtml(k.description)+'</td>'
+        + '<td><select class="input !py-1.5 !text-[12.5px]" onchange="updateClaimStatus(\''+k.id+'\', this.value)">'+CLAIM_STATUSES.map(s=>'<option value="'+s+'" '+(s===k.status?'selected':'')+'>'+s+'</option>').join('')+'</select></td></tr>';
+    }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>';
+  });
+  activeListeners.push(unsub);
 }
 window.updateClaimStatus = async function(id, status){
   try{ await updateDoc(doc(db,'claims',id), { status }); showToast('Durum güncellendi.'); }
   catch(err){ console.error(err); showToast('Güncellenemedi.'); }
 };
+
+/* ---- Personel Yönetimi (sadece süper admin) ---- */
+async function renderAdminStaff(){
+  const content = document.getElementById('adminContent');
+  if(!isSuperAdmin()){ content.innerHTML = sectionHeader('Yetkisiz','Bu ekrana yalnızca süper admin erişebilir.'); return; }
+  content.innerHTML = sectionHeader('Personel Yönetimi','Yükleniyor…');
+  const allUsers = await fetchAll('users');
+  const staff = allUsers.filter(u=>u.role==='staff' || u.role==='admin');
+
+  content.innerHTML = sectionHeader('Personel Yönetimi', 'Personel hesapları poliçe/teklif girebilir; silme yetkisi yoktur.')
+    + '<div class="grid lg:grid-cols-2 gap-8">'
+    + '<form id="staffForm" class="card p-6">'
+      + '<div class="field mb-3.5" id="sf_nameField"><label class="label" for="sf_name">Ad Soyad</label><input class="input" id="sf_name"><div class="field-error">Zorunlu alan.</div></div>'
+      + '<div class="field mb-3.5" id="sf_emailField"><label class="label" for="sf_email">E-posta</label><input class="input" id="sf_email" type="email"><div class="field-error">Geçerli e-posta giriniz.</div></div>'
+      + '<div class="field mb-3.5" id="sf_phoneField"><label class="label" for="sf_phone">Telefon</label><input class="input" id="sf_phone" placeholder="05XX XXX XX XX"><div class="field-error">Geçerli telefon giriniz.</div></div>'
+      + '<div class="field mb-4" id="sf_pwField"><label class="label" for="sf_pw">Geçici Şifre</label><input class="input" id="sf_pw" type="text" placeholder="En az 6 karakter"><div class="field-error">Şifre en az 6 karakter olmalı.</div></div>'
+      + '<button type="submit" id="staffSubmitBtn" class="btn btn-navy w-full justify-center">Personel Hesabı Oluştur</button>'
+    + '</form>'
+    + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Mevcut Personel</h3>'
+    + '<table><thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Rol</th></tr></thead><tbody>'
+    + (staff.length ? staff.map(s=>'<tr><td>'+escapeHtml(s.fullName)+'</td><td>'+escapeHtml(s.email)+'</td><td>'+(s.role==='admin'?'<span class="badge badge-navy">Süper Admin</span>':'<span class="badge badge-amber">Personel</span>')+'</td></tr>').join('') : '<tr><td colspan="3" class="text-ink-soft text-center py-4">Henüz personel yok.</td></tr>')
+    + '</tbody></table></div></div>';
+
+  document.getElementById('staffForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const fullName = document.getElementById('sf_name').value.trim();
+    const email = document.getElementById('sf_email').value.trim();
+    const phone = document.getElementById('sf_phone').value.trim();
+    const password = document.getElementById('sf_pw').value;
+    let valid = true;
+    markInvalid('sf_nameField', !fullName); if(!fullName) valid=false;
+    markInvalid('sf_emailField', !email); if(!email) valid=false;
+    markInvalid('sf_phoneField', !isValidTRPhone(phone)); if(!isValidTRPhone(phone)) valid=false;
+    markInvalid('sf_pwField', password.length<6); if(password.length<6) valid=false;
+    if(!valid) return;
+    const btn = document.getElementById('staffSubmitBtn'); setBtnLoading(btn, true);
+    try{
+      // İkincil bir Firebase oturumu kullanarak, mevcut admin oturumunu bozmadan personel hesabı oluşturulur.
+      const secondaryApp = initializeApp(firebaseConfig, 'Secondary-'+Date.now());
+      const secondaryAuth = getAuth(secondaryApp);
+      const cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+      await setDoc(doc(db,'users',cred.user.uid), { fullName, phone: normalizeTRPhone(phone), email, role:'staff', createdAt: serverTimestamp() });
+      await sendEmailVerification(cred.user);
+      await signOut(secondaryAuth);
+      await deleteApp(secondaryApp);
+      showToast('Personel hesabı oluşturuldu.');
+      renderAdminStaff();
+    }catch(err){ console.error(err); showToast('Oluşturulamadı: '+(err.code||'hata')); }
+    setBtnLoading(btn, false, 'Personel Hesabı Oluştur');
+  });
+}
 
 /* =========================================================
    BAŞLAT
