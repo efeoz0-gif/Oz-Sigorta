@@ -668,7 +668,7 @@ document.getElementById('completeProfileForm').addEventListener('submit', async 
     showScreen('customer');
     renderCustomerDashboard();
     showToast('Profiliniz tamamlandı.');
-  }catch(err){ console.error(err); showToast('Kaydedilemedi, tekrar deneyin.'); }
+  }catch(err){ console.error(err); showToast('Kaydedilemedi: ' + (err.code || err.message || 'bilinmeyen hata')); }
 });
 
 /* ---------------- e-posta doğrulama ekranı ---------------- */
