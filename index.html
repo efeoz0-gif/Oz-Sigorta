@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a1c30">
 <title>Öz Grup Sigorta | Sigorta Acentesi Web Uygulaması</title>
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Öz Grup Sigorta">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -66,11 +74,50 @@
   @keyframes spin{to{transform:rotate(360deg);}}
   @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
   @media (max-width:900px){ .admin-sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .2s ease;z-index:150;} .admin-sidebar.open{transform:translateX(0);} }
+
+  /* ---------------- PWA yükleme bildirimleri ---------------- */
+  .install-banner{position:fixed;left:12px;right:12px;bottom:12px;z-index:250;background:#0a1c30;color:#f6f2e9;border:1px solid rgba(216,184,118,.35);box-shadow:0 12px 30px rgba(0,0,0,.3);padding:14px 16px;display:flex;align-items:center;gap:12px;transform:translateY(140%);transition:transform .35s ease;max-width:480px;margin:0 auto;}
+  .install-banner.show{transform:translateY(0);}
+  .install-banner svg{flex:none;}
+  .install-banner p{font-size:12.5px;line-height:1.45;color:#c9d3de;margin:0;}
+  .install-banner .install-close{flex:none;background:transparent;border:none;color:#9fadbc;font-size:16px;cursor:pointer;padding:2px 4px;}
+
+  /* ---------------- Pakete özel arka plan animasyonları ---------------- */
+  .pkg-anim{position:relative;height:0;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease, opacity .4s ease, margin .4s ease;border:1px solid transparent;}
+  .pkg-anim.pkg-anim-active{max-height:130px;opacity:1;margin-bottom:20px;border-color:#d8cfb9;background:linear-gradient(180deg,#0e2743,#0a1c30);}
+  .pkg-anim-inner{position:relative;height:130px;overflow:hidden;}
+
+  /* Kasko/Trafik: yol çizgisi + geçen araç + kalkan */
+  .anim-road{position:absolute;left:0;right:0;bottom:22px;height:2px;background:repeating-linear-gradient(90deg,#d8b876 0 22px,transparent 22px 40px);opacity:.55;}
+  .anim-car{position:absolute;bottom:26px;left:-70px;animation:driveAcross 3.2s ease-in-out infinite;}
+  @keyframes driveAcross{0%{left:-70px;}55%{left:calc(50% - 35px);}100%{left:calc(100% + 70px);}}
+  .anim-shield-wrap{position:absolute;right:24px;top:50%;transform:translateY(-50%);animation:shieldPulse 2.4s ease-in-out infinite;}
+  @keyframes shieldPulse{0%,100%{transform:translateY(-50%) scale(1);opacity:.85;}50%{transform:translateY(-50%) scale(1.08);opacity:1;}}
+
+  /* Konut/DASK: çatı üstüne inen koruma + anahtar */
+  .anim-roof-drop{animation:roofDrop 2.6s ease-in-out infinite;}
+  @keyframes roofDrop{0%{transform:translateY(-14px);opacity:.3;}45%,60%{transform:translateY(0);opacity:1;}100%{transform:translateY(-14px);opacity:.3;}}
+  .anim-key-hand{animation:keyHandIn 2.6s ease-in-out infinite;}
+  @keyframes keyHandIn{0%{transform:translateX(-14px);opacity:0;}40%,65%{transform:translateX(0);opacity:1;}100%{transform:translateX(14px);opacity:0;}}
+
+  /* Sağlık: EKG çizgisi */
+  .anim-ekg-path{stroke-dasharray:340;stroke-dashoffset:340;animation:ekgDraw 2.6s linear infinite;}
+  @keyframes ekgDraw{0%{stroke-dashoffset:340;}70%{stroke-dashoffset:0;}100%{stroke-dashoffset:-340;}}
+  .anim-pulse-dot{animation:pulseDot 2.6s linear infinite;}
+  @keyframes pulseDot{0%{opacity:0;}5%{opacity:1;}12%{opacity:0;}100%{opacity:0;}}
 </style>
 </head>
 <body class="font-sans">
 
 <div id="toast" class="toast"></div>
+
+<!-- PWA: Ana ekrana ekle bildirimi (iOS Safari talimatı veya Android tek tık kurulum) -->
+<div id="installBanner" class="install-banner" role="dialog" aria-live="polite">
+  <svg class="w-9 h-9 text-gold-light" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <p id="installBannerText" class="flex-1">Öz Grup Sigorta uygulamasını telefonunuza yüklemek için Safari'nin <strong>Paylaş</strong> butonuna basıp <strong>“Ana Ekrana Ekle”</strong> seçeneğini seçin.</p>
+  <button id="installBannerActionBtn" class="btn btn-gold btn-sm hidden">Uygulamayı Yükle</button>
+  <button class="install-close" id="installBannerCloseBtn" aria-label="Kapat">✕</button>
+</div>
 
 <div id="configWarning" class="hidden fixed inset-0 z-[500] bg-navy-950 text-paper flex items-center justify-center p-6">
   <div class="max-w-lg text-center">
@@ -161,6 +208,35 @@
       </div>
       <form id="quoteForm" class="card p-7" novalidate>
         <div id="selectedPkgBox" class="border border-dashed border-gold p-3.5 mb-5 text-[13.5px] text-ink-soft bg-gold/[0.06]">Henüz paket seçilmedi — <strong class="font-display text-navy-950">lütfen yukarıdan bir paket seçin.</strong></div>
+
+        <!-- Pakete özel arka plan animasyonu (kasko/trafik/dask/konut/sağlık/işyeri/seyahat) -->
+        <div id="anim_vehicle" class="pkg-anim"><div class="pkg-anim-inner">
+          <div class="anim-road"></div>
+          <svg class="anim-car w-16 h-16 text-gold-light" viewBox="0 0 48 24" fill="none"><path d="M3 16 L7 8 H33 L41 12 L45 16 V20 H3 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="13" cy="20" r="2.6" fill="#0a1c30" stroke="currentColor" stroke-width="1.8"/><circle cx="34" cy="20" r="2.6" fill="#0a1c30" stroke="currentColor" stroke-width="1.8"/></svg>
+          <svg class="anim-shield-wrap w-10 h-10 text-gold-light" viewBox="0 0 24 24" fill="none"><path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5 L11 13.5 L15.5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div></div>
+
+        <div id="anim_home" class="pkg-anim"><div class="pkg-anim-inner flex items-center justify-center gap-6">
+          <svg class="anim-key-hand w-16 h-16 text-gold-light" viewBox="0 0 48 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M16 12 H38 M31 12 V17 M35 12 V15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="anim-roof-drop w-16 h-16 text-gold-light" viewBox="0 0 24 24" fill="none"><path d="M4 11 L12 4 L20 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10 V20 H18 V10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20 V15 H14 V20" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div></div>
+
+        <div id="anim_health" class="pkg-anim"><div class="pkg-anim-inner flex items-center justify-center relative">
+          <svg viewBox="0 0 300 80" class="w-full h-16 text-gold-light" fill="none">
+            <path class="anim-ekg-path" d="M0 40 H90 L102 15 L114 62 L126 40 L138 40 L150 22 L162 58 L174 40 L300 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="anim-pulse-dot" cx="150" cy="22" r="4" fill="currentColor"/>
+          </svg>
+        </div></div>
+
+        <div id="anim_business" class="pkg-anim"><div class="pkg-anim-inner flex items-center justify-center">
+          <svg class="w-16 h-16 text-gold-light" viewBox="0 0 24 24" fill="none"><rect x="4" y="9" width="16" height="11" stroke="currentColor" stroke-width="1.7"/><path d="M9 9 V6 C9 5 9.8 4 11 4 H13 C14.2 4 15 5 15 6 V9" stroke="currentColor" stroke-width="1.7"/></svg>
+          <svg class="anim-shield-wrap w-10 h-10 text-gold-light" style="position:static;transform:none;margin-left:-8px;" viewBox="0 0 24 24" fill="none"><path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5 L11 13.5 L15.5 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div></div>
+
+        <div id="anim_travel" class="pkg-anim"><div class="pkg-anim-inner">
+          <div class="anim-road" style="bottom:auto;top:50%;"></div>
+          <svg class="anim-car w-14 h-14 text-gold-light" viewBox="0 0 24 24" fill="none" style="bottom:auto;top:calc(50% - 24px);"><path d="M3 12 L21 5 L14 21 L11 14 L3 12 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </div></div>
 
         <div class="field mb-4" id="q_nameField">
           <label class="label" for="q_name">Ad Soyad</label>
@@ -523,6 +599,13 @@ const PACKAGES = ["Kasko Sigortası","Trafik Sigortası","DASK","Özel Sağlık 
 const VEHICLE_PKGS = ["Kasko Sigortası","Trafik Sigortası"];
 const HOME_PKGS = ["Konut Sigortası","DASK"];
 const HEALTH_PKGS = ["Özel Sağlık Sigortası"];
+const PKG_ANIM_MAP = {
+  "Kasko Sigortası":"anim_vehicle", "Trafik Sigortası":"anim_vehicle",
+  "Konut Sigortası":"anim_home", "DASK":"anim_home",
+  "Özel Sağlık Sigortası":"anim_health",
+  "İşyeri Sigortası":"anim_business",
+  "Seyahat Sigortası":"anim_travel"
+};
 const PAYMENT_STATUSES = ["Ödendi","Bekliyor"];
 const CLAIM_STATUSES = ["Beklemede","İnceleniyor","Sonuçlandı"];
 const LEAD_STATUSES = ["Yeni","İletişime Geçildi","Onaylandı","Reddedildi"];
@@ -540,10 +623,38 @@ function escapeHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g, c 
 function fmtDate(iso){ if(!iso) return '—'; const d = new Date(iso + 'T00:00:00'); if(isNaN(d)) return iso; return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear(); }
 function daysUntil(iso){ const t=new Date(); t.setHours(0,0,0,0); const e=new Date(iso+'T00:00:00'); return Math.ceil((e-t)/86400000); }
 function toWaNumber(phone){ let d=String(phone||'').replace(/\D/g,''); if(d.startsWith('90')) return d; if(d.startsWith('0')) d=d.slice(1); return '90'+d; }
-function openWhatsApp(phone,msg){ window.open("https://wa.me/"+toWaNumber(phone)+"?text="+encodeURIComponent(msg), '_blank','noopener'); }
+function openWhatsApp(phone,msg,preOpenedWindow){
+  const url = "https://wa.me/"+toWaNumber(phone)+"?text="+encodeURIComponent(msg);
+  // iOS Safari, bir kullanıcı tıklamasından SONRA (ör. Firestore kaydı bittikten sonra) çağrılan
+  // window.open()'ı engeller. Bunu aşmak için tıklama anında boş bir sekme açıp,
+  // asenkron işlem bitince o sekmenin adresini WhatsApp'a yönlendiriyoruz.
+  if(preOpenedWindow && !preOpenedWindow.closed){
+    preOpenedWindow.location.href = url;
+    return preOpenedWindow;
+  }
+  return window.open(url, '_blank', 'noopener');
+}
 function normalizeTRPhone(v){ let d=String(v||'').replace(/\D/g,''); if(d.startsWith('90')) d=d.slice(2); if(d.startsWith('0')) d=d.slice(1); return '+90'+d; }
 function isValidTRPhone(v){ const d=String(v||'').replace(/\D/g,'').replace(/^90/,'').replace(/^0/,''); return /^5\d{9}$/.test(d); }
 function isValidTc(v){ return /^\d{11}$/.test(String(v||'').trim()); }
+// Ekranda T.C. no varsayılan olarak maskelenir (ör. 12345******); tıklayınca açılır.
+// Bu, admin ekranı birinin omzunun üzerinden bakması ya da ekran görüntüsü paylaşılması
+// durumunda kimlik bilgisinin açığa çıkma riskini azaltır.
+function maskTc(tc){
+  const s = String(tc||''); if(s.length < 5) return escapeHtml(s);
+  return escapeHtml(s.slice(0,3)) + '••••••••'.slice(0, s.length-3);
+}
+window._tcRevealState = {};
+function tcRevealSpan(tc, key){
+  if(!tc) return '—';
+  const revealed = window._tcRevealState[key];
+  return '<span class="font-mono cursor-pointer" title="Göstermek/gizlemek için tıklayın" onclick="window.toggleTcReveal(\''+key+'\')">'+(revealed ? escapeHtml(tc) : maskTc(tc))+'</span>';
+}
+window.toggleTcReveal = function(key){
+  window._tcRevealState[key] = !window._tcRevealState[key];
+  if(window._leadsCache) renderLeadRows(window._leadsCache);
+  if(document.getElementById('customerDetailContent') && !document.getElementById('modal-customer-detail').classList.contains('hidden') && window._lastDetailCustomerId===key) showCustomerDetail(key);
+};
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastTimer); window._toastTimer=setTimeout(()=>t.classList.remove('show'),2800); }
 window.openModal = id => document.getElementById(id).classList.remove('hidden');
 window.closeModal = id => document.getElementById(id).classList.add('hidden');
@@ -824,6 +935,11 @@ window.selectPackage = function(btn){
   if(VEHICLE_PKGS.includes(selectedPackage)) document.getElementById('q_group_vehicle').classList.remove('hidden');
   else if(HOME_PKGS.includes(selectedPackage)) document.getElementById('q_group_home').classList.remove('hidden');
   else if(HEALTH_PKGS.includes(selectedPackage)) document.getElementById('q_group_health').classList.remove('hidden');
+
+  Object.values(PKG_ANIM_MAP).forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('pkg-anim-active'); });
+  const animId = PKG_ANIM_MAP[selectedPackage];
+  if(animId){ const el=document.getElementById(animId); if(el) el.classList.add('pkg-anim-active'); }
+
   document.getElementById('teklif').scrollIntoView({behavior:'smooth', block:'start'});
 };
 
@@ -868,6 +984,8 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
 
   const btn = document.getElementById('quoteSubmitBtn');
   setBtnLoading(btn, true);
+  // iOS Safari popup engelleyicisini aşmak için tıklama anında boş sekme açılır.
+  const waWindow = window.open('about:blank', '_blank');
   try{
     await addDoc(collection(db,'quotes'), {
       package: selectedPackage, name, phone, tcNo, note, paymentPreference: payment,
@@ -881,11 +999,12 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     + "\n- T.C. No: " + tcNo + "\n- Ödeme Tercihi: " + payment;
   if(extraMsgLines.length) msg += "\n" + extraMsgLines.join("\n");
   if(note) msg += "\n- Not: " + note;
-  openWhatsApp(WHATSAPP_NUMBER, msg);
+  openWhatsApp(WHATSAPP_NUMBER, msg, waWindow);
   showToast("WhatsApp açılıyor, mesajınızı göndermeniz yeterli.");
   this.reset();
   document.querySelectorAll('.pkg-card').forEach(b=>b.setAttribute('aria-pressed','false'));
   ['q_group_vehicle','q_group_home','q_group_health'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  Object.values(PKG_ANIM_MAP).forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('pkg-anim-active'); });
   selectedPackage = null;
   document.getElementById('selectedPkgBox').innerHTML = 'Henüz paket seçilmedi — <strong class="font-display text-navy-950">lütfen yukarıdan bir paket seçin.</strong>';
 });
@@ -952,14 +1071,15 @@ window.crossSellWhatsApp = function(){
   openWhatsApp(WHATSAPP_NUMBER, "Merhaba, Kasko poliçem var; Tamamlayıcı Sağlık Sigortası indirim fırsatı hakkında bilgi almak istiyorum. Ad Soyad: " + (currentProfile ? currentProfile.fullName : ''));
 };
 window.acceptRenewalOffer = async function(policyId){
+  const waWindow = window.open('about:blank', '_blank');
   try{
     await updateDoc(doc(db,'policies',policyId), { renewalRequested: true });
     const pSnap = await getDoc(doc(db,'policies',policyId));
     const p = pSnap.data();
-    openWhatsApp(WHATSAPP_NUMBER, "Merhaba, " + (currentProfile?currentProfile.fullName:'') + " olarak " + p.type + " poliçemin " + p.renewalOfferPrice + " TL'lik yenileme teklifini onaylıyorum.");
+    openWhatsApp(WHATSAPP_NUMBER, "Merhaba, " + (currentProfile?currentProfile.fullName:'') + " olarak " + p.type + " poliçemin " + p.renewalOfferPrice + " TL'lik yenileme teklifini onaylıyorum.", waWindow);
     renderCustomerDashboard();
     showToast('Onayınız iletildi.');
-  }catch(err){ console.error(err); showToast('İşlem başarısız.'); }
+  }catch(err){ console.error(err); if(waWindow && !waWindow.closed) waWindow.close(); showToast('İşlem başarısız.'); }
 };
 
 document.getElementById('claimForm').addEventListener('submit', async function(e){
@@ -981,6 +1101,8 @@ document.getElementById('claimForm').addEventListener('submit', async function(e
 document.getElementById('roadsideBtn').addEventListener('click', function(){
   if(!navigator.geolocation){ showToast('Cihazınız konum özelliğini desteklemiyor.'); return; }
   const btn = this; setBtnLoading(btn, true);
+  // iOS Safari popup engelleyicisini aşmak için tıklama anında boş sekme açılır.
+  const waWindow = window.open('about:blank', '_blank');
   navigator.geolocation.getCurrentPosition(async function(pos){
     const lat = pos.coords.latitude, lng = pos.coords.longitude;
     const mapsUrl = 'https://maps.google.com/?q=' + lat + ',' + lng;
@@ -991,9 +1113,10 @@ document.getElementById('roadsideBtn').addEventListener('click', function(){
       });
     }catch(err){ console.error(err); }
     setBtnLoading(btn, false, 'Çekici Çağır');
-    openWhatsApp(WHATSAPP_NUMBER, "🚨 ACİL YOL YARDIM TALEBİ\nAd Soyad: " + currentProfile.fullName + "\nTelefon: " + currentProfile.phone + "\nKonum: " + mapsUrl);
+    openWhatsApp(WHATSAPP_NUMBER, "🚨 ACİL YOL YARDIM TALEBİ\nAd Soyad: " + currentProfile.fullName + "\nTelefon: " + currentProfile.phone + "\nKonum: " + mapsUrl, waWindow);
     showToast('Konumunuz iletildi, WhatsApp açılıyor.');
   }, function(err){
+    if(waWindow && !waWindow.closed) waWindow.close();
     setBtnLoading(btn, false, 'Çekici Çağır');
     showToast('Konum alınamadı: tarayıcı izinlerini kontrol edin.');
   }, { enableHighAccuracy:true, timeout:10000 });
@@ -1028,11 +1151,24 @@ async function renderAdminOverview(){
   const renewals = policies.filter(p=>daysUntil(p.endDate)<=30).length;
   const newLeads = quotes.filter(q=>q.status==='Yeni').length;
 
+  // "Bugün Yapılacaklar" — acentenin günlük işini kolaylaştıran öncelikli aksiyon listesi
+  const urgentRenewals = policies.filter(p=>daysUntil(p.endDate)<=7).sort((a,b)=>daysUntil(a.endDate)-daysUntil(b.endDate));
+  const overduePayments = policies.filter(p=>p.paymentStatus==='Bekliyor' && daysUntil(p.endDate)<=15);
+  const newLeadsList = quotes.filter(q=>q.status==='Yeni');
+  const todoItems = [];
+  newLeadsList.forEach(q=>todoItems.push({icon:'🆕', text:'<strong>'+escapeHtml(q.name)+'</strong> — '+escapeHtml(q.package)+' talebini yanıtlayın', action:'adminShowTab(\'leads\')'}));
+  urgentRenewals.forEach(p=>{ const c=customersAll.find(u=>u.id===p.customerId); todoItems.push({icon:'⏰', text:(c?escapeHtml(c.fullName):'Müşteri')+' — '+escapeHtml(p.type)+' '+daysUntil(p.endDate)+' gün içinde bitiyor', action:'adminShowTab(\'renewals\')'}); });
+  overduePayments.forEach(p=>{ const c=customersAll.find(u=>u.id===p.customerId); todoItems.push({icon:'💳', text:(c?escapeHtml(c.fullName):'Müşteri')+' — '+escapeHtml(p.type)+' ödemesi bekliyor', action:'adminShowTab(\'customers\')'}); });
+  const todoHtml = todoItems.length
+    ? '<ul class="flex flex-col gap-2.5">' + todoItems.slice(0,8).map(t=>'<li class="flex items-center gap-2.5 text-[13.5px] cursor-pointer hover:text-gold" onclick="'+t.action+'"><span>'+t.icon+'</span><span>'+t.text+'</span></li>').join('') + '</ul>'
+    : '<p class="text-ink-soft text-[13.5px]">Şu an bekleyen acil bir işlem yok — harika gidiyor! 🎉</p>';
+
   content.innerHTML = sectionHeader('Genel Bakış', 'Öz Grup Sigorta acente yönetim özeti')
     + '<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">'
     + statCard('Toplam Müşteri', customers.length) + statCard('Aktif Poliçe', policies.length)
     + statCard('Bekleyen Ödeme', pending) + statCard('Yaklaşan Yenileme', renewals) + statCard('Bekleyen Başvuru', newLeads)
     + '</div>'
+    + '<div class="card p-6 mt-6 border-gold bg-gold/[0.05]"><h3 class="font-display text-[16px] mb-4 text-navy-950">📋 Bugün Yapılacaklar</h3>' + todoHtml + '</div>'
     + '<div class="grid md:grid-cols-2 gap-6 mt-9">'
     + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Teklif Talepleri</h3><ul id="ovLeads" class="flex flex-col gap-3"></ul></div>'
     + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Hasar Bildirimleri</h3><ul id="ovClaims" class="flex flex-col gap-3"></ul></div>'
@@ -1168,6 +1304,7 @@ window.exportCustomersCsv = function(){
 };
 
 window.showCustomerDetail = async function(customerId){
+  window._lastDetailCustomerId = customerId;
   openModal('modal-customer-detail');
   document.getElementById('customerDetailContent').innerHTML = '<p class="text-ink-soft">Yükleniyor…</p>';
   const [userSnap, policies, quotesAll, claims] = await Promise.all([getDoc(doc(db,'users',customerId)), fetchAll('policies'), fetchAll('quotes'), fetchAll('claims')]);
@@ -1181,7 +1318,7 @@ window.showCustomerDetail = async function(customerId){
   document.getElementById('customerDetailContent').innerHTML =
     '<div class="font-mono text-[11px] uppercase tracking-widest text-gold mb-1.5">Müşteri Detayı</div>'
     + '<h2 class="font-display text-[22px] text-navy-950 mb-1">'+escapeHtml(c.fullName)+'</h2>'
-    + '<p class="text-ink-soft text-[13.5px] mb-6">'+escapeHtml(c.phone)+(c.email?' · '+escapeHtml(c.email):'')+(c.tcNo?' · TC/Not: '+escapeHtml(c.tcNo):'')+'</p>'
+    + '<p class="text-ink-soft text-[13.5px] mb-6">'+escapeHtml(c.phone)+(c.email?' · '+escapeHtml(c.email):'')+(c.tcNo?' · TC/Not: '+tcRevealSpan(c.tcNo, customerId):'')+'</p>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Poliçeler</h4>'
     + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>No</th><th>Tür</th><th>Bitiş</th><th>Ödeme</th><th></th></tr></thead><tbody>'
       + (custPolicies.length ? custPolicies.map(p=>'<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+paymentBadge(p.paymentStatus)+'</td><td><button class="btn btn-outline btn-sm" onclick="openEditPolicy(\''+p.id+'\',\''+p.startDate+'\',\''+p.endDate+'\',\''+p.paymentStatus+'\',\''+(p.renewalOfferPrice||'')+'\')">Düzenle</button></td></tr>').join('') : '<tr><td colspan="5" class="text-ink-soft text-center py-4">Poliçe yok.</td></tr>')
@@ -1298,17 +1435,17 @@ async function renderAdminLeads(){
 function extraSummary(q){
   const e = q.extra || {};
   const parts = [];
-  if(e.plaka) parts.push('Plaka: '+e.plaka);
-  if(e.address) parts.push('Adres: '+e.address);
-  if(e.birthDate) parts.push('D.Tarihi: '+e.birthDate);
-  if(q.tcNo) parts.push('TC: '+q.tcNo);
+  if(e.plaka) parts.push('Plaka: '+escapeHtml(e.plaka));
+  if(e.address) parts.push('Adres: '+escapeHtml(e.address));
+  if(e.birthDate) parts.push('D.Tarihi: '+escapeHtml(e.birthDate));
+  if(q.tcNo) parts.push('TC: '+tcRevealSpan(q.tcNo, 'lead_'+q.id));
   return parts.join(' · ') || '—';
 }
 function renderLeadRows(list){
   const tbody = document.querySelector('#leadsTable tbody');
   if(!tbody) return;
   tbody.innerHTML = list.length ? list.map(q =>
-    '<tr><td>'+escapeHtml(q.name)+'</td><td>'+escapeHtml(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[180px] truncate text-[12px]">'+escapeHtml(extraSummary(q))+'</td>'
+    '<tr><td>'+escapeHtml(q.name)+'</td><td>'+escapeHtml(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[220px] truncate text-[12px]">'+extraSummary(q)+'</td>'
       + '<td><span class="badge '+(q.status==='Onaylandı'?'badge-green':q.status==='Reddedildi'?'badge-red':q.status==='İletişime Geçildi'?'badge-amber':'badge-navy')+'">'+escapeHtml(q.status)+'</span></td>'
       + '<td class="flex flex-wrap gap-1.5">'
       + '<button class="btn btn-ok btn-sm" onclick="replyLead(\''+q.id+'\')">WhatsApp</button>'
@@ -1426,6 +1563,65 @@ async function renderAdminStaff(){
    BAŞLAT
 ========================================================== */
 renderPackages();
+</script>
+
+<!-- =========================================================
+     PWA: Service Worker kaydı + Ana Ekrana Ekle bildirimi
+========================================================== -->
+<script>
+(function(){
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('service-worker.js').catch(function(err){ console.warn('SW kaydı başarısız:', err); });
+    });
+  }
+
+  var STORAGE_KEY = 'ozgrup_install_banner_dismissed_v1';
+  var banner = document.getElementById('installBanner');
+  var textEl = document.getElementById('installBannerText');
+  var actionBtn = document.getElementById('installBannerActionBtn');
+  var closeBtn = document.getElementById('installBannerCloseBtn');
+  var deferredPrompt = null;
+
+  function isStandalone(){
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  }
+  function isIos(){
+    return /iphone|ipad|ipod/i.test(window.navigator.userAgent) && !window.MSStream;
+  }
+  function wasDismissed(){
+    try{ return localStorage.getItem(STORAGE_KEY) === '1'; }catch(e){ return false; }
+  }
+  function dismiss(){
+    banner.classList.remove('show');
+    try{ localStorage.setItem(STORAGE_KEY, '1'); }catch(e){}
+  }
+  closeBtn.addEventListener('click', dismiss);
+
+  if(isStandalone() || wasDismissed()){
+    // Zaten yüklü ya da kullanıcı kapatmış — banner hiç gösterilmez.
+  } else if(isIos()){
+    textEl.textContent = "Öz Grup Sigorta uygulamasını telefonunuza yüklemek için Safari'nin Paylaş butonuna basıp \"Ana Ekrana Ekle\" seçeneğini seçin.";
+    actionBtn.classList.add('hidden');
+    setTimeout(function(){ banner.classList.add('show'); }, 1800);
+  }
+
+  // Android / Chrome: tarayıcının otomatik yükleme istemini yakala
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    if(wasDismissed() || isStandalone()) return;
+    textEl.textContent = 'Öz Grup Sigorta uygulamasını tek dokunuşla telefonunuzun ana ekranına ekleyebilirsiniz.';
+    actionBtn.classList.remove('hidden');
+    banner.classList.add('show');
+  });
+  actionBtn.addEventListener('click', function(){
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.finally(function(){ deferredPrompt = null; dismiss(); });
+  });
+  window.addEventListener('appinstalled', dismiss);
+})();
 </script>
 </body>
 </html>
