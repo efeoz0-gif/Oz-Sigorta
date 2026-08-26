@@ -1632,6 +1632,14 @@ renderPackages();
     window.addEventListener('load', function(){
       navigator.serviceWorker.register('service-worker.js').catch(function(err){ console.warn('SW kaydı başarısız:', err); });
     });
+    // Yeni bir service worker sürümü devreye girdiğinde sayfayı bir kez otomatik tazele,
+    // böylece kullanıcı elle "sil ve yeniden yükle" yapmak zorunda kalmaz.
+    var swRefreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(swRefreshing) return;
+      swRefreshing = true;
+      window.location.reload();
+    });
   }
 
   var STORAGE_KEY = 'ozgrup_install_banner_dismissed_v1';
