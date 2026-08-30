@@ -133,6 +133,16 @@
   /* Hero istatistik kutusu: sayaçlar görünür olunca oynar */
   .stat-pop{opacity:0;transform:translateY(6px) scale(.9);transition:opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);}
   .stat-pop.stat-in{opacity:1;transform:translateY(0) scale(1);}
+
+  /* Giriş/üyelik başarı animasyonu: altın çember + onay işareti çizilir */
+  .welcome-check-circle{stroke-dasharray:214;stroke-dashoffset:214;}
+  .pkg-transition-overlay.show .welcome-check-circle{animation:welcomeCircle .6s ease-out forwards;}
+  .welcome-check-mark{stroke-dasharray:46;stroke-dashoffset:46;}
+  .pkg-transition-overlay.show .welcome-check-mark{animation:welcomeMark .4s ease-out forwards .55s;}
+  @keyframes welcomeCircle{to{stroke-dashoffset:0;}}
+  @keyframes welcomeMark{to{stroke-dashoffset:0;}}
+  .welcome-text{opacity:0;transform:translateY(6px);transition:opacity .4s ease .8s, transform .4s ease .8s;}
+  .pkg-transition-overlay.show .welcome-text{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body class="font-sans">
@@ -146,6 +156,17 @@
     <div id="pkgTransitionStage" class="pkg-transition-stage"></div>
     <div id="pkgTransitionTitle" class="pkg-transition-title">Teklifiniz hazırlanıyor…</div>
     <div class="pkg-transition-hint">Devam etmek için dokunun</div>
+  </div>
+</div>
+
+<!-- Giriş / üyelik başarı animasyonu (panele girerken oynar) -->
+<div id="welcomeOverlay" class="pkg-transition-overlay">
+  <div class="pkg-transition-card">
+    <svg class="welcome-check" width="76" height="76" viewBox="0 0 76 76" fill="none">
+      <circle class="welcome-check-circle" cx="38" cy="38" r="34" stroke="#d8b876" stroke-width="2.5"/>
+      <path class="welcome-check-mark" d="M23 39 L33 49 L54 27" stroke="#d8b876" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <div id="welcomeText" class="pkg-transition-title welcome-text" style="margin-top:16px;">Hoş geldiniz</div>
   </div>
 </div>
 
@@ -172,17 +193,17 @@
 ========================================================== -->
 <div id="screen-public">
   <header class="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
-    <div class="max-w-6xl mx-auto px-5 md:px-7 py-3.5 flex items-center justify-between">
-      <a href="#top" class="flex items-center gap-2.5">
-        <svg class="w-8 h-8 text-navy-900" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span><span class="block font-display font-semibold text-[16px] text-navy-950 leading-tight">Öz Grup Sigorta</span><span class="block font-mono text-[9px] tracking-widest text-gold uppercase">Sigorta Acenteliği</span></span>
+    <div class="max-w-6xl mx-auto px-4 md:px-7 py-3.5 flex items-center justify-between gap-2">
+      <a href="#top" class="flex items-center gap-2 min-w-0 flex-shrink">
+        <svg class="w-8 h-8 text-navy-900 flex-none" viewBox="0 0 48 48" fill="none"><path d="M24 4 L42 11 V22 C42 33 34.5 40.5 24 44 C13.5 40.5 6 33 6 22 V11 Z" stroke="currentColor" stroke-width="2"/><path d="M17 24 L22 29 L32 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="min-w-0 truncate"><span class="block font-display font-semibold text-[16px] text-navy-950 leading-tight truncate">Öz Grup Sigorta</span><span class="block font-mono text-[9px] tracking-widest text-gold uppercase truncate">Sigorta Acenteliği</span></span>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-[14px] font-medium text-navy-900">
+      <nav class="hidden md:flex items-center gap-7 text-[14px] font-medium text-navy-900 flex-none">
         <a href="#paketler" class="hover:text-gold">Paketler</a>
         <a href="#teklif" class="hover:text-gold">Teklif Al</a>
         <a href="#hakkimizda" class="hover:text-gold">Hakkımızda</a>
       </nav>
-      <div id="navAuthArea" class="flex items-center gap-2"></div>
+      <div id="navAuthArea" class="flex items-center gap-2 flex-none"></div>
     </div>
   </header>
 
@@ -511,7 +532,8 @@
       <div class="field mb-3.5" id="rg_phoneField"><label class="label" for="rg_phone">Telefon (+90)</label><input class="input" id="rg_phone" placeholder="05XX XXX XX XX" inputmode="tel"><div class="field-error">Geçerli bir Türkiye telefon numarası giriniz.</div></div>
       <div class="field mb-3.5" id="rg_emailField"><label class="label" for="rg_email">E-posta</label><input class="input" id="rg_email" type="email" placeholder="ornek@eposta.com"><div class="field-error">Geçerli bir e-posta giriniz.</div></div>
       <div class="field mb-2" id="rg_pwField"><label class="label" for="rg_pw">Şifre</label><input class="input" id="rg_pw" type="password" placeholder="En az 6 karakter"><div class="field-error">Şifre en az 6 karakter olmalı.</div></div>
-      <p class="text-[11px] text-ink-soft mb-4">Kayıt sonrası e-postanıza bir doğrulama bağlantısı gönderilir. Panel erişimi için e-postanızı doğrulamanız gerekir.</p>
+      <p class="text-[11px] text-ink-soft mb-1.5">Kayıt sonrası e-postanıza bir doğrulama bağlantısı gönderilir. Panel erişimi için e-postanızı doğrulamanız gerekir.</p>
+      <p class="text-[11px] mb-4 flex items-start gap-1.5 px-2.5 py-2" style="color:#7a4f10;background:#fbf0e0;border:1px solid #c98a2c;"><span>⚠️</span><span>E-posta gelmezse lütfen <strong>Gereksiz/Spam</strong> klasörünüzü kontrol edin.</span></p>
       <button type="submit" id="registerSubmitBtn" class="btn btn-navy w-full justify-center">Üye Ol</button>
     </form>
 
@@ -544,7 +566,8 @@
   <div class="card w-full max-w-[400px] p-7 text-center my-8">
     <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 flex items-center justify-center text-gold text-2xl">✉️</div>
     <h3 class="font-display text-[19px] mb-2 text-navy-950">E-posta Doğrulaması Bekleniyor</h3>
-    <p class="text-ink-soft text-[13.5px] mb-5">Panele erişebilmek için <strong id="verifyEmailAddr"></strong> adresine gönderilen bağlantıya tıklayın.</p>
+    <p class="text-ink-soft text-[13.5px] mb-3.5">Panele erişebilmek için <strong id="verifyEmailAddr"></strong> adresine gönderilen bağlantıya tıklayın.</p>
+    <p class="text-[11.5px] mb-5 flex items-start gap-1.5 px-2.5 py-2 text-left" style="color:#7a4f10;background:#fbf0e0;border:1px solid #c98a2c;"><span>⚠️</span><span>E-posta gelmezse lütfen <strong>Gereksiz/Spam</strong> klasörünüzü kontrol edin.</span></p>
     <div class="flex flex-col gap-2.5">
       <button id="resendVerifyBtn" class="btn btn-outline w-full justify-center">Doğrulama E-postasını Tekrar Gönder</button>
       <button id="checkVerifyBtn" class="btn btn-navy w-full justify-center">Doğruladım, Kontrol Et</button>
@@ -696,11 +719,14 @@ function escapeHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g, c 
 function fmtDate(iso){ if(!iso) return '—'; const d = new Date(iso + 'T00:00:00'); if(isNaN(d)) return iso; return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear(); }
 function daysUntil(iso){ const t=new Date(); t.setHours(0,0,0,0); const e=new Date(iso+'T00:00:00'); return Math.ceil((e-t)/86400000); }
 function toWaNumber(phone){ let d=String(phone||'').replace(/\D/g,''); if(d.startsWith('90')) return d; if(d.startsWith('0')) d=d.slice(1); return '90'+d; }
+// Sadece iOS Safari, bir kullanıcı tıklamasından SONRA (ör. Firestore kaydı bittikten sonra)
+// çağrılan window.open()'ı engeller. Android/Chrome bunu engellemez — orada "önce boş sekme aç"
+// numarasını uygularsak, sekme geç yönlendirildiğinde kullanıcı beyaz bir ekranda asılı kalır.
+// Bu yüzden bu numarayı SADECE iOS'ta kullanıyoruz.
+function isIosDevice(){ return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream; }
+function openWhatsAppPreOpen(){ return isIosDevice() ? window.open('about:blank', '_blank') : null; }
 function openWhatsApp(phone,msg,preOpenedWindow){
   const url = "https://wa.me/"+toWaNumber(phone)+"?text="+encodeURIComponent(msg);
-  // iOS Safari, bir kullanıcı tıklamasından SONRA (ör. Firestore kaydı bittikten sonra) çağrılan
-  // window.open()'ı engeller. Bunu aşmak için tıklama anında boş bir sekme açıp,
-  // asenkron işlem bitince o sekmenin adresini WhatsApp'a yönlendiriyoruz.
   if(preOpenedWindow && !preOpenedWindow.closed){
     preOpenedWindow.location.href = url;
     return preOpenedWindow;
@@ -746,16 +772,23 @@ function downloadCsv(filename, rows){
 function showScreen(name){ ['public','customer','admin'].forEach(s=>document.getElementById('screen-'+s).classList.toggle('hidden', s!==name)); window.scrollTo(0,0); }
 window.goPublic = function(){ stopActiveListeners(); showScreen('public'); renderNavAuth(); };
 
+function initials(name){
+  const parts = String(name||'').trim().split(/\s+/).filter(Boolean);
+  if(!parts.length) return '?';
+  return (parts[0][0] + (parts.length>1 ? parts[parts.length-1][0] : '')).toUpperCase();
+}
 function renderNavAuth(){
   const el = document.getElementById('navAuthArea');
   if(currentUser && currentProfile && currentProfile.role === 'customer'){
-    el.innerHTML = '<button onclick="requestCustomerPanel()" class="btn btn-outline btn-sm">'+escapeHtml((currentProfile.fullName||'Panelim').split(' ')[0])+'</button>'
-                 + '<button onclick="doLogout()" class="btn btn-navy btn-sm">Çıkış</button>';
+    // Sabit boyutlu, baş harf rozeti kullanıyoruz — uzun isim, büyük yazı tipi ayarı ya da
+    // dar ekranlarda metin butonunun taşıp görünmez olması riskini tamamen ortadan kaldırır.
+    el.innerHTML = '<button onclick="requestCustomerPanel()" class="flex-none w-9 h-9 rounded-full bg-navy-950 text-gold-light font-mono text-[12.5px] font-semibold flex items-center justify-center border border-gold-light/50 hover:border-gold-light transition-colors" aria-label="Panelim" title="Panelim">'+escapeHtml(initials(currentProfile.fullName))+'</button>'
+                 + '<button onclick="doLogout()" class="flex-none btn btn-navy btn-sm">Çıkış</button>';
   } else if(currentUser){
-    el.innerHTML = '<button onclick="doLogout()" class="btn btn-navy btn-sm">Çıkış</button>';
+    el.innerHTML = '<button onclick="doLogout()" class="flex-none btn btn-navy btn-sm">Çıkış</button>';
   } else {
-    el.innerHTML = '<button onclick="switchAuthTab(\'login\');openModal(\'modal-auth\');" class="btn btn-outline btn-sm">Giriş Yap</button>'
-                 + '<button onclick="switchAuthTab(\'register\');openModal(\'modal-auth\');" class="btn btn-navy btn-sm">Üye Ol</button>';
+    el.innerHTML = '<button onclick="switchAuthTab(\'login\');openModal(\'modal-auth\');" class="flex-none btn btn-outline btn-sm">Giriş Yap</button>'
+                 + '<button onclick="switchAuthTab(\'register\');openModal(\'modal-auth\');" class="flex-none btn btn-navy btn-sm">Üye Ol</button>';
   }
 }
 
@@ -772,8 +805,11 @@ window.requestCustomerPanel = async function(){
     openModal('modal-complete-profile');
     return;
   }
-  showScreen('customer');
-  renderCustomerDashboard();
+  const firstName = (currentProfile.fullName||'').trim().split(/\s+/)[0] || '';
+  playWelcome('Hoş geldiniz' + (firstName ? ', '+firstName : ''), function(){
+    showScreen('customer');
+    renderCustomerDashboard();
+  });
 };
 
 /* ---------------- oturum dinleyici ---------------- */
@@ -790,8 +826,11 @@ onAuthStateChanged(auth, async (user) => {
     if(currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'staff')){
       closeModal('modal-admin-login');
       document.getElementById('adminLoginForm').reset();
-      showScreen('admin');
-      adminShowTab('overview');
+      const firstName = (currentProfile.fullName||'').trim().split(/\s+/)[0] || '';
+      playWelcome('Hoş geldiniz' + (firstName ? ', '+firstName : ''), function(){
+        showScreen('admin');
+        adminShowTab('overview');
+      });
       showToast('Oturum açıldı.');
     } else {
       markInvalid('admin_pwField', true);
@@ -1031,6 +1070,19 @@ function finishPkgTransition(){
 }
 window.skipPkgTransition = function(){ finishPkgTransition(); };
 
+// Panele girerken (giriş/üye olma sonrası) oynayan kısa, profesyonel karşılama animasyonu.
+function playWelcome(text, onDone){
+  const overlay = document.getElementById('welcomeOverlay');
+  const textEl = document.getElementById('welcomeText');
+  if(!overlay){ onDone(); return; }
+  textEl.textContent = text;
+  overlay.classList.add('show');
+  setTimeout(function(){
+    overlay.classList.remove('show');
+    setTimeout(onDone, 300);
+  }, 1250);
+}
+
 window.selectPackage = function(btn){
   document.querySelectorAll('.pkg-card').forEach(b=>b.setAttribute('aria-pressed','false'));
   btn.setAttribute('aria-pressed','true');
@@ -1094,7 +1146,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   const btn = document.getElementById('quoteSubmitBtn');
   setBtnLoading(btn, true);
   // iOS Safari popup engelleyicisini aşmak için tıklama anında boş sekme açılır.
-  const waWindow = window.open('about:blank', '_blank');
+  const waWindow = openWhatsAppPreOpen();
   try{
     await addDoc(collection(db,'quotes'), {
       package: selectedPackage, name, phone, tcNo, note, paymentPreference: payment,
@@ -1123,16 +1175,44 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
    MÜŞTERİ PANELİ
 ========================================================== */
 function paymentBadge(s){ return s==='Ödendi' ? '<span class="badge badge-green">Ödendi</span>' : '<span class="badge badge-amber">Bekliyor</span>'; }
+// Tek tıkla arama: telefonu yazı olarak göstermek yerine tel: bağlantısı yapar — acente,
+// bir müşteriyi aramak için numarayı elle çevirmek zorunda kalmaz.
+function telLink(phone){ if(!phone) return '—'; return '<a href="tel:'+escapeHtml(phone)+'" class="text-navy-950 underline decoration-dotted hover:decoration-solid" onclick="event.stopPropagation()">'+escapeHtml(phone)+'</a>'; }
+// Poliçe no gibi tekrar tekrar elle kopyalanan alanlar için tek tıkla panoya kopyalama.
+window.copyToClipboard = function(text, label){
+  const done = function(){ showToast((label||'Metin')+' kopyalandı.'); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ showToast('Kopyalanamadı.'); });
+  } else { showToast('Kopyalanamadı.'); }
+};
+function copyChip(text, label){
+  return '<button type="button" class="font-mono hover:text-gold inline-flex items-center gap-1" onclick="event.stopPropagation(); copyToClipboard(\''+String(text).replace(/'/g,"\\'")+'\', \''+(label||'Poliçe no')+'\')" title="Kopyala">'
+    + escapeHtml(text)
+    + ' <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V5a1 1 0 0 1 1-1h10" stroke="currentColor" stroke-width="1.6"/></svg>'
+    + '</button>';
+}
 function claimBadge(s){ if(s==='Sonuçlandı') return '<span class="badge badge-green">Sonuçlandı</span>'; if(s==='İnceleniyor') return '<span class="badge badge-amber">İnceleniyor</span>'; return '<span class="badge badge-navy">Beklemede</span>'; }
 function renewalTier(days){ if(days<0) return {label:'Süresi Doldu', cls:'badge-red'}; if(days<=7) return {label:days+' gün kaldı', cls:'badge-red'}; if(days<=15) return {label:days+' gün kaldı', cls:'badge-orange'}; if(days<=30) return {label:days+' gün kaldı', cls:'badge-amber'}; return {label:days+' gün kaldı', cls:'badge-green'}; }
 
 async function renderCustomerDashboard(){
   if(!currentUser || !currentProfile) { goPublic(); return; }
   const c = currentProfile;
+  const hour = new Date().getHours();
+  const greeting = hour < 6 ? 'İyi geceler' : hour < 12 ? 'Günaydın' : hour < 18 ? 'İyi günler' : 'İyi akşamlar';
+  let memberSince = '';
+  if(c.createdAt && c.createdAt.toDate){
+    const d = c.createdAt.toDate();
+    const months = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    memberSince = months[d.getMonth()] + ' ' + d.getFullYear() + "'den beri üyemiz";
+  }
   document.getElementById('custWelcome').innerHTML =
-    '<p class="font-mono text-[11px] tracking-widest uppercase text-gold mb-1.5">Hoş geldiniz</p>'
-    + '<h2 class="font-display text-[22px] text-navy-950">'+escapeHtml(c.fullName)+'</h2>'
-    + '<p class="text-ink-soft text-[13.5px] mt-1">'+escapeHtml(c.email)+' · '+escapeHtml(c.phone)+'</p>';
+    '<div class="flex items-center gap-4">'
+    + '<div class="flex-none w-14 h-14 rounded-full bg-navy-950 text-gold-light font-mono text-[17px] font-semibold flex items-center justify-center border-2 border-gold-light/60">'+escapeHtml(initials(c.fullName))+'</div>'
+    + '<div class="min-w-0">'
+    + '<p class="font-mono text-[11px] tracking-widest uppercase text-gold mb-1">'+greeting+', hoş geldiniz</p>'
+    + '<h2 class="font-display text-[22px] text-navy-950 truncate">'+escapeHtml(c.fullName)+'</h2>'
+    + '<p class="text-ink-soft text-[13px] mt-0.5">'+escapeHtml(c.email)+' · '+escapeHtml(c.phone)+(memberSince?' · '+memberSince:'')+'</p>'
+    + '</div></div>';
 
   const polQ = query(collection(db,'policies'), where('customerId','==', currentUser.uid));
   const claimQ = query(collection(db,'claims'), where('customerId','==', currentUser.uid));
@@ -1181,7 +1261,7 @@ window.crossSellWhatsApp = function(){
   openWhatsApp(WHATSAPP_NUMBER, "Merhaba, Kasko poliçem var; Tamamlayıcı Sağlık Sigortası indirim fırsatı hakkında bilgi almak istiyorum. Ad Soyad: " + (currentProfile ? currentProfile.fullName : ''));
 };
 window.acceptRenewalOffer = async function(policyId){
-  const waWindow = window.open('about:blank', '_blank');
+  const waWindow = openWhatsAppPreOpen();
   try{
     await updateDoc(doc(db,'policies',policyId), { renewalRequested: true });
     const pSnap = await getDoc(doc(db,'policies',policyId));
@@ -1212,7 +1292,7 @@ document.getElementById('roadsideBtn').addEventListener('click', function(){
   if(!navigator.geolocation){ showToast('Cihazınız konum özelliğini desteklemiyor.'); return; }
   const btn = this; setBtnLoading(btn, true);
   // iOS Safari popup engelleyicisini aşmak için tıklama anında boş sekme açılır.
-  const waWindow = window.open('about:blank', '_blank');
+  const waWindow = openWhatsAppPreOpen();
   navigator.geolocation.getCurrentPosition(async function(pos){
     const lat = pos.coords.latitude, lng = pos.coords.longitude;
     const mapsUrl = 'https://maps.google.com/?q=' + lat + ',' + lng;
@@ -1260,6 +1340,7 @@ async function renderAdminOverview(){
   const pending = policies.filter(p=>p.paymentStatus==='Bekliyor').length;
   const renewals = policies.filter(p=>daysUntil(p.endDate)<=30).length;
   const newLeads = quotes.filter(q=>q.status==='Yeni').length;
+  const totalPremium = policies.reduce((sum,p)=>sum + (parseFloat(String(p.premium||'0').replace(/[^\d.,]/g,'').replace(',','.')) || 0), 0);
 
   // "Bugün Yapılacaklar" — acentenin günlük işini kolaylaştıran öncelikli aksiyon listesi
   const urgentRenewals = policies.filter(p=>daysUntil(p.endDate)<=7).sort((a,b)=>daysUntil(a.endDate)-daysUntil(b.endDate));
@@ -1274,9 +1355,10 @@ async function renderAdminOverview(){
     : '<p class="text-ink-soft text-[13.5px]">Şu an bekleyen acil bir işlem yok — harika gidiyor! 🎉</p>';
 
   content.innerHTML = sectionHeader('Genel Bakış', 'Öz Grup Sigorta acente yönetim özeti')
-    + '<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">'
+    + '<div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-4">'
     + statCard('Toplam Müşteri', customers.length) + statCard('Aktif Poliçe', policies.length)
     + statCard('Bekleyen Ödeme', pending) + statCard('Yaklaşan Yenileme', renewals) + statCard('Bekleyen Başvuru', newLeads)
+    + statCard('Toplam Aktif Prim', totalPremium.toLocaleString('tr-TR')+' ₺')
     + '</div>'
     + '<div class="card p-6 mt-6 border-gold bg-gold/[0.05]"><h3 class="font-display text-[16px] mb-4 text-navy-950">📋 Bugün Yapılacaklar</h3>' + todoHtml + '</div>'
     + '<div class="grid md:grid-cols-2 gap-6 mt-9">'
@@ -1398,7 +1480,7 @@ async function renderAdminCustomers(){
   function renderRows(list){
     document.querySelector('#customersTable tbody').innerHTML = list.length ? list.map(c=>{
       const count = policies.filter(p=>p.customerId===c.id).length;
-      return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+'</td><td>'+escapeHtml(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
+      return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+'</td><td>'+telLink(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
     }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Sonuç yok.</td></tr>';
   }
   renderRows(customers);
@@ -1428,10 +1510,10 @@ window.showCustomerDetail = async function(customerId){
   document.getElementById('customerDetailContent').innerHTML =
     '<div class="font-mono text-[11px] uppercase tracking-widest text-gold mb-1.5">Müşteri Detayı</div>'
     + '<h2 class="font-display text-[22px] text-navy-950 mb-1">'+escapeHtml(c.fullName)+'</h2>'
-    + '<p class="text-ink-soft text-[13.5px] mb-6">'+escapeHtml(c.phone)+(c.email?' · '+escapeHtml(c.email):'')+(c.tcNo?' · TC/Not: '+tcRevealSpan(c.tcNo, customerId):'')+'</p>'
+    + '<p class="text-ink-soft text-[13.5px] mb-6">'+telLink(c.phone)+(c.email?' · '+escapeHtml(c.email):'')+(c.tcNo?' · TC/Not: '+tcRevealSpan(c.tcNo, customerId):'')+'</p>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Poliçeler</h4>'
     + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>No</th><th>Tür</th><th>Bitiş</th><th>Ödeme</th><th></th></tr></thead><tbody>'
-      + (custPolicies.length ? custPolicies.map(p=>'<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+paymentBadge(p.paymentStatus)+'</td><td><button class="btn btn-outline btn-sm" onclick="openEditPolicy(\''+p.id+'\',\''+p.startDate+'\',\''+p.endDate+'\',\''+p.paymentStatus+'\',\''+(p.renewalOfferPrice||'')+'\')">Düzenle</button></td></tr>').join('') : '<tr><td colspan="5" class="text-ink-soft text-center py-4">Poliçe yok.</td></tr>')
+      + (custPolicies.length ? custPolicies.map(p=>'<tr><td class="font-mono">'+copyChip(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+paymentBadge(p.paymentStatus)+'</td><td class="flex flex-wrap gap-1.5"><button class="btn btn-outline btn-sm" onclick="openEditPolicy(\''+p.id+'\',\''+p.startDate+'\',\''+p.endDate+'\',\''+p.paymentStatus+'\',\''+(p.renewalOfferPrice||'')+'\')">Düzenle</button>'+(c.phone?'<button class="btn btn-ok btn-sm" onclick="waTemplate(\''+p.id+'\',\'approved\')">Onay Mesajı</button>':'')+'</td></tr>').join('') : '<tr><td colspan="5" class="text-ink-soft text-center py-4">Poliçe yok.</td></tr>')
     + '</tbody></table></div>'
     + '<h4 class="font-display text-[15px] text-navy-950 mb-2.5">Teklif Geçmişi</h4>'
     + '<div class="overflow-x-auto mb-6"><table><thead><tr><th>Paket</th><th>Durum</th></tr></thead><tbody>'
@@ -1506,10 +1588,11 @@ async function renderAdminRenewals(){
     + '</tbody></table></div>';
 }
 window.waTemplate = async function(policyId, kind){
-  const pSnap = await getDoc(doc(db,'policies',policyId)); if(!pSnap.exists()) return;
+  const waWindow = openWhatsAppPreOpen();
+  const pSnap = await getDoc(doc(db,'policies',policyId)); if(!pSnap.exists()){ if(waWindow && !waWindow.closed) waWindow.close(); return; }
   const p = pSnap.data();
   const cSnap = await getDoc(doc(db,'users',p.customerId));
-  if(!cSnap.exists() || !cSnap.data().phone){ showToast('Müşteri telefonu bulunamadı.'); return; }
+  if(!cSnap.exists() || !cSnap.data().phone){ if(waWindow && !waWindow.closed) waWindow.close(); showToast('Müşteri telefonu bulunamadı.'); return; }
   const c = cSnap.data();
   const days = daysUntil(p.endDate);
   let msg;
@@ -1521,7 +1604,7 @@ window.waTemplate = async function(policyId, kind){
   } else if(kind==='approved'){
     msg = "Sayın "+c.fullName+", "+p.type+" poliçeniz onaylanmıştır. Öz Grup Sigorta'yı tercih ettiğiniz için teşekkür ederiz.";
   }
-  openWhatsApp(c.phone, msg);
+  openWhatsApp(c.phone, msg, waWindow);
 };
 
 /* ---- Teklif Talepleri ---- */
@@ -1555,7 +1638,7 @@ function renderLeadRows(list){
   const tbody = document.querySelector('#leadsTable tbody');
   if(!tbody) return;
   tbody.innerHTML = list.length ? list.map(q =>
-    '<tr><td>'+escapeHtml(q.name)+'</td><td>'+escapeHtml(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[220px] truncate text-[12px]">'+extraSummary(q)+'</td>'
+    '<tr><td>'+escapeHtml(q.name)+'</td><td>'+telLink(q.phone)+'</td><td>'+escapeHtml(q.package)+'</td><td class="max-w-[220px] truncate text-[12px]">'+extraSummary(q)+'</td>'
       + '<td><span class="badge '+(q.status==='Onaylandı'?'badge-green':q.status==='Reddedildi'?'badge-red':q.status==='İletişime Geçildi'?'badge-amber':'badge-navy')+'">'+escapeHtml(q.status)+'</span></td>'
       + '<td class="flex flex-wrap gap-1.5">'
       + '<button class="btn btn-ok btn-sm" onclick="replyLead(\''+q.id+'\')">WhatsApp</button>'
@@ -1570,9 +1653,10 @@ window.updateLeadStatus = async function(id, status){
   catch(err){ console.error(err); showToast('Güncellenemedi.'); }
 };
 window.replyLead = async function(id){
-  const snap = await getDoc(doc(db,'quotes',id)); if(!snap.exists()) return;
+  const waWindow = openWhatsAppPreOpen();
+  const snap = await getDoc(doc(db,'quotes',id)); if(!snap.exists()){ if(waWindow && !waWindow.closed) waWindow.close(); return; }
   const q = snap.data();
-  openWhatsApp(q.phone, "Merhaba "+q.name+", Öz Grup Sigorta'dan Ahmetcan Öz yazıyorum. "+q.package+" talebiniz için sizinle görüşmek istiyorum.");
+  openWhatsApp(q.phone, "Merhaba "+q.name+", Öz Grup Sigorta'dan Ahmetcan Öz yazıyorum. "+q.package+" talebiniz için sizinle görüşmek istiyorum.", waWindow);
 };
 window.exportLeadsCsv = function(){
   const rows = [['Ad Soyad','Telefon','T.C.','Paket','Ödeme Tercihi','Durum','Not']];
