@@ -619,7 +619,7 @@
 <script type="module">
 import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider,
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider,
   signOut, onAuthStateChanged, updateProfile, sendEmailVerification, sendPasswordResetEmail, reload
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
@@ -859,12 +859,33 @@ onAuthStateChanged(auth, async (user) => {
 window.doLogout = async function(){ stopActiveListeners(); await signOut(auth); goPublic(); showToast('Çıkış yapıldı.'); };
 
 /* ---------------- Google girişi ---------------- */
+// iOS Safari'de (özellikle "Ana Ekrana Ekle" ile açılan PWA modunda) signInWithPopup
+// güvenilmez çalışıyor: Google penceresi about:blank'te asılı kalıp siteye hiç dönmüyordu.
+// Mobil/PWA'da bunun yerine tam sayfa yönlendirmeli signInWithRedirect kullanıyoruz;
+// masaüstünde kullanıcı deneyimi daha akıcı olduğu için popup yöntemi kalıyor.
+function isMobileOrPwaDevice(){
+  const isMobileUA = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  return isMobileUA || isStandalone;
+}
 document.getElementById('googleSignInBtn').addEventListener('click', async function(){
   const provider = new GoogleAuthProvider();
   try{
-    await signInWithPopup(auth, provider);
-    // profil eksikse onAuthStateChanged modal-complete-profile'ı açar
+    if(isMobileOrPwaDevice()){
+      await signInWithRedirect(auth, provider);
+      // Sayfa Google'a yönlenip geri dönecek; devamı aşağıdaki getRedirectResult ile ele alınır.
+    } else {
+      await signInWithPopup(auth, provider);
+      // profil eksikse onAuthStateChanged modal-complete-profile'ı açar
+    }
   }catch(err){
+    console.error(err);
+    showToast('Google girişi başarısız oldu.');
+  }
+});
+// Sayfa, Google yönlendirmesinden geri döndüğünde sonucu yakalar (hata varsa bildirir).
+getRedirectResult(auth).catch(function(err){
+  if(err && err.code && err.code !== 'auth/popup-closed-by-user'){
     console.error(err);
     showToast('Google girişi başarısız oldu.');
   }
