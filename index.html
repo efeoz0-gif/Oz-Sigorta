@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <script>
   tailwind.config = { theme: { extend: {
     colors: {
@@ -143,6 +144,28 @@
   @keyframes welcomeMark{to{stroke-dashoffset:0;}}
   .welcome-text{opacity:0;transform:translateY(6px);transition:opacity .4s ease .8s, transform .4s ease .8s;}
   .pkg-transition-overlay.show .welcome-text{opacity:1;transform:translateY(0);}
+
+  /* ---------------- Yönetici paneli: bildirim / arama / VIP / kanban / grafik ---------------- */
+  .notif-item{display:flex;gap:10px;padding:11px 12px;border-bottom:1px solid #ece5d4;cursor:pointer;text-align:left;width:100%;}
+  .notif-item:hover{background:#f6f2e9;}
+  .notif-item:last-child{border-bottom:none;}
+  .search-result-item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;cursor:pointer;border-radius:2px;}
+  .search-result-item:hover{background:#f6f2e9;}
+  .badge-vip{background:linear-gradient(90deg,#d8b876,#b3893f);color:#0a1c30;border-color:#8a6a2e;}
+  .kanban-col{background:#ece5d4;border:1px solid #d8cfb9;min-width:240px;flex:1;}
+  .kanban-col-head{padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid #d8cfb9;display:flex;justify-content:space-between;align-items:center;}
+  .kanban-card{background:#fff;border:1px solid #d8cfb9;padding:10px 11px;margin:8px;font-size:12.5px;}
+  .chart-card{background:#fff;border:1px solid #d8cfb9;padding:18px;}
+
+  /* Müşteri paneli: görsel poliçe kartları */
+  .policy-card{position:relative;overflow:hidden;background:linear-gradient(135deg,#0e2743,#0a1c30);border:1px solid #1d4468;padding:18px;color:#f6f2e9;}
+  .policy-card::after{content:'';position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle, rgba(216,184,118,.18), transparent 70%);}
+  .policy-card-type{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#d8b876;}
+  .policy-card-no{font-family:'Fraunces',serif;font-size:16px;margin:4px 0 12px;}
+  .policy-card-row{display:flex;justify-content:space-between;font-size:11.5px;color:#a9b6c4;padding-top:8px;border-top:1px dashed rgba(255,255,255,.18);}
+  .claim-steps{display:flex;align-items:center;gap:4px;margin-top:5px;}
+  .claim-step{width:16px;height:4px;border-radius:2px;background:#ece5d4;}
+  .claim-step.done{background:#3f6b4f;}
 </style>
 </head>
 <body class="font-sans">
@@ -442,10 +465,12 @@
 
     <div id="crossSellBox"></div>
     <div id="renewalOfferBox"></div>
+    <div id="referralBox"></div>
 
     <div class="grid md:grid-cols-3 gap-4 mb-9" id="custStats"></div>
 
     <div class="mb-3.5 flex items-center gap-2.5 font-mono text-[11px] tracking-widest uppercase text-gold"><span class="w-5 h-px bg-gold"></span> Poliçelerim</div>
+    <div id="custPolicyCards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5"></div>
     <div class="card mb-9 overflow-x-auto">
       <table id="custPolicyTable"><thead><tr><th>Poliçe No</th><th>Tür</th><th>Başlangıç</th><th>Bitiş</th><th>Prim</th><th>Ödeme</th><th>Belge</th></tr></thead><tbody><tr><td colspan="7" class="text-center text-ink-soft py-6">Yükleniyor…</td></tr></tbody></table>
     </div>
@@ -493,12 +518,38 @@
     </div>
   </aside>
   <main class="flex-1 min-w-0">
-    <header class="bg-white border-b border-line px-6 py-4 flex items-center justify-between md:hidden">
-      <button onclick="document.querySelector('.admin-sidebar').classList.toggle('open')" class="btn btn-outline btn-sm">☰ Menü</button>
-      <span class="font-display text-[15px] text-navy-950">Yönetici Paneli</span>
+    <header class="bg-white border-b border-line px-4 md:px-8 py-3.5 flex items-center justify-between gap-3 relative">
+      <div class="flex items-center gap-3 min-w-0">
+        <button onclick="document.querySelector('.admin-sidebar').classList.toggle('open')" class="btn btn-outline btn-sm md:hidden flex-none">☰</button>
+        <span class="font-display text-[15px] text-navy-950 hidden md:block truncate">Yönetici Paneli</span>
+      </div>
+      <div class="flex items-center gap-2 flex-none">
+        <button onclick="openAdminSearch()" class="w-9 h-9 rounded-full border border-line hover:border-gold text-ink-soft hover:text-navy-950 flex items-center justify-center transition-colors" title="Ara (Ctrl/Cmd+K)" aria-label="Ara">
+          <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20 L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="relative">
+          <button onclick="toggleAdminNotifDropdown()" class="w-9 h-9 rounded-full border border-line hover:border-gold text-ink-soft hover:text-navy-950 flex items-center justify-center transition-colors" title="Bildirimler" aria-label="Bildirimler">
+            <svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="none"><path d="M18 15.5V11a6 6 0 0 0-4.5-5.8V4a1.5 1.5 0 0 0-3 0v1.2A6 6 0 0 0 6 11v4.5L4 18h16Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.5 20a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span id="adminNotifBadge" class="hidden absolute -top-1 -right-1 min-w-[17px] h-[17px] px-1 rounded-full bg-danger text-white text-[10px] font-bold flex items-center justify-center leading-none">0</span>
+          </button>
+          <div id="adminNotifDropdown" class="hidden absolute right-0 top-11 w-80 max-w-[85vw] card shadow-2xl z-[120] max-h-[70vh] overflow-y-auto"></div>
+        </div>
+      </div>
     </header>
     <div class="p-6 md:p-8" id="adminContent"></div>
   </main>
+
+  <!-- Yönetici genel arama (Ctrl/Cmd+K) -->
+  <div id="modal-admin-search" class="modal-overlay hidden" style="align-items:flex-start;padding-top:80px;">
+    <div class="card w-full max-w-lg p-0 relative overflow-hidden">
+      <div class="p-3.5 border-b border-line flex items-center gap-2.5">
+        <svg class="w-[17px] h-[17px] text-ink-soft flex-none" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20 L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input id="adminSearchInput" class="flex-1 outline-none text-[15px]" placeholder="Müşteri, poliçe no veya telefon ara…" oninput="handleAdminSearchInput()">
+        <button onclick="closeModal('modal-admin-search')" class="text-ink-soft hover:text-ink text-xl leading-none flex-none">✕</button>
+      </div>
+      <div id="adminSearchResults" class="max-h-[55vh] overflow-y-auto p-2"></div>
+    </div>
+  </div>
 </div>
 </div><!-- /#appRoot -->
 
@@ -830,6 +881,7 @@ onAuthStateChanged(auth, async (user) => {
       playWelcome('Hoş geldiniz' + (firstName ? ', '+firstName : ''), function(){
         showScreen('admin');
         adminShowTab('overview');
+        startAdminNotifWatchers();
       });
       showToast('Oturum açıldı.');
     } else {
@@ -843,7 +895,7 @@ onAuthStateChanged(auth, async (user) => {
 
   if(currentProfile && (currentProfile.role === 'admin' || currentProfile.role === 'staff')){
     if(document.getElementById('screen-customer').classList.contains('hidden') && document.getElementById('screen-admin').classList.contains('hidden')){
-      showScreen('admin'); adminShowTab('overview');
+      showScreen('admin'); adminShowTab('overview'); startAdminNotifWatchers();
     }
     return;
   }
@@ -856,7 +908,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-window.doLogout = async function(){ stopActiveListeners(); await signOut(auth); goPublic(); showToast('Çıkış yapıldı.'); };
+window.doLogout = async function(){ stopActiveListeners(); stopAdminNotifWatchers(); await signOut(auth); goPublic(); showToast('Çıkış yapıldı.'); };
 
 /* ---------------- Google girişi ---------------- */
 // iOS Safari'de (özellikle "Ana Ekrana Ekle" ile açılan PWA modunda) signInWithPopup
@@ -1213,6 +1265,12 @@ function copyChip(text, label){
     + '</button>';
 }
 function claimBadge(s){ if(s==='Sonuçlandı') return '<span class="badge badge-green">Sonuçlandı</span>'; if(s==='İnceleniyor') return '<span class="badge badge-amber">İnceleniyor</span>'; return '<span class="badge badge-navy">Beklemede</span>'; }
+function claimStepper(s){
+  const stage = s==='Sonuçlandı' ? 3 : s==='İnceleniyor' ? 2 : 1;
+  let dots = '';
+  for(let i=1;i<=3;i++) dots += '<span class="claim-step'+(i<=stage?' done':'')+'"></span>';
+  return '<div class="claim-steps" title="Beklemede → İnceleniyor → Sonuçlandı">'+dots+'</div>';
+}
 function renewalTier(days){ if(days<0) return {label:'Süresi Doldu', cls:'badge-red'}; if(days<=7) return {label:days+' gün kaldı', cls:'badge-red'}; if(days<=15) return {label:days+' gün kaldı', cls:'badge-orange'}; if(days<=30) return {label:days+' gün kaldı', cls:'badge-amber'}; return {label:days+' gün kaldı', cls:'badge-green'}; }
 
 async function renderCustomerDashboard(){
@@ -1253,11 +1311,21 @@ async function renderCustomerDashboard(){
     return '<tr><td class="font-mono">'+escapeHtml(p.policyNo)+'</td><td>'+escapeHtml(p.type)+'</td><td>'+fmtDate(p.startDate)+'</td><td>'+fmtDate(p.endDate)+'</td><td>'+escapeHtml(p.premium)+' ₺</td><td>'+paymentBadge(p.paymentStatus)+'</td><td>'+docCell+'</td></tr>';
   }).join('') : '<tr><td colspan="7" class="text-center text-ink-soft py-6">Henüz tanımlı poliçeniz bulunmuyor.</td></tr>';
 
+  // Görsel poliçe kartları (tablo ile aynı veri, daha "cüzdan kartı" hissiyle)
+  document.getElementById('custPolicyCards').innerHTML = policies.map(p => (
+    '<div class="policy-card">'
+    + '<div class="policy-card-type">'+escapeHtml(p.type)+'</div>'
+    + '<div class="policy-card-no">'+escapeHtml(p.policyNo)+'</div>'
+    + '<div class="flex items-center justify-between"><span class="text-[11px] text-[#a9b6c4]">Bitiş: '+fmtDate(p.endDate)+'</span>'+paymentBadge(p.paymentStatus)+'</div>'
+    + '<div class="policy-card-row"><span>Prim</span><span>'+escapeHtml(p.premium)+' ₺</span></div>'
+    + '</div>'
+  )).join('');
+
   const policySelect = document.getElementById('claim_policy');
   policySelect.innerHTML = policies.length ? policies.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.policyNo)+' — '+escapeHtml(p.type)+'</option>').join('') : '<option value="">Poliçe bulunamadı</option>';
 
   const claimTbody = document.querySelector('#custClaimTable tbody');
-  claimTbody.innerHTML = claims.length ? claims.map(k => { const pol = policies.find(p=>p.id===k.policyId); return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(pol?escapeHtml(pol.policyNo):'—')+'</td><td>'+claimBadge(k.status)+'</td></tr>'; }).join('') : '<tr><td colspan="3" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>';
+  claimTbody.innerHTML = claims.length ? claims.map(k => { const pol = policies.find(p=>p.id===k.policyId); return '<tr><td>'+fmtDate(k.date)+'</td><td>'+(pol?escapeHtml(pol.policyNo):'—')+'</td><td>'+claimBadge(k.status)+claimStepper(k.status)+'</td></tr>'; }).join('') : '<tr><td colspan="3" class="text-center text-ink-soft py-6">Hasar bildirimi yok.</td></tr>';
 
   // Yenileme teklifi kutusu
   const withOffer = policies.filter(p => p.renewalOfferPrice && daysUntil(p.endDate) <= 30 && daysUntil(p.endDate) >= 0 && !p.renewalRequested);
@@ -1277,7 +1345,19 @@ async function renderCustomerDashboard(){
     + '<p class="text-[14px] text-navy-950">💡 Kasko sahiplerine özel <strong>Tamamlayıcı Sağlık Sigortası</strong>\'nda indirim fırsatı!</p>'
     + '<button class="btn btn-ok btn-sm" onclick="crossSellWhatsApp()">Bilgi Al</button></div>'
   ) : '';
+
+  // Arkadaşını Getir — memnun müşteriden düşük maliyetli referans akışı
+  document.getElementById('referralBox').innerHTML =
+    '<div class="card p-5 mb-5 flex items-center justify-between flex-wrap gap-3" style="border-color:#d8b876;background:linear-gradient(90deg, rgba(216,184,118,.08), transparent);">'
+    + '<div><p class="font-display text-[15.5px] text-navy-950">🎁 Arkadaşınızı Getirin</p>'
+    + '<p class="text-ink-soft text-[13px] mt-0.5">Öz Grup Sigorta\'yı bir arkadaşınıza önerin, ikiniz için de avantajları konuşalım.</p></div>'
+    + '<button class="btn btn-gold btn-sm" onclick="shareReferral()">WhatsApp\'tan Paylaş</button></div>';
 }
+window.shareReferral = function(){
+  const name = currentProfile ? currentProfile.fullName : '';
+  const msg = (name?name+' size Öz Grup Sigorta\'yı öneriyor! ':'') + 'Kasko, trafik, DASK, sağlık, konut ve seyahat sigortalarında online teklif almak için: ' + window.location.origin + window.location.pathname;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg), '_blank', 'noopener');
+};
 window.crossSellWhatsApp = function(){
   openWhatsApp(WHATSAPP_NUMBER, "Merhaba, Kasko poliçem var; Tamamlayıcı Sağlık Sigortası indirim fırsatı hakkında bilgi almak istiyorum. Ad Soyad: " + (currentProfile ? currentProfile.fullName : ''));
 };
@@ -1338,7 +1418,109 @@ document.getElementById('roadsideBtn').addEventListener('click', function(){
 ========================================================== */
 function isSuperAdmin(){ return currentProfile && currentProfile.role === 'admin'; }
 
+/* =========================================================
+   CANLI BİLDİRİM ÇANI — panele girer girmez bir kez başlar,
+   sekme değiştirmekle kapanmaz (stopActiveListeners'dan bağımsız).
+========================================================== */
+let _adminNotifData = { leads:[], claims:[], roadside:[] };
+function startAdminNotifWatchers(){
+  if(window._adminNotifStarted) return;
+  window._adminNotifStarted = true;
+  window._adminNotifUnsubs = [
+    onSnapshot(collection(db,'quotes'), function(snap){
+      _adminNotifData.leads = snap.docs.map(d=>({id:d.id,...d.data()})).filter(q=>q.status==='Yeni');
+      renderAdminNotifBadge();
+    }),
+    onSnapshot(collection(db,'claims'), function(snap){
+      _adminNotifData.claims = snap.docs.map(d=>({id:d.id,...d.data()})).filter(k=>k.status==='Beklemede');
+      renderAdminNotifBadge();
+    }),
+    onSnapshot(collection(db,'roadside_requests'), function(snap){
+      _adminNotifData.roadside = snap.docs.map(d=>({id:d.id,...d.data()})).filter(r=>r.status==='Yeni');
+      renderAdminNotifBadge();
+    })
+  ];
+}
+function stopAdminNotifWatchers(){
+  (window._adminNotifUnsubs||[]).forEach(u=>u());
+  window._adminNotifUnsubs = [];
+  window._adminNotifStarted = false;
+  _adminNotifData = { leads:[], claims:[], roadside:[] };
+}
+function renderAdminNotifBadge(){
+  const total = _adminNotifData.leads.length + _adminNotifData.claims.length + _adminNotifData.roadside.length;
+  const badge = document.getElementById('adminNotifBadge');
+  if(!badge) return;
+  badge.textContent = total > 99 ? '99+' : String(total);
+  badge.classList.toggle('hidden', total === 0);
+  if(!document.getElementById('adminNotifDropdown').classList.contains('hidden')) renderAdminNotifDropdown();
+}
+function renderAdminNotifDropdown(){
+  const el = document.getElementById('adminNotifDropdown'); if(!el) return;
+  const rows = [];
+  _adminNotifData.roadside.forEach(r=>rows.push({icon:'🚨', text:'<strong>'+escapeHtml(r.customerName||'Müşteri')+'</strong> — acil yol yardımı bekliyor', action:"adminShowTab('roadside')"}));
+  _adminNotifData.leads.forEach(q=>rows.push({icon:'🆕', text:'<strong>'+escapeHtml(q.name)+'</strong> — '+escapeHtml(q.package)+' talebi', action:"adminShowTab('leads')"}));
+  _adminNotifData.claims.forEach(k=>rows.push({icon:'📋', text:'Bekleyen hasar bildirimi', action:"adminShowTab('claims')"}));
+  el.innerHTML = rows.length
+    ? rows.map(r=>'<button type="button" class="notif-item" onclick="'+r.action+'; closeAdminNotifDropdown();"><span>'+r.icon+'</span><span class="text-[13px] text-navy-950">'+r.text+'</span></button>').join('')
+    : '<div class="p-5 text-center text-ink-soft text-[13px]">Yeni bildirim yok — her şey güncel. 🎉</div>';
+}
+window.toggleAdminNotifDropdown = function(){
+  const el = document.getElementById('adminNotifDropdown');
+  const willShow = el.classList.contains('hidden');
+  el.classList.toggle('hidden');
+  if(willShow) renderAdminNotifDropdown();
+};
+window.closeAdminNotifDropdown = function(){ document.getElementById('adminNotifDropdown').classList.add('hidden'); };
+document.addEventListener('click', function(e){
+  const dd = document.getElementById('adminNotifDropdown');
+  if(!dd || dd.classList.contains('hidden')) return;
+  if(!dd.contains(e.target) && !e.target.closest('[onclick="toggleAdminNotifDropdown()"]')) dd.classList.add('hidden');
+});
+
+/* =========================================================
+   GENEL ARAMA (Ctrl/Cmd+K) — müşteri / poliçe / telefon
+========================================================== */
+window.openAdminSearch = function(){
+  openModal('modal-admin-search');
+  document.getElementById('adminSearchInput').value = '';
+  document.getElementById('adminSearchResults').innerHTML = '<div class="p-5 text-center text-ink-soft text-[13px]">Aramaya başlayın…</div>';
+  setTimeout(()=>document.getElementById('adminSearchInput').focus(), 50);
+};
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k' && !document.getElementById('screen-admin').classList.contains('hidden')){
+    e.preventDefault(); window.openAdminSearch();
+  }
+  if(e.key === 'Escape') closeModal('modal-admin-search');
+});
+let _adminSearchTimer = null;
+window.handleAdminSearchInput = function(){
+  clearTimeout(_adminSearchTimer);
+  _adminSearchTimer = setTimeout(runAdminSearch, 180);
+};
+async function runAdminSearch(){
+  const q = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+  const resEl = document.getElementById('adminSearchResults');
+  if(!q){ resEl.innerHTML = '<div class="p-5 text-center text-ink-soft text-[13px]">Aramaya başlayın…</div>'; return; }
+  const [users, policies] = await Promise.all([fetchAll('users'), fetchAll('policies')]);
+  const customers = users.filter(u=>u.role==='customer');
+  const custMatches = customers.filter(c => (c.fullName||'').toLowerCase().includes(q) || (c.phone||'').includes(q));
+  const polMatches = policies.filter(p => (p.policyNo||'').toLowerCase().includes(q));
+  let html = '';
+  if(custMatches.length){
+    html += '<div class="px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">Müşteriler</div>';
+    html += custMatches.slice(0,6).map(c=>'<div class="search-result-item" onclick="closeModal(\'modal-admin-search\'); adminShowTab(\'customers\'); setTimeout(()=>showCustomerDetail(\''+c.id+'\'),150);"><span class="text-[14px] text-navy-950 font-medium">'+escapeHtml(c.fullName)+'</span><span class="text-[12px] text-ink-soft">'+escapeHtml(c.phone||'')+'</span></div>').join('');
+  }
+  if(polMatches.length){
+    html += '<div class="px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft">Poliçeler</div>';
+    html += polMatches.slice(0,6).map(p=>{ const c=customers.find(x=>x.id===p.customerId); return '<div class="search-result-item" onclick="closeModal(\'modal-admin-search\'); adminShowTab(\'customers\'); setTimeout(()=>showCustomerDetail(\''+p.customerId+'\'),150);"><span class="text-[14px] text-navy-950 font-medium font-mono">'+escapeHtml(p.policyNo)+'</span><span class="text-[12px] text-ink-soft">'+escapeHtml(p.type)+' · '+(c?escapeHtml(c.fullName):'—')+'</span></div>'; }).join('');
+  }
+  if(!custMatches.length && !polMatches.length) html = '<div class="p-5 text-center text-ink-soft text-[13px]">Sonuç bulunamadı.</div>';
+  resEl.innerHTML = html;
+}
+
 window.adminShowTab = function(tab){
+  closeAdminNotifDropdown();
   stopActiveListeners();
   document.querySelectorAll('.sidebar-link').forEach(el=>el.classList.toggle('active', el.getAttribute('data-tab')===tab));
   document.querySelector('.admin-sidebar').classList.remove('open');
@@ -1352,6 +1534,43 @@ window.adminShowTab = function(tab){
 function sectionHeader(title, subtitle){ return '<h2 class="font-display text-[24px] text-navy-950 mb-1">'+title+'</h2>' + (subtitle ? '<p class="text-ink-soft text-[14px] mb-7">'+subtitle+'</p>' : '<div class="mb-7"></div>'); }
 function statCard(label, value){ return '<div class="card p-5"><div class="font-mono text-[10.5px] uppercase tracking-wide text-ink-soft mb-2">'+label+'</div><div class="font-display text-[26px] text-navy-950">'+value+'</div></div>'; }
 async function fetchAll(colName){ const snap = await getDocs(collection(db,colName)); return snap.docs.map(d=>({id:d.id, ...d.data()})); }
+
+/* Genel Bakış grafikleri: son 6 ay yeni poliçe trendi + paket dağılımı */
+let _ovChart1 = null, _ovChart2 = null;
+function renderAdminCharts(policies){
+  if(typeof Chart === 'undefined') return;
+  const trendCanvas = document.getElementById('ovTrendChart');
+  const pkgCanvas = document.getElementById('ovPkgChart');
+  if(!trendCanvas || !pkgCanvas) return;
+  if(_ovChart1) _ovChart1.destroy();
+  if(_ovChart2) _ovChart2.destroy();
+
+  const months = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+  const now = new Date();
+  const labels = []; const counts = [];
+  for(let i=5;i>=0;i--){
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    labels.push(months[d.getMonth()]+' '+String(d.getFullYear()).slice(2));
+    const cnt = policies.filter(p=>{ if(!p.startDate) return false; const sd=new Date(p.startDate+'T00:00:00'); return sd.getFullYear()===d.getFullYear() && sd.getMonth()===d.getMonth(); }).length;
+    counts.push(cnt);
+  }
+  _ovChart1 = new Chart(trendCanvas.getContext('2d'), {
+    type:'line',
+    data:{ labels, datasets:[{ data:counts, borderColor:'#b3893f', backgroundColor:'rgba(179,137,63,.15)', fill:true, tension:.35, pointBackgroundColor:'#0a1c30', pointRadius:4 }]},
+    options:{ plugins:{legend:{display:false}}, scales:{ y:{beginAtZero:true, ticks:{precision:0}}, x:{grid:{display:false}} } }
+  });
+
+  const typeCounts = {};
+  policies.forEach(p=>{ typeCounts[p.type] = (typeCounts[p.type]||0)+1; });
+  const pkgLabels = Object.keys(typeCounts);
+  const pkgData = Object.values(typeCounts);
+  const palette = ['#0a1c30','#b3893f','#3f6b4f','#c1631f','#a13d3d','#1d4468','#d8b876'];
+  _ovChart2 = new Chart(pkgCanvas.getContext('2d'), {
+    type:'doughnut',
+    data:{ labels: pkgLabels.length?pkgLabels:['Veri yok'], datasets:[{ data: pkgData.length?pkgData:[1], backgroundColor: palette, borderWidth:2, borderColor:'#fff' }]},
+    options:{ plugins:{legend:{position:'bottom', labels:{boxWidth:11, font:{size:11}}}}, cutout:'62%' }
+  });
+}
 
 async function renderAdminOverview(){
   const content = document.getElementById('adminContent');
@@ -1381,11 +1600,17 @@ async function renderAdminOverview(){
     + statCard('Bekleyen Ödeme', pending) + statCard('Yaklaşan Yenileme', renewals) + statCard('Bekleyen Başvuru', newLeads)
     + statCard('Toplam Aktif Prim', totalPremium.toLocaleString('tr-TR')+' ₺')
     + '</div>'
+    + '<div class="grid md:grid-cols-[1.4fr_1fr] gap-6 mt-6">'
+    + '<div class="chart-card"><h3 class="font-display text-[16px] mb-1 text-navy-950">Son 6 Ay — Yeni Poliçe</h3><p class="text-ink-soft text-[12px] mb-3">Başlangıç tarihine göre poliçe sayısı</p><canvas id="ovTrendChart" height="150"></canvas></div>'
+    + '<div class="chart-card"><h3 class="font-display text-[16px] mb-1 text-navy-950">Paket Dağılımı</h3><p class="text-ink-soft text-[12px] mb-3">Aktif poliçelerin türe göre payı</p><canvas id="ovPkgChart" height="150"></canvas></div>'
+    + '</div>'
     + '<div class="card p-6 mt-6 border-gold bg-gold/[0.05]"><h3 class="font-display text-[16px] mb-4 text-navy-950">📋 Bugün Yapılacaklar</h3>' + todoHtml + '</div>'
     + '<div class="grid md:grid-cols-2 gap-6 mt-9">'
     + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Teklif Talepleri</h3><ul id="ovLeads" class="flex flex-col gap-3"></ul></div>'
     + '<div class="card p-6"><h3 class="font-display text-[16px] mb-4 text-navy-950">Son Hasar Bildirimleri</h3><ul id="ovClaims" class="flex flex-col gap-3"></ul></div>'
     + '</div>';
+
+  renderAdminCharts(policies);
 
   // Canlı güncellenen listeler (yeni teklif geldiğinde admin ekranı otomatik yenilenir)
   const unsub1 = onSnapshot(collection(db,'quotes'), snap => {
@@ -1501,7 +1726,8 @@ async function renderAdminCustomers(){
   function renderRows(list){
     document.querySelector('#customersTable tbody').innerHTML = list.length ? list.map(c=>{
       const count = policies.filter(p=>p.customerId===c.id).length;
-      return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+'</td><td>'+telLink(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
+      const vip = count >= 2 ? ' <span class="badge badge-vip">★ VIP</span>' : '';
+      return '<tr><td>'+escapeHtml(c.fullName)+(c.quickAdd?' <span class="badge badge-navy">Hızlı Kayıt</span>':'')+vip+'</td><td>'+telLink(c.phone)+'</td><td>'+(c.email?escapeHtml(c.email):'—')+'</td><td>'+count+'</td><td><button class="btn btn-outline btn-sm" onclick="showCustomerDetail(\''+c.id+'\')">Detay</button></td></tr>';
     }).join('') : '<tr><td colspan="5" class="text-center text-ink-soft py-6">Sonuç yok.</td></tr>';
   }
   renderRows(customers);
@@ -1633,18 +1859,55 @@ async function renderAdminLeads(){
   const content = document.getElementById('adminContent');
   content.innerHTML = sectionHeader('Teklif Talepleri','Yükleniyor…');
   content.innerHTML = sectionHeader('Teklif Talepleri', 'Liste yeni talep geldiğinde otomatik güncellenir.')
-    + '<div class="flex flex-wrap gap-3 mb-4"><input class="input flex-1 min-w-[200px]" id="leadSearch" placeholder="İsim, T.C. veya telefon ile ara…"><button class="btn btn-outline btn-sm" onclick="exportLeadsCsv()">Excel/CSV İndir</button></div>'
-    + '<div class="card overflow-x-auto"><table id="leadsTable"><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>Paket</th><th>Ek Bilgi</th><th>Durum</th><th></th></tr></thead><tbody></tbody></table></div>';
+    + '<div class="flex flex-wrap gap-3 mb-4 items-center">'
+    + '<input class="input flex-1 min-w-[200px]" id="leadSearch" placeholder="İsim, T.C. veya telefon ile ara…">'
+    + '<div class="flex border border-line"><button id="leadViewListBtn" class="btn-sm px-3 py-1.5 bg-navy-950 text-paper" onclick="setLeadView(\'list\')">☰ Liste</button><button id="leadViewKanbanBtn" class="btn-sm px-3 py-1.5" onclick="setLeadView(\'kanban\')">▤ Pano</button></div>'
+    + '<button class="btn btn-outline btn-sm" onclick="exportLeadsCsv()">Excel/CSV İndir</button>'
+    + '</div>'
+    + '<div id="leadListWrap" class="card overflow-x-auto"><table id="leadsTable"><thead><tr><th>Ad Soyad</th><th>Telefon</th><th>Paket</th><th>Ek Bilgi</th><th>Durum</th><th></th></tr></thead><tbody></tbody></table></div>'
+    + '<div id="leadKanbanWrap" class="hidden flex gap-4 overflow-x-auto pb-2"></div>';
 
   const unsub = onSnapshot(collection(db,'quotes'), snap => {
     window._leadsCache = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
     renderLeadRows(window._leadsCache);
+    renderLeadKanban(window._leadsCache);
   });
   activeListeners.push(unsub);
   document.getElementById('leadSearch').addEventListener('input', function(){
     const q = this.value.trim().toLowerCase();
-    renderLeadRows((window._leadsCache||[]).filter(l => (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q) || (l.tcNo||'').includes(q)));
+    const filtered = (window._leadsCache||[]).filter(l => (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q) || (l.tcNo||'').includes(q));
+    renderLeadRows(filtered); renderLeadKanban(filtered);
   });
+  setLeadView(window._leadViewMode || 'list');
+}
+window.setLeadView = function(mode){
+  window._leadViewMode = mode;
+  document.getElementById('leadListWrap').classList.toggle('hidden', mode!=='list');
+  document.getElementById('leadKanbanWrap').classList.toggle('hidden', mode!=='kanban');
+  document.getElementById('leadViewListBtn').className = 'btn-sm px-3 py-1.5 ' + (mode==='list' ? 'bg-navy-950 text-paper' : '');
+  document.getElementById('leadViewKanbanBtn').className = 'btn-sm px-3 py-1.5 ' + (mode==='kanban' ? 'bg-navy-950 text-paper' : '');
+};
+function renderLeadKanban(list){
+  const wrap = document.getElementById('leadKanbanWrap');
+  if(!wrap) return;
+  const cols = [
+    {status:'Yeni', label:'Yeni'},
+    {status:'İletişime Geçildi', label:'İletişime Geçildi'},
+    {status:'Onaylandı', label:'Onaylandı'}
+  ];
+  wrap.innerHTML = cols.map(col => {
+    const items = list.filter(q=>q.status===col.status);
+    return '<div class="kanban-col"><div class="kanban-col-head"><span>'+col.label+'</span><span class="badge badge-navy">'+items.length+'</span></div>'
+      + (items.length ? items.map(q=>
+          '<div class="kanban-card"><div class="font-display text-[14px] text-navy-950 mb-0.5">'+escapeHtml(q.name)+'</div>'
+          + '<div class="text-ink-soft mb-2">'+escapeHtml(q.package)+' · '+telLink(q.phone)+'</div>'
+          + '<div class="flex flex-wrap gap-1"><button class="btn btn-ok btn-sm" onclick="replyLead(\''+q.id+'\')">WA</button>'
+          + (col.status!=='İletişime Geçildi' ? '<button class="btn btn-outline btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'İletişime Geçildi\')">→ İletişimde</button>' : '')
+          + (col.status!=='Onaylandı' ? '<button class="btn btn-outline btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'Onaylandı\')">→ Onayla</button>' : '')
+          + '<button class="btn btn-danger btn-sm" onclick="updateLeadStatus(\''+q.id+'\',\'Reddedildi\')">Reddet</button></div></div>'
+        ).join('') : '<p class="text-ink-soft text-[12px] p-3">Boş</p>')
+      + '</div>';
+  }).join('');
 }
 function extraSummary(q){
   const e = q.extra || {};
